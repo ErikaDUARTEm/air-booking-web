@@ -1,5 +1,5 @@
+import { SectionBookingSeatsComponent } from './../../../components/seats-page-components/booking-seats/section-booking-seats.component';
 import { Component } from '@angular/core';
-import { SectionBookingSeatsComponent } from "../../components/booking-seats/section-booking-seats.component";
 
 @Component({
   selector: 'lib-section-seats-content',

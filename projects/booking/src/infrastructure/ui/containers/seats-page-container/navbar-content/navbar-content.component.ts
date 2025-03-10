@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BookingNevbarComponent } from "../../components/booking-navbar/booking-navbar.component";
+import { BookingNevbarComponent } from '../../../components/seats-page-components/booking-navbar/booking-navbar.component';
 
 @Component({
   selector: 'lib-navbar-content',

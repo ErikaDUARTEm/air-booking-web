@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'lib-booking-seats-details',
   imports: [],
   templateUrl: './booking-seats-details.component.html',
-  styleUrl: './booking-seats-details.component.css'
+  styleUrl: './booking-seats-details.component.scss'
 })
 export class BookingSeatsDetailsComponent {
 

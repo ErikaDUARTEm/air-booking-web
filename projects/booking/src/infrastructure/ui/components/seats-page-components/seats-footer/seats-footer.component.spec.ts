@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SeatsBarContentComponent } from './seats-bar-content.component';
+import { SeatsFooterComponent } from './seats-footer.component';
 
-describe('SeatsBarContentComponent', () => {
-  let component: SeatsBarContentComponent;
-  let fixture: ComponentFixture<SeatsBarContentComponent>;
+describe('SeatsFooterComponent', () => {
+  let component: SeatsFooterComponent;
+  let fixture: ComponentFixture<SeatsFooterComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SeatsBarContentComponent]
+      imports: [SeatsFooterComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SeatsBarContentComponent);
+    fixture = TestBed.createComponent(SeatsFooterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
