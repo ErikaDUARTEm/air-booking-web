@@ -1,0 +1,107 @@
+@use "../../../../../../shared/src/infrastructure/ui/styles/variables" as
+  variables;
+
+.passenger-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  border: 1px solid variables.$blue;
+
+  &__content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: 2fr auto 1fr auto;
+    align-items: center;
+    margin: 10px 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+
+    &-label {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+    }
+
+    &-button {
+      background: none;
+      border: 1px solid #ccc;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 50px;
+
+      &:last-child {
+        border-color: variables.$blue;
+      }
+    }
+  }
+
+  &__label {
+    font-size: 16px;
+    text-align: start;
+
+    &-subtitle {
+      color: variables.$gray;
+    }
+  }
+
+  &__count {
+    text-align: center;
+    font-size: 1.6rem;
+  }
+
+  &__button {
+    background: variables.$blue;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    font-size: 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-inline: 5px;
+    transition: background 0.3s;
+
+    &-save {
+      background: variables.$blue;
+      color: white;
+
+      &:hover {
+        background: #0c5edb;
+      }
+
+      &:active {
+        outline: 2px solid variables.$gray;
+        outline-offset: 2px;
+      }
+    }
+
+    &-close {
+      background: #f0f0f0;
+      color: black;
+
+      &:hover {
+        background: #e0e0e0;
+      }
+
+      &:active {
+        background: #d0d0d0;
+      }
+    }
+  }
+}

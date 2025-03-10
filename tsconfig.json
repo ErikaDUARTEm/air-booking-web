@@ -7,6 +7,9 @@
       "booking": [
         "./dist/booking"
       ],
+      "home": [
+        "./dist/home"
+      ],
       "shared": [
         "./dist/shared"
       ]

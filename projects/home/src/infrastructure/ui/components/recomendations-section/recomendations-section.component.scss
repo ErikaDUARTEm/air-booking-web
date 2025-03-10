@@ -1,0 +1,76 @@
+@use "../../../../../../shared/src/infrastructure/ui/styles/variables.scss" as
+  variables;
+@use "../../../../../../shared/src/infrastructure/ui/styles/mixins.scss" as
+  mixins;
+
+.recomendations-section {
+  border: 1px solid rgb(189, 189, 189);
+  border-radius: 20px;
+  padding: 50px;
+  display: flex;
+  justify-content: space-between;
+  max-width: 70dvw;
+  margin: 0 auto;
+  font-family: variables.$primary-font;
+  margin-block: 100px;
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: start;
+    max-width: 50%;
+
+    &-image {
+      width: 200px;
+      padding-bottom: 20px;
+    }
+
+    &-title {
+      font-size: variables.$font-size-title-main;
+      color: variables.$blue;
+    }
+
+    &-description {
+      @include mixins.text-paragraph;
+      max-width: 500px;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: self-start;
+  }
+
+  &__card {
+    padding-block: 30px;
+    &:first-child,
+    &:nth-child(2) {
+      border-bottom: 1px solid rgb(198, 198, 198);
+    }
+  }
+
+  &__button {
+    background-color: transparent;
+    color: variables.$blue;
+    border: 1.5px solid variables.$blue;
+    width: 100%;
+    padding: 10px;
+    border-radius: 50px;
+    font-size: variables.$font-size-paragraph;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgb(239, 245, 255);
+    }
+
+    &:active {
+      outline: 1px solid variables.$blue;
+      outline-offset: 2px;
+    }
+  }
+}

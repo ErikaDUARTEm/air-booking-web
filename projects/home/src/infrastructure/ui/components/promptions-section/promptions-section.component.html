@@ -1,0 +1,33 @@
+<div class="promotions-section">
+  <div class="promotions-section__content">
+    <ng-container *ngFor="let item of items">
+      <a href="" class="promotions-section__link">
+        <lib-recomendation-card
+          [recomendation]="item"
+          class="promotions-section__card"
+        ></lib-recomendation-card>
+        <svg
+          class="promotions-section__icon"
+          width="22"
+          height="20"
+          viewBox="0 0 22 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M11.6 3.4L19.2 11H1V13H19.2L11.6 20.6L13 22L23 12L13 2L11.6 3.4Z"
+            fill="#0032A0"
+          ></path>
+        </svg>
+      </a>
+    </ng-container>
+  </div>
+  <div class="promotions-section__cards">
+    <ng-container *ngFor="let item of promotions">
+      <lib-promptions-card
+        [promotion]="item"
+        class="promotions-card"
+      ></lib-promptions-card>
+    </ng-container>
+  </div>
+</div>

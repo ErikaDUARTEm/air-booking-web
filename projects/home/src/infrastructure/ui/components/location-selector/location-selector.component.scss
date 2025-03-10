@@ -1,0 +1,75 @@
+/* flight-search.component.scss */
+@use "../../../../../../shared/src/infrastructure/ui/styles/variables.scss" as
+  variables;
+@use "../../../../../../shared/src/infrastructure/ui/styles/mixins.scss" as
+  mixins;
+
+.flight-search {
+  &__locations {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+  }
+
+  &__main {
+    display: flex;
+    gap: variables.$spacing-base;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+  }
+  &__swap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  &__field {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    &-input {
+      border: none;
+      border-bottom: 1px solid rgb(235, 235, 235);
+      height: 40px;
+      font-size: 2rem;
+      &:hover,
+      &:focus {
+        border-bottom: 1px solid variables.$blue;
+      }
+      &:focus {
+        background-color: rgb(241, 246, 255);
+        outline: none;
+      }
+      &::placeholder {
+        color: rgb(175, 175, 175);
+        font-size: 2rem;
+      }
+    }
+  }
+
+  &__submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    width: 230px;
+    background-color: variables.$blue;
+    color: variables.$white;
+    padding: variables.$spacing-sm variables.$spacing-base;
+    border-radius: 50px;
+    border: none;
+    margin-left: 50px;
+
+    &:hover {
+      background-color: rgb(0, 26, 102);
+      cursor: pointer;
+    }
+    &:active {
+      outline: 1px solid variables.$black;
+      outline-offset: 2px;
+    }
+  }
+}
