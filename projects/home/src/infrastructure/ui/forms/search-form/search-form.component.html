@@ -1,0 +1,23 @@
+<form
+  [formGroup]="flightForm"
+  class="flight-search__form"
+  (ngSubmit)="onSubmit()"
+>
+  <app-trip-options
+    [formGroup]="flightForm"
+    (passengersChange)="
+      updatePassengers($event.adults, $event.children, $event.infants)
+    "
+  ></app-trip-options>
+  <app-location-selector
+    [formGroup]="flightForm"
+    (originChange)="updateOrigin($event)"
+    (destinationChange)="updateDestination($event)"
+    (departureDateChange)="
+      updateDates($event, flightForm.get('dates.return')?.value)
+    "
+    (returnDateChange)="
+      updateDates(flightForm.get('dates.departure')?.value, $event)
+    "
+  ></app-location-selector>
+</form>

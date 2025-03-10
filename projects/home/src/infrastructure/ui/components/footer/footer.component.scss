@@ -1,0 +1,118 @@
+@use "../../../../../../shared/src/infrastructure/ui/styles/variables.scss" as
+  variables;
+@use "../../../../../../shared/src/infrastructure/ui/styles/mixins.scss" as
+  mixins;
+
+.footer {
+  background-color: variables.$background-color;
+  padding: variables.$spacing-lg 0;
+  font-family: variables.$primary-font;
+  margin-top: 100px;
+  padding-block: 50px;
+  padding-inline: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 variables.$spacing-lg;
+    margin-bottom: variables.$spacing-lg;
+  }
+
+  &__logos {
+    display: flex;
+    align-items: center;
+    gap: variables.$spacing-lg;
+  }
+
+  &__line {
+    width: 1px;
+    height: 50px;
+  }
+
+  &__language {
+    &-button {
+      display: flex;
+      align-items: center;
+      padding: variables.$spacing-sm variables.$spacing-md;
+      border-radius: 50px;
+      background-color: transparent;
+      border: 1px solid variables.$black;
+      color: variables.$gray;
+      cursor: pointer;
+      font-size: variables.$font-size-text-secondary;
+    }
+
+    &-icon {
+      width: 20px;
+      height: 20px;
+      margin-right: variables.$spacing-sm;
+    }
+
+    &-text {
+      color: variables.$black;
+      margin-right: variables.$spacing-sm;
+    }
+
+    &-arrow {
+      fill: variables.$black;
+    }
+  }
+
+  &__menu {
+    display: flex;
+    gap: 50px;
+    border-bottom: 1px solid variables.$gray;
+    padding-bottom: variables.$spacing-lg;
+  }
+  &__bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+  }
+  &__images {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &-list {
+      display: flex;
+      gap: 50px;
+
+      img {
+        width: 100px;
+      }
+    }
+  }
+  &__social-media {
+    display: flex;
+    gap: 15px;
+
+    &-button {
+      display: flex;
+      align-items: center;
+      border-radius: 20px;
+      padding: 7px 14px;
+      background-color: variables.$white;
+      border: 1px solid variables.$black;
+      cursor: pointer;
+
+      &:last-child {
+        img {
+          width: 20px;
+        }
+      }
+
+      &:hover {
+        border-color: transparent;
+        background-color: rgb(239, 245, 255);
+      }
+    }
+  }
+  &__copyright {
+    font-size: 1.6rem;
+  }
+}

@@ -1,0 +1,206 @@
+<div [formGroup]="formGroup">
+  <div class="flight-search__options">
+    <div class="flight-search__options-origin">
+      <div class="flight-search__trip-type">
+        <button type="button" class="flight-search__toggle-btn">
+          <svg
+            width="18"
+            height="18"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1sk7ctj"
+            focusable="false"
+            aria-hidden="true"
+            viewBox="0 0 14 14"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M11.261 3.845a.497.497 0 0 0-.069-.605L8.435.483 8.346.41a.49.49 0 0 0-.751.419v1.77h-5.94l-.16.012a.992.992 0 0 0-.828.975c0 .544.444.989.988.989h5.94v1.769l.012.115a.489.489 0 0 0 .828.23l2.757-2.757.07-.087ZM.738 8.155a.497.497 0 0 0 .07.604l2.757 2.758.088.073a.49.49 0 0 0 .752-.42V9.403h5.94l.16-.013a.992.992 0 0 0 .828-.976.991.991 0 0 0-.988-.988h-5.94V5.656l-.013-.115a.489.489 0 0 0-.827-.23L.807 8.067l-.069.087Z"
+              fill="#0032A0"
+            ></path>
+          </svg>
+          Ida y vuelta
+        </button>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          fill="#0032a0"
+          focusable="false"
+          aria-hidden="true"
+          viewBox="0 0 22 22"
+        >
+          <defs>
+            <path
+              id="KeyboardArrowDown_svg__a"
+              d="m7.4 8.6 4.6 4.6 4.6-4.6L18 10l-6 6-6-6z"
+            ></path>
+          </defs>
+          <use xlink:href="#KeyboardArrowDown_svg__a"></use>
+        </svg>
+      </div>
+
+      <div class="flight-search__passengers">
+        <button
+          type="button"
+          class="flight-search__toggle-btn"
+          (click)="openPassengersDialog()"
+        >
+          <svg
+            width="16"
+            height="16"
+            fill="#0032a0"
+            xmlns="http://www.w3.org/2000/svg"
+            focusable="false"
+            aria-hidden="true"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M4.54 3.358c0 1.863 1.53 3.357 3.394 3.357s3.393-1.512 3.393-3.357C11.327 1.494 9.797 0 7.934 0 6.069 0 4.54 1.513 4.54 3.358ZM1.333 13.744v.923h13.2v-.923c0-3.45-2.852-6.272-6.338-6.272h-.523c-3.486 0-6.338 2.822-6.338 6.272Z"
+              fill="#0032A0"
+            ></path>
+          </svg>
+          {{ numberOfAdults }} Adulto<span *ngIf="numberOfAdults > 1">s</span>
+          <span *ngIf="numberOfChildren > 0"
+            >, {{ numberOfChildren }} Niño<span *ngIf="numberOfChildren > 1"
+              >s</span
+            ></span
+          >
+          <span *ngIf="numberOfInfants > 0"
+            >, {{ numberOfInfants }} Infante<span *ngIf="numberOfInfants > 1"
+              >s</span
+            ></span
+          >
+        </button>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          fill="#0032a0"
+          focusable="false"
+          aria-hidden="true"
+          viewBox="0 0 22 22"
+        >
+          <defs>
+            <path
+              id="KeyboardArrowDown_svg__a"
+              d="m7.4 8.6 4.6 4.6 4.6-4.6L18 10l-6 6-6-6z"
+            ></path>
+          </defs>
+          <use xlink:href="#KeyboardArrowDown_svg__a"></use>
+        </svg>
+      </div>
+
+      <div class="flight-search__rewards">
+        <label class="flight-search__checkbox-label">
+          <input type="checkbox" class="flight-search__checkbox" />
+          Reservar con millas
+        </label>
+      </div>
+
+      <div class="flight-search__advanced">
+        <button type="button" class="flight-search__advanced-btn">
+          Búsqueda avanzada
+          <svg
+            width="20"
+            height="20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            focusable="false"
+            aria-hidden="true"
+            viewBox="0 0 20 20"
+          >
+            <path
+              d="M7.167 13.833 11 10 7.167 6.167 8.332 5l5 5-5 5-1.167-1.167Z"
+              fill="#0032A0"
+            ></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="flight-search__stopover">
+      <svg
+        width="32"
+        height="32"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        focusable="false"
+        aria-hidden="true"
+        viewBox="0 0 32 32"
+      >
+        <g clip-path="url(#PanamaStopover_svg__a)">
+          <path
+            d="M0 16c0 8.837 7.163 16 16 16s16-7.163 16-16S24.837 0 16 0 0 7.163 0 16Z"
+            fill="#EFF5FF"
+          ></path>
+          <path
+            d="M24 11.556c0-.982-.796-1.778-1.778-1.778H9.778c-.982 0-1.778.796-1.778 1.778V20c0 .982.796 1.778 1.778 1.778h12.444c.982 0 1.778-.796 1.778-1.778v-8.444Z"
+            fill="#fff"
+          ></path>
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M24.444 11.022c0-.981-.796-1.777-1.777-1.777H9.333c-.982 0-1.778.796-1.778 1.777v5.112a.444.444 0 1 0 .89 0v-5.112c0-.49.397-.889.888-.889h13.334c.49 0 .888.399.888.89v9.333a.889.889 0 0 1-.888.889h-6a.444.444 0 1 0 0 .889h6c.981 0 1.777-.796 1.777-1.778v-9.334Z"
+            fill="#0032A0"
+          ></path>
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M8 14.133h16.089v-.888H8v.889ZM22.755 15.556a.444.444 0 0 0-.444-.445h-5.422a.444.444 0 0 0 0 .89h5.422a.444.444 0 0 0 .444-.445ZM16 15.556a.444.444 0 0 0-.444-.445h-.09a.444.444 0 1 0 0 .89h.09a.444.444 0 0 0 .444-.445ZM20 11.733a.444.444 0 0 0 .444-.444v-3.2a.444.444 0 1 0-.889 0v3.2c0 .245.2.444.445.444ZM12 11.733a.444.444 0 0 0 .444-.444v-3.2a.444.444 0 1 0-.889 0v3.2c0 .245.2.444.445.444Z"
+            fill="#0032A0"
+          ></path>
+          <path
+            d="M6.341 21.051a4.607 4.607 0 1 0 9.214 0 4.607 4.607 0 0 0-9.214 0Z"
+            fill="#00A3E0"
+          ></path>
+          <path
+            d="m13.056 21.819.315.024c.383.03.765-.062 1.092-.263l.215-.132a.569.569 0 0 0 .165-.154l.085-.12a.297.297 0 0 0 .036-.277l-.025-.068a.202.202 0 0 1 .069-.234.202.202 0 0 0 .079-.201l-.07-.355a.438.438 0 0 0-.739-.227l-.07.07a.641.641 0 0 1-.307.17l-.806.188a2.32 2.32 0 0 1-1.808-.326l-.066-.036a3.405 3.405 0 0 0-2.908-.159l-.116.048c-.24.098-.463.23-.663.395l-.403.332a1.141 1.141 0 0 0-.305 1.367l.063.133a.722.722 0 0 0 .35.344l.007.003a.686.686 0 0 0 .973-.623v-.12c0-.241.107-.47.293-.623l.909-.752a.423.423 0 0 1 .688.404.422.422 0 0 0 .246.466l.153.067c.242.106.351.39.242.63-.11.242 0 .526.243.631l.172.075a.66.66 0 0 0 .707-.117l.268-.245c.248-.227.58-.341.916-.315Z"
+            fill="#fff"
+          ></path>
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M10.948 24.77a3.718 3.718 0 1 1 0-7.437 3.718 3.718 0 0 1 0 7.437Zm0 .889a4.607 4.607 0 1 1 0-9.215 4.607 4.607 0 0 1 0 9.215Z"
+            fill="#0032A0"
+          ></path>
+        </g>
+        <defs>
+          <clipPath id="PanamaStopover_svg__a">
+            <path fill="#fff" d="M0 0h32v32H0z"></path>
+          </clipPath>
+        </defs>
+      </svg>
+      <button type="button" class="flight-search__stopover-btn">
+        Panamá Stopover
+        <svg
+          width="20"
+          height="20"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-rslfqc"
+          focusable="false"
+          aria-hidden="true"
+          viewBox="0 0 20 20"
+        >
+          <path
+            d="M7.167 13.833 11 10 7.167 6.167 8.332 5l5 5-5 5-1.167-1.167Z"
+            fill="#0032A0"
+          ></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <div *ngIf="showPassengerModal" class="passenger-modal">
+    <app-passenger-modal
+      [adults]="numberOfAdults"
+      [children]="numberOfChildren"
+      [infants]="numberOfInfants"
+      (passengersSelected)="onPassengersSelected($event)"
+      (closeModalEvent)="closePassengersDialog()"
+    ></app-passenger-modal>
+  </div>
+</div>

@@ -1,0 +1,66 @@
+<div class="footer">
+  <div class="footer__top">
+    <div class="footer__logos">
+      <lib-logo class="footer__logo"></lib-logo>
+      <hr class="footer__line" />
+      <img
+        class="footer__star-alliance-logo"
+        src="https://www.copaair.com/assets/StarAlliance-Footer-Logo-01.svg"
+        alt="A logo of the Star Alliance"
+      />
+    </div>
+    <div class="footer__language">
+      <button class="footer__language-button">
+        <img
+          class="footer__language-icon"
+          src="https://www.copaair.com/assets/CO.svg"
+          alt="Idioma español"
+        />
+        <span class="footer__language-text">Colombia (COP) - Español</span>
+        <svg
+          class="footer__language-arrow"
+          width="8"
+          height="12"
+          viewBox="0 0 8 12"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M0.456055 10.6L4.94163 6L0.456055 1.4L1.82123 0L7.67198 6L1.82123 12L0.456055 10.6Z"
+          ></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <menu class="footer__menu">
+    <ng-container *ngFor="let section of sections">
+      <lib-footer-section
+        [section]="section"
+        class="footer__section"
+      ></lib-footer-section>
+    </ng-container>
+  </menu>
+  <div class="footer__bottom">
+    <div class="footer__images">
+      <div class="footer__images-list">
+        <ng-container *ngFor="let image of images">
+          <img class="footer__image" [src]="image.src" [alt]="image.alt" />
+        </ng-container>
+      </div>
+      <div class="footer__social-media">
+        <ng-container *ngFor="let icon of socialMedia">
+          <button class="footer__social-media-button">
+            <img
+              class="footer__social-media-icon"
+              [src]="icon.src"
+              [alt]="icon.alt"
+            />
+          </button>
+        </ng-container>
+      </div>
+    </div>
+    <div class="footer__copyright">
+      <p>Copyright © 2025 Copa Airlines, Inc. Todos los derechos reservados</p>
+    </div>
+  </div>
+</div>

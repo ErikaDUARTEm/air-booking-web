@@ -1,0 +1,32 @@
+<div class="flight-card">
+  <div class="flight-card__city-image">
+    <img src="home/{{ flight.image }}" alt="City view" />
+  </div>
+
+  <div class="flight-card__info">
+    <div class="flight-card__route">
+      <span class="flight-card__city"
+        >{{ flight.origin.name }} ({{ flight.origin.code }})</span
+      >
+      <span class="flight-card__separator">a</span>
+      <span class="flight-card__city"
+        >{{ flight.destination.name }} ({{ flight.destination.code }})</span
+      >
+    </div>
+
+    <div class="flight-card__dates">
+      {{ flight.departureDate }} - {{ flight.returnDate }}
+    </div>
+  </div>
+
+  <div class="flight-card__price-container">
+    <div class="flight-card__price-label">desde</div>
+    <div class="flight-card__price">
+      {{ flight.price.currency }} {{ flight.price.amount.toLocaleString() }}*
+    </div>
+    <div class="flight-card__last-checked">
+      Visto hace {{ flight.lastChecked.hours }}
+      {{ flight.lastChecked.timeUnit }} atrás
+    </div>
+  </div>
+</div>

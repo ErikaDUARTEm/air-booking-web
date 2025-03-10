@@ -1,0 +1,55 @@
+<div class="passenger-modal">
+  <div class="passenger-modal__content">
+    <div class="passenger-modal__row">
+      <div class="passenger-modal__row-label">
+        <span class="passenger-modal__label">Adulto</span>
+        <span class="passenger-modal__label-subtitle">Mayores de 12 años</span>
+      </div>
+      <button class="passenger-modal__row-button" (click)="decrementAdults()">
+        -
+      </button>
+      <span class="passenger-modal__count">{{ adults }}</span>
+      <button class="passenger-modal__row-button" (click)="incrementAdults()">
+        +
+      </button>
+    </div>
+    <div class="passenger-modal__row">
+      <div class="passenger-modal__row-label">
+        <span class="passenger-modal__label">Niño</span>
+        <span class="passenger-modal__label-subtitle">2-11 años</span>
+      </div>
+      <button class="passenger-modal__row-button" (click)="decrementChildren()">
+        -
+      </button>
+      <span class="passenger-modal__count">{{ children }}</span>
+      <button class="passenger-modal__row-button" (click)="incrementChildren()">
+        +
+      </button>
+    </div>
+    <div class="passenger-modal__row">
+      <div class="passenger-modal__row-label">
+        <span class="passenger-modal__label">Infante</span>
+        <span class="passenger-modal__label-subtitle">Menos de 2 años</span>
+      </div>
+      <button class="passenger-modal__row-button" (click)="decrementInfants()">
+        -
+      </button>
+      <span class="passenger-modal__count">{{ infants }}</span>
+      <button class="passenger-modal__row-button" (click)="incrementInfants()">
+        +
+      </button>
+    </div>
+    <button
+      class="passenger-modal__button passenger-modal__button-save"
+      (click)="save()"
+    >
+      Guardar
+    </button>
+    <button
+      class="passenger-modal__button passenger-modal__button-close"
+      (click)="closeModal()"
+    >
+      Cerrar
+    </button>
+  </div>
+</div>
