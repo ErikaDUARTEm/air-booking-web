@@ -4,11 +4,8 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "booking": [
-        "./dist/booking"
-      ],
-      "home": [
-        "./dist/home"
+      "availability": [
+        "./dist/availability"
       ],
       "shared": [
         "./dist/shared"
