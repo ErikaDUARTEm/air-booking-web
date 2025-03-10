@@ -1,48 +1,54 @@
-<section class="method-options">
-  <div class="payment-container">
-    <div class="payment-option">
-      <div class="payment-header">
-        <h3>Tarjeta de crédito</h3>
-        <div class="installments">
-          <img src="calendar.png" alt="Pago en cuotas">
-          <span>Pago en cuotas disponible*</span>
+<section class="payment-method">
+  <div class="payment-method__container">
+    <div class="payment-method__option">
+      <div class="payment-method__header">
+        <h3 class="payment-method__title">Tarjeta de crédito</h3>
+        <div class="payment-method__installments">
+          <img src="calendar.png" alt="Pago en cuotas" class="payment-method__icon">
+          <span class="payment-method__installments-text">Pago en cuotas disponible*</span>
         </div>
       </div>
-
-      <div class="credit-card">
-        <div class="card-icons">
-          <img src="Visa_icon.png" alt="logo de tarjeta Visa">
-          <img src="MasterCard.png" alt="logo de tarjeta MasterCard">
-          <img src="uatp.png" alt="logo de uatp">
-          <img src="diners.png" alt="logo diners club">
+      <div class="payment-method__card-icons">
+        <img src="Visa_icon.png" alt="logo de tarjeta Visa" class="payment-method__card-icon">
+        <img src="MasterCard.png" alt="logo de tarjeta MasterCard" class="payment-method__card-icon">
+        <img src="uatp.png" alt="logo de uatp" class="payment-method__card-icon">
+        <img src="diners.png" alt="logo diners club" class="payment-method__card-icon">
+      </div>
+      <div class="payment-method__credit-card">
+        <div class="payment-method__card-info">
+          <div class="payment-method__card-container">
+            <img src="credit.png" width="25px" height="25px" alt="logo de tarjeta de credito" class="payment-method__card-icon">
+            <span class="payment-method__card-text">Ingresa una tarjeta de crédito</span>
+          </div>
+          <div class="payment-method__container-button">
+            <button class="payment-method__select-button">
+              Seleccionar
+            </button>
+            <img src="keyboard.png" alt="icono de teclado" class="payment-method__select-icon" width="10" height="10">
+          </div>
         </div>
       </div>
-        <div class="card-info">
-          <span>Ingresa una tarjeta de crédito</span>
-          <button class="select-button">Seleccionar</button>
-        </div>
-
-      <p class="disclaimer">*Pago en cuotas solo disponible para algunas tarjetas de crédito.</p>
+      <p class="payment-method__disclaimer">*Pago en cuotas solo disponible para algunas tarjetas de crédito.</p>
     </div>
 
-    <hr class="divider">
+    <hr class="payment-method__divider">
 
-    <!-- Otras formas de pago -->
-    <div class="payment-option">
-      <h3>Otras formas de pago</h3>
-      <div class="pse-option">
-        <img src="assets/icons/pse.svg" alt="PSE">
-        <div class="pse-info">
-          <span>PSE Colombia</span>
-          <p>Débitos a cuentas de ahorro/corriente emitidas en Colombia.</p>
+    <div class="payment-method__option">
+      <h3 class="payment-method__title">Otras formas de pago</h3>
+      <div class="payment-method__pse-option">
+        <img src="pse.webp" alt="icono de PSE" class="payment-method__pse-icon">
+        <div class="payment-method__pse-info">
+          <span class="payment-method__pse-title">PSE Colombia</span>
+          <p class="payment-method__pse-description">Débitos a cuentas de ahorro/corriente emitidas en Colombia.</p>
         </div>
-        <button class="select-button">Seleccionar</button>
+        <div class="payment-method__container-button">
+          <button class="payment-method__select-button">
+            Seleccionar
+          </button>
+          <img src="keyboard.png" alt="icono de teclado" class="payment-method__select-icon" width="10" height="10">
+        </div>
       </div>
     </div>
-
-    <!-- Botón de confirmar pago -->
-    <button class="confirm-button" disabled>Confirmar Pago y Continuar</button>
+    <button class="payment-method__confirm-button" disabled>Confirmar Pago y Continuar</button>
   </div>
-
-
 </section>
