@@ -1,0 +1,12 @@
+.payment-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__method-options{
+    width: 50%;
+  }
+  &__summary-container{
+    width: 50%;
+  }
+}

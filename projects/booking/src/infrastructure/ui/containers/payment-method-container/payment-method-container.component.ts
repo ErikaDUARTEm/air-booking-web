@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { PaymentMethodOptionsComponent } from "../../components/payment-method-options/payment-method-options.component";
+import { PaymentAndSummaryComponentComponent } from '../../components/payment-and-summary-component/payment-and-summary-component.component';
 
 @Component({
   selector: 'lib-payment-method-container',
-  imports: [PaymentMethodOptionsComponent],
+  imports: [PaymentAndSummaryComponentComponent],
   templateUrl: './payment-method-container.component.html'
 })
 export class PaymentMethodContainerComponent {

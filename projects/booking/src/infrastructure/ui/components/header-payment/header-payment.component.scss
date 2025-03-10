@@ -1,0 +1,32 @@
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  border-bottom: 1px solid #ddd;
+
+  &__back-icon {
+    width: 20px;
+    height: 32px;
+    cursor: pointer;
+    border-right: 1px solid #ddd;
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+  }
+  &__subtitle {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+    padding-bottom: 10px;
+  }
+
+  &__title {
+    font-size: 25px;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+  }
+}
