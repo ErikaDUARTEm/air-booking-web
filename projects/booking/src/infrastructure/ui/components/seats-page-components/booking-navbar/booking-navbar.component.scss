@@ -1,0 +1,115 @@
+@use "../../../../../../../shared/src/infrastructure/ui/styles/variables.scss" as variables;
+
+.navbar {
+    font-family: variables.$secondary-font;
+    
+    &__content {
+        background-color: variables.$white;
+        display: flex;
+        padding: 1rem;
+        position: relative;
+    }
+    
+    &__flight-info {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        flex-direction: column;
+        color: variables.$black;
+        margin: 0 auto;
+        
+        p {
+            font-size: 1.2rem;
+            color: variables.$gray;
+        }
+  
+        h3 {
+            font-size: 3rem;
+        }
+    }
+
+    &__navigation {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        color: variables.$gray;
+        font-size: 1.6rem;
+        position: absolute;
+        right: 1rem; 
+        top: 50%; 
+        transform: translateY(-50%); 
+
+        &--left {
+            display: flex;
+            align-items: center;
+        }
+
+        &--right {
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    &__seating {
+        background-color: variables.$dark-blue;
+    }
+
+    &__seat-map {
+        height: 28px;
+        display: flex;
+        gap: 25px;
+        justify-content: center;
+        color: #fff;
+        font-weight: 700;
+        align-items: center;
+    }
+
+    &__seat-row {
+        display: flex;
+        gap: 5px;
+    }
+
+    &__seat {
+        padding: 2px 10px;
+        font-size: 12px;
+    }
+
+    &__nav-button {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        &--prev {
+            margin-right: 1rem;
+        }
+
+       
+    }
+
+    &__button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: variables.$gray;
+        font-size: 1.6rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: variables.$blue;
+        border-radius: 100%;
+        height: 48px;
+        width: 48px;
+
+        &--inactive{
+            background-color: variables.$gray;
+            color: variables.$white;
+        }
+
+        
+        // navbar__nav-button--inactive
+    }
+
+    &__button-text {
+        font-size: 1.4rem;
+    }
+}
