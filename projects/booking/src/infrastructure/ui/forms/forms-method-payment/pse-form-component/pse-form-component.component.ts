@@ -32,6 +32,7 @@ export class PseFormComponentComponent {
   }
   resetForm(): void {
     this.pseForm.reset();
+    this.pseForm.patchValue({});
     console.log('Formulario de tarjeta reiniciado');
   }
 }

@@ -26,6 +26,7 @@ export class CreditCardFormComponentComponent {
   }
   resetForm(): void {
     this.cardForm.reset();
+    this.cardForm.patchValue({});
     console.log('Formulario de tarjeta reiniciado');
   }
 }

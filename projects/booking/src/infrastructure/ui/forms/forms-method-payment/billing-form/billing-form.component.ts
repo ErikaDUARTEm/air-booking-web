@@ -21,7 +21,7 @@ export class BillingFormComponent {
         state: ['', Validators.required],
         postalCode: [''],
         phoneCode: ['+57', [Validators.required]],
-        phoneNumber: ['', [Validators.required, Validators.pattern(/^[0-9]{7,10}$/)]],
+        phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
         email: ['', Validators.email],
     });
 
@@ -30,12 +30,15 @@ export class BillingFormComponent {
       const isValid = this.billingForm.valid;
       const formData = {
         ...this.billingForm.value,
-        phone: `${this.billingForm.get('phoneCode')?.value} ${this.billingForm.get('phoneNumber')?.value}`
+        phoneNumber: `${this.billingForm.get('phoneCode')?.value}${this.billingForm.get('phone')?.value}`
       };
+      delete formData.phoneCode;
+      delete formData.phone;
       this.onFormValidityChange.emit({ isValid, formData });
     }
     resetForm(): void {
       this.billingForm.reset();
+      this.billingForm.patchValue({});
       console.log('Formulario de billing reiniciado');
     }
 

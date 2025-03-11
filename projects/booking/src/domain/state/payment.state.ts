@@ -13,16 +13,20 @@ export class PaymentState {
   private readonly paymentData$ = new BehaviorSubject<IPaymentData | null>(null);
   private readonly billingData$ = new BehaviorSubject<IBillingAddress | null>(null);
   private readonly selectedMethod$ = new BehaviorSubject<'CARD' | 'PSE' | null>(null);
+  private readonly successMessage$ = new BehaviorSubject<string | null>(null);
   //#endregion
 
   store() {
     return {
       paymentData: this._factory.state(this.paymentData$),
       billingData: this._factory.state(this.billingData$),
-      selectedMethod: this._factory.state(this.selectedMethod$)
+      selectedMethod: this._factory.state(this.selectedMethod$),
+      successMessage: this._factory.state(this.successMessage$)
       };
   }
-
+  setSuccessMessage(message: string | null) {
+    this.successMessage$.next(message);
+  }
   updatePaymentData(paymentData: IPaymentData) {
     this.paymentData$.next(paymentData);
   }

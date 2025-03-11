@@ -1,14 +1,21 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { PaymentAndSummaryComponentComponent } from '../../components/payment/payment-and-summary-component/payment-and-summary-component.component';
 import { PaymentState } from '../../../../domain/state/payment.state';
+import { PaymentUseCase } from '../../../../application/booking/payment.usecase';
 
 @Component({
   selector: 'lib-payment-method-container',
   imports: [PaymentAndSummaryComponentComponent],
   templateUrl: './payment-method-container.component.html'
 })
-export class PaymentMethodContainerComponent {
+export class PaymentMethodContainerComponent implements OnInit, OnDestroy{
   private readonly paymentState = inject(PaymentState);
+  private readonly _paymentUseCase = inject(PaymentUseCase);
+
+  ngOnInit(): void {
+    this._paymentUseCase.initSubscriptions();
+    const paymentData = this.paymentState.store().paymentData.snapshot();
+  }
 
   onMethodSelected(method: 'CARD' | 'PSE' | null): void {
     this.paymentState.updateSelectedMethod(method);
@@ -30,6 +37,10 @@ export class PaymentMethodContainerComponent {
 
   submitPayment(paymentData: any): void {
     console.log('Datos de pago confirmados:', paymentData);
-    //enviar al caso de uso.
+    this._paymentUseCase.execute(paymentData);
+  }
+  ngOnDestroy(): void {
+    this._paymentUseCase.destroySubscriptions();
+
   }
 }
