@@ -62,20 +62,27 @@
     </div>
   </div>
 
-  <div *ngIf="selectedMethod === 'CARD'">
+  <div>
     <lib-credit-card-form-component
+      [class.hidden]="selectedMethod !== 'CARD'"
       (onFormValidityChange)="handleFormValidity('CARD', $event.isValid, $event.formData)">
     </lib-credit-card-form-component>
-    <lib-billing-form (onFormValidityChange)="handleFormValidity('BILLING', $event.isValid, $event.formData)">
+  </div>
+
+  <div>
+    <lib-pse-form-component
+      [class.hidden]="selectedMethod !== 'PSE'"
+      (onFormValidityChange)="handleFormValidity('PSE', $event.isValid, $event.formData)">
+    </lib-pse-form-component>
+  </div>
+
+  <div>
+    <lib-billing-form
+      [class.hidden]="selectedMethod === null"
+      (onFormValidityChange)="handleFormValidity('BILLING', $event.isValid, $event.formData)">
     </lib-billing-form>
   </div>
 
-  <div *ngIf="selectedMethod === 'PSE'">
-    <lib-pse-form-component (onFormValidityChange)="handleFormValidity('PSE', $event.isValid, $event.formData)">
-    </lib-pse-form-component>
-    <lib-billing-form (onFormValidityChange)="handleFormValidity('BILLING', $event.isValid, $event.formData)">
-    </lib-billing-form>
-  </div>
   <div class="payment-method__button">
     <button class="payment-method__confirm-button"
       [disabled]="!isConfirmButtonEnabled()"

@@ -34,6 +34,9 @@ export class BillingFormComponent {
       };
       this.onFormValidityChange.emit({ isValid, formData });
     }
-
+    resetForm(): void {
+      this.billingForm.reset();
+      console.log('Formulario de billing reiniciado');
+    }
 
 }

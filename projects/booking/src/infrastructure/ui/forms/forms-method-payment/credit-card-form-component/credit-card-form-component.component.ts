@@ -24,4 +24,8 @@ export class CreditCardFormComponentComponent {
     const formData = this.cardForm.value;
     this.onFormValidityChange.emit({ isValid, formData });
   }
+  resetForm(): void {
+    this.cardForm.reset();
+    console.log('Formulario de tarjeta reiniciado');
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, inject, output} from '@angular/core';
+import { Component, inject, output, ViewChild} from '@angular/core';
 import { CreditCardFormComponentComponent } from '../../../forms/forms-method-payment/credit-card-form-component/credit-card-form-component.component';
 import { PseFormComponentComponent } from "../../../forms/forms-method-payment/pse-form-component/pse-form-component.component";
 import { CommonModule } from '@angular/common';
@@ -15,6 +15,10 @@ import { BillingFormComponent } from '../../../forms/forms-method-payment/billin
 })
 export class PaymentMethodOptionsComponent {
 
+  @ViewChild(CreditCardFormComponentComponent, { static: false }) creditCardFormComponent!: CreditCardFormComponentComponent;
+  @ViewChild(PseFormComponentComponent, { static: false }) pseFormComponent!: PseFormComponentComponent;
+  @ViewChild(BillingFormComponent, { static: false }) billingFormComponent!: BillingFormComponent;
+
   public onMethodSelected = output<'CARD' | 'PSE' | null>();
   public onConfirmPayment = output<any>();
 
@@ -25,13 +29,35 @@ export class PaymentMethodOptionsComponent {
     PSE: { isValid: false, formData: null },
     BILLING: { isValid: false, formData: null },
   };
-
-  handleSelectMethod(method: 'CARD' | 'PSE' | null): void {
-    console.log('Selected method:', this.selectedMethod);
-
-    this.selectedMethod = method;
-    this.onMethodSelected.emit(method);
+  ngAfterViewInit(): void {
+    console.log('Referencia de CreditCardFormComponent:', this.creditCardFormComponent);
+    console.log('Referencia de PseFormComponent:', this.pseFormComponent);
+    console.log('Referencia de BillingFormComponent:', this.billingFormComponent);
   }
+  handleSelectMethod(method: 'CARD' | 'PSE' | null): void {
+    this.selectedMethod = method;
+    if (!this.pseFormComponent) {
+      console.warn('PseFormComponent no está inicializado en ngAfterViewInit.');
+    }
+    const componentsToReset = {
+      default: [this.creditCardFormComponent, this.pseFormComponent, this.billingFormComponent],
+      CARD: [this.pseFormComponent],
+      PSE: [this.creditCardFormComponent]
+    };
+
+    const key = method === null ? 'default' : method;
+
+    (componentsToReset[key] || []).forEach((component, index) => {
+      if (component) {
+        component.resetForm();
+      } else {
+        console.warn(`Componente no inicializado en posición ${index}`);
+      }
+    });
+    this.onMethodSelected.emit(method);
+    console.log('Método seleccionado emitido:', method);
+  }
+
 
   handleFormValidity(formType: 'CARD' | 'BILLING' | 'PSE', isValid: boolean, formData: any): void {
     console.log(`Formulario actualizado: ${formType}, Válido: ${isValid}`);
@@ -54,7 +80,7 @@ export class PaymentMethodOptionsComponent {
       pseData: this.formStates.PSE.formData,
       billingData: this.formStates.BILLING.formData,
     };
-    this.onConfirmPayment.emit(paymentData);
     console.log('Pago confirmado', paymentData);
+    this.onConfirmPayment.emit(paymentData);
   }
 }
