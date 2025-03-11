@@ -36,44 +36,31 @@
         </div>
         
         <div class="main__executive-class">
+
+   
           <!-- Fila 01 -->
-          <div class="main__seat-row">
-            <div class="main__col-left">
-              <div class="main__diagonal-seat"></div>
-              <div class="main__diagonal-seat"></div>
+          <ng-container *ngFor="let row of [01, 02, 03]">
+            <div class="main__seat-row">
+              <div class="main__col-left">
+                <div class="main__seat main__diagonal-seat" *ngFor="let col of ['A', 'B']">
+                  <button *ngIf="!isSeatAvailable(row, col)" (click)="selectSeat(row, col)" disabled>
+                    <img src="./booking/dollar-sign.svg">
+                  </button>
+                </div>
+              </div>
+              <div class="main__col-number">{{row}}</div>
+              <div class="main__col-right">
+                <div class="main__seat main__diagonal-seat" *ngFor="let col of ['E', 'F']">
+                  <button *ngIf="!isSeatAvailable(row, col)" (click)="selectSeat(row, col)" disabled>
+                    <img src="./booking/dollar-sign.svg">
+                  </button>
+                </div>
+              </div>
             </div>
-            <div class="main__col-number">01</div>
-            <div class="main__col-right">
-              <div class="main__diagonal-seat"></div>
-              <div class="main__diagonal-seat"></div>
-            </div>
-          </div>
+          </ng-container>
+
+       
           
-          <!-- Fila 02 -->
-          <div class="main__seat-row">
-            <div class="main__col-left">
-              <div class="main__diagonal-seat"></div>
-              <div class="main__diagonal-seat"></div>
-            </div>
-            <div class="main__col-number">02</div>
-            <div class="main__col-right">
-              <div class="main__diagonal-seat"></div>
-              <div class="main__diagonal-seat"></div>
-            </div>
-          </div>
-          
-          <!-- Fila 03 -->
-          <div class="main__seat-row">
-            <div class="main__col-left">
-              <div class="main__diagonal-seat"></div>
-              <div class="main__diagonal-seat"></div>
-            </div>
-            <div class="main__col-number">03</div>
-            <div class="main__col-right">
-              <div class="main__diagonal-seat"></div>
-              <div class="main__diagonal-seat"></div>
-            </div>
-          </div>
         </div>
         
         <!-- Separador de clases -->
@@ -99,177 +86,111 @@
         
         <!-- Filas de clase económica -->
         <div class="main__economy-class">
-          <!-- Fila 05 -->
-          <div class="main__seat-row">
-            <div class="main__col-left">
-              <div class="main__seat main__seat--premium"><button> <img src="./booking/dollar-sign.svg"> </button></div>
-              <div class="main__seat main__seat--premium"><button><img src="./booking/dollar-sign.svg"></button></div>
-              <div class="main__seat main__seat--premium"><button><img src="./booking/dollar-sign.svg"></button></div>
+          <!-- Fila 05 a 11-->
+
+          <ng-container *ngFor="let row of [05, 06, 07, 08, 09, 10, 11]">
+            <div class="main__seat-row">
+              <div class="main__col-left">
+                <div class="main__seat main__seat--premium" *ngFor="let col of ['A', 'B', 'C']">
+                  <button *ngIf="isSeatAvailable(row, col)" (click)="selectSeat(row, col)">
+                    <img src="./booking/dollar-sign.svg">
+                  </button>
+                  <button *ngIf="!isSeatAvailable(row, col)" (click)="selectSeat(row, col)" disabled>
+                    <img src="./booking/dollar-sign.svg">
+                  </button>
+                </div>
+              </div>
+              <div class="main__col-number">{{row}}</div>
+              <div class="main__col-right">
+                <div class="main__seat main__seat--premium" *ngFor="let col of ['D', 'E', 'F']">
+                  <button *ngIf="isSeatAvailable(row, col)" (click)="selectSeat(row, col)">
+                    <img src="./booking/dollar-sign.svg">  
+                  </button>
+                  <button *ngIf="!isSeatAvailable(row, col)" (click)="selectSeat(row, col)" disabled>
+                    <img src="./booking/dollar-sign.svg">
+                  </button>
+                </div>
+              </div>
             </div>
-            <div class="main__col-number">05</div>
-            <div class="main__col-right">
-              <div class="main__seat main__seat--premium"><button><img src="./booking/dollar-sign.svg"></button></div>
-              <div class="main__seat main__seat--premium"><button><img src="./booking/dollar-sign.svg"></button></div>
-              <div class="main__seat main__seat--premium"><button><img src="./booking/dollar-sign.svg"></button></div>
-            </div>
-          </div>
+          </ng-container>
+
           
-          <!-- Fila 06 -->
-          <div class="main__seat-row">
-            <div class="main__col-left">
-              <div class="main__seat main__seat--premium"><button><img src="./booking/dollar-sign.svg"></button></div>
-              <div class="main__seat main__seat--premium"><button><img src="./booking/dollar-sign.svg"></button></div>
-              <div class="main__seat main__seat--premium"><button><img src="./booking/dollar-sign.svg"></button></div>
-            </div>
-            <div class="main__col-number">06</div>
-            <div class="main__col-right">
-              <div class="main__seat main__seat--premium"><button><img src="./booking/dollar-sign.svg"></button></div>
-              <div class="main__seat main__seat--premium"><button><img src="./booking/dollar-sign.svg"></button></div>
-              <div class="main__seat main__seat--premium"><button><img src="./booking/dollar-sign.svg"></button></div>
-            </div>
-          </div>
-          
-          <!-- Fila 07 -->
-          <div class="main__seat-row">
-            <div class="main__col-left">
-              <div class="main__seat main__seat--premium"><button><img src="./booking/dollar-sign.svg"></button></div>
-              <div class="main__seat main__seat--premium"><button><img src="./booking/dollar-sign.svg"></button></div>
-              <div class="main__seat main__seat--premium"><button><img src="./booking/dollar-sign.svg"></button></div>
-            </div>
-            <div class="main__col-number">07</div>
-            <div class="main__col-right">
-              <div class="main__seat main__seat--premium"><button><img src="./booking/dollar-sign.svg"></button></div>
-              <div class="main__seat main__seat--premium"><button><img src="./booking/dollar-sign.svg"></button></div>
-              <div class="main__seat main__seat--premium"><button><img src="./booking/dollar-sign.svg"></button></div>
-            </div>
-          </div>
-          
-          <!-- Fila 08 -->
-          <div class="main__seat-row">
-            <div class="main__col-left">
-              <div class="main__seat main__seat--premium"><button><img src="./booking/dollar-sign.svg"></button></div>
-              <div class="main__seat main__seat--premium"><button><img src="./booking/dollar-sign.svg"></button></div>
-              <div class="main__seat main__seat--premium"><button><img src="./booking/dollar-sign.svg"></button></div>
-            </div>
-            <div class="main__col-number">08</div>
-            <div class="main__col-right">
-              <div class="main__seat main__seat--premium"><button><img src="./booking/dollar-sign.svg"></button></div>
-              <div class="main__seat main__seat--premium"><button><img src="./booking/dollar-sign.svg"></button></div>
-              <div class="main__seat main__seat--premium"><button><img src="./booking/dollar-sign.svg"></button></div>
-            </div>
-          </div>
-          
-          <!-- Fila 09 -->
-          <div class="main__seat-row">
-            <div class="main__col-left">
-              <div class="main__seat main__seat--premium"><button><img src="./booking/dollar-sign.svg"></button></div>
-              <div class="main__seat main__seat--premium"><button><img src="./booking/dollar-sign.svg"></button></div>
-              <div class="main__seat main__seat--premium"><button><img src="./booking/dollar-sign.svg"></button></div>
-            </div>
-            <div class="main__col-number">09</div>
-            <div class="main__col-right">
-              <div class="main__seat main__seat--premium"><button><img src="./booking/dollar-sign.svg"></button></div>
-              <div class="main__seat main__seat--premium"><button><img src="./booking/dollar-sign.svg"></button></div>
-              <div class="main__seat main__seat--premium"><button><img src="./booking/dollar-sign.svg"></button></div>
-            </div>
-          </div>
-          
-          <!-- Fila 10 -->
-          <div class="main__seat-row">
-            <div class="main__col-left">
-              <div class="main__seat main__seat--premium"><button><img src="./booking/dollar-sign.svg"></button></div>
-              <div class="main__seat main__seat--premium"><button><img src="./booking/dollar-sign.svg"></button></div>
-              <div class="main__seat main__seat--premium"><button><img src="./booking/dollar-sign.svg"></button></div>
-            </div>
-            <div class="main__col-number">10</div>
-            <div class="main__col-right">
-              <div class="main__seat main__seat--premium"><button><img src="./booking/dollar-sign.svg"></button></div>
-              <div class="main__seat main__seat--premium"><button><img src="./booking/dollar-sign.svg"></button></div>
-              <div class="main__seat main__seat--premium"><button><img src="./booking/dollar-sign.svg"></button></div>
-            </div>
-          </div>
-          
+
           <!-- Fila 17 (Salida de emergencia) -->
-          <div class="main__seat-row">
-            <div class="main__col-left">
-              <div class="main__seat main__seat--emergency"><button><img src="./booking/dollar-sign.svg"></button></div>
-              <div class="main__seat main__seat--emergency"><button><img src="./booking/dollar-sign.svg"></button></div>
-              <div class="main__seat main__seat--emergency"><button><img src="./booking/dollar-sign.svg"></button></div>
+
+          <ng-container *ngFor="let row of [17]">
+            <div class="main__seat-row">
+              <div class="main__col-left">
+                <div class="main__seat main__seat--emergency" *ngFor="let col of ['A', 'B', 'C']">
+                  <button *ngIf="isSeatAvailable(row, col)" (click)="selectSeat(row, col)">
+                    <img src="./booking/dollar-sign.svg">
+                  </button>
+                  <button *ngIf="!isSeatAvailable(row, col)" (click)="selectSeat(row, col)" disabled>
+                    <img src="./booking/dollar-sign.svg">
+                  </button>
+                </div>
+              </div>
+              <div class="main__col-number">{{row}}</div>
+              <div class="main__col-right">
+                <div class="main__seat main__seat--emergency" *ngFor="let col of ['D', 'E', 'F']">
+                  <button *ngIf="isSeatAvailable(row, col)" (click)="selectSeat(row, col)">
+                    <img src="./booking/dollar-sign.svg">  
+                  </button>
+                  <button *ngIf="!isSeatAvailable(row, col)" (click)="selectSeat(row, col)" disabled>
+                    <img src="./booking/dollar-sign.svg">
+                  </button>
+                </div>
+              </div>
             </div>
-            <div class="main__col-number">17</div>
-            <div class="main__col-right">
-              <div class="main__seat main__seat--emergency"><button><img src="./booking/dollar-sign.svg"></button></div>
-              <div class="main__seat main__seat--emergency"><button><img src="./booking/dollar-sign.svg"></button></div>
-              <div class="main__seat main__seat--emergency"><button><img src="./booking/dollar-sign.svg"></button></div>
-            </div>
-          </div>
+          </ng-container>
           
           <!-- Fila 18 -->
-          <div class="main__seat-row">
-            <div class="main__col-left">
-              <div class="main__seat main__seat--favorable"><button><img src="./booking/dollar-sign.svg"></button></div>
-              <div class="main__seat main__seat--favorable"><button><img src="./booking/dollar-sign.svg"></button></div>
-              <div class="main__diagonal-seat"></div>
+          <ng-container *ngFor="let row of [18,19,20]">
+            <div class="main__seat-row">
+              <div class="main__col-left">
+                <div class="main__seat main__seat--favorable" *ngFor="let col of ['A', 'B', 'C']">
+                  <button *ngIf="isSeatAvailable(row, col)" (click)="selectSeat(row, col)">
+                    <img src="./booking/dollar-sign.svg">
+                  </button>
+                  <button *ngIf="!isSeatAvailable(row, col)" (click)="selectSeat(row, col)" disabled>
+                    <img src="./booking/dollar-sign.svg">
+                  </button>
+                </div>
+              </div>
+              <div class="main__col-number">{{row}}</div>
+              <div class="main__col-right">
+                <div class="main__seat main__seat--favorable" *ngFor="let col of ['D', 'E', 'F']">
+                  <button *ngIf="isSeatAvailable(row, col)" (click)="selectSeat(row, col)">
+                    <img src="./booking/dollar-sign.svg">  
+                  </button>
+                  <button *ngIf="!isSeatAvailable(row, col)" (click)="selectSeat(row, col)" disabled>
+                    <img src="./booking/dollar-sign.svg">
+                  </button>
+                </div>
+              </div>
             </div>
-            <div class="main__col-number">18</div>
-            <div class="main__col-right">
-              <div class="main__diagonal-seat"></div>
-              <div class="main__diagonal-seat"></div>
-              <div class="main__diagonal-seat"></div>
-            </div>
-          </div>
-          
-          <!-- Fila 19 -->
-          <div class="main__seat-row">
-            <div class="main__col-left">
-              <div class="main__seat main__seat--favorable"><button><img src="./booking/dollar-sign.svg"></button></div>
-              <div class="main__diagonal-seat"></div>
-              <div class="main__diagonal-seat"></div>
-            </div>
-            <div class="main__col-number">19</div>
-            <div class="main__col-right">
-              <div class="main__diagonal-seat"></div>
-              <div class="main__diagonal-seat"></div>
-              <div class="main__seat main__seat--favorable"><button><img src="./booking/dollar-sign.svg"></button></div>
-            </div>
-          </div>
-          
-          <!-- Fila 20 -->
-          <div class="main__seat-row">
-            <div class="main__col-left">
-              <div class="main__seat main__seat--favorable"><button><img src="./booking/dollar-sign.svg"></button></div>
-              <div class="main__seat main__seat--favorable"><button><img src="./booking/dollar-sign.svg"></button></div>
-              <div class="main__diagonal-seat"></div>
-            </div>
-            <div class="main__col-number">20</div>
-            <div class="main__col-right">
-              <div class="main__diagonal-seat"></div>
-              <div class="main__seat main__seat--favorable"><button><img src="./booking/dollar-sign.svg"></button></div>
-              <div class="main__seat main__seat--favorable"><button><img src="./booking/dollar-sign.svg"></button></div>
-            </div>
-          </div>
+          </ng-container>
           
           <!-- Filas 21-29 (Asientos regulares) -->
-          <ng-container *ngFor="let row of [99, 22, 23, 24, 25, 26, 27, 28, 29]">
+          <ng-container *ngFor="let row of [21, 22, 23, 24, 25, 26, 27, 28, 29]">
             <div class="main__seat-row">
               <div class="main__col-left">
                 <div class="main__seat main__seat--regular" *ngFor="let col of ['A', 'B', 'C']">
-                  <button *ngIf="isSeatAvailable(row, col)"></button>
-                  <button *ngIf="!isSeatAvailable(row, col)" disabled></button>
+                  <button *ngIf="isSeatAvailable(row, col)" (click)="selectSeat(row, col)"></button>
+                  <button *ngIf="!isSeatAvailable(row, col)" (click)="selectSeat(row, col)" disabled></button>
                 </div>
               </div>
               <div class="main__col-number">{{row}}</div>
               <div class="main__col-right">
                 <div class="main__seat main__seat--regular" *ngFor="let col of ['D', 'E', 'F']">
-                  <button *ngIf="isSeatAvailable(row, col)"></button>
-                  <button *ngIf="!isSeatAvailable(row, col)" disabled></button>
+                  <button *ngIf="isSeatAvailable(row, col)" (click)="selectSeat(row, col)"></button>
+                  <button *ngIf="!isSeatAvailable(row, col)" (click)="selectSeat(row, col)" disabled></button>
                 </div>
               </div>
             </div>
           </ng-container>
         </div>
         
-        <!-- Bottom service areas -->
         <div class="main__bottom-services">
           <div class="service-row">
             <div class="main__service-item">

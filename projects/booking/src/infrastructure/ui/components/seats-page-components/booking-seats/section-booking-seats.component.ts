@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'lib-section-booking-seats',
@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './section-booking-seats.component.scss'
 })
 export class SectionBookingSeatsComponent {
+  @Output() seatSelected = new EventEmitter<string>();
 
   // Define rows and columns
   regularRows: number[] = [21, 22, 23, 24, 25, 26, 27, 28, 29];
@@ -67,11 +68,13 @@ export class SectionBookingSeatsComponent {
     }
   }
   
-  // Handle seat selection
+
+
   selectSeat(row: number, col: string): void {
     if (this.isSeatAvailable(row, col)) {
-      console.log(`Selected seat: ${row}${col}`);
-      // Add your seat selection logic here
+      const seatId = `${row}${col}`;
+      console.log(`Selected seat: ${seatId}`);
+      this.seatSelected.emit(seatId);
     }
   }
 

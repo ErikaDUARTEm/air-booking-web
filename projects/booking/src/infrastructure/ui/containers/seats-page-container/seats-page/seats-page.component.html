@@ -4,13 +4,19 @@
     </header>
 
     <section>
-        <lib-section-seats-content/>
+        <lib-section-seats-content (seatSelected)="openModal($event)"/>
     </section>
 
     <div>
         <lib-seats-details-content/>
     </div>
 
+    <lib-seats-modal-content
+        [isOpen]="modalOpen"
+        [seatInfo]="selectedSeat"
+        (confirm)="confirmSeatSelection()"
+        (cancel)="cancelSeatSelection()"
+        (close)="closeModal()"/>
     <footer>
        <lib-seats-footer-content/>
     </footer>

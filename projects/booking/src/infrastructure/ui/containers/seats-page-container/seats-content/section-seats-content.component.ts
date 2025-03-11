@@ -1,5 +1,5 @@
 import { SectionBookingSeatsComponent } from './../../../components/seats-page-components/booking-seats/section-booking-seats.component';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'lib-section-seats-content',
@@ -8,5 +8,10 @@ import { Component } from '@angular/core';
   styleUrl: './section-seats-content.component.scss'
 })
 export class SectionSeatsContentComponent {
+  @Output() seatSelected = new EventEmitter<string>();
+  
+  onSeatSelected(seatId: string): void {
+    this.seatSelected.emit(seatId);
+  }
 
 }
