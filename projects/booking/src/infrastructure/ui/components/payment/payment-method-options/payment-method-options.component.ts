@@ -1,9 +1,9 @@
 import { Component, inject, output} from '@angular/core';
-import { CreditCardFormComponentComponent } from '../../forms/credit-card-form-component/credit-card-form-component.component';
-import { PseFormComponentComponent } from "../../forms/pse-form-component/pse-form-component.component";
+import { CreditCardFormComponentComponent } from '../../../forms/forms-method-payment/credit-card-form-component/credit-card-form-component.component';
+import { PseFormComponentComponent } from "../../../forms/forms-method-payment/pse-form-component/pse-form-component.component";
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { BillingFormComponent } from '../../forms/billing-form/billing-form.component';
+import { BillingFormComponent } from '../../../forms/forms-method-payment/billing-form/billing-form.component';
 
 
 

@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { PaymentAndSummaryComponentComponent } from '../../components/payment-and-summary-component/payment-and-summary-component.component';
+import { PaymentAndSummaryComponentComponent } from '../../components/payment/payment-and-summary-component/payment-and-summary-component.component';
 import { PaymentState } from '../../../../domain/state/payment.state';
 
 @Component({
