@@ -1,12 +1,12 @@
 
 export interface IPaymentData {
-  id?: string;
+  id?: number;
   paymentMethod: 'CARD' | 'PSE';
-  billingAddress: IBillingAddress;
   subtotal: number;
   total: number;
   discount: number;
   paymentDetails: ICard | IPse;
+  billingAddress: IBillingAddress;
 }
 export interface IPaymentMethod {
   id?: string;
@@ -16,7 +16,7 @@ export interface ICard extends IPaymentMethod {
   number: string;
   holderName: string;
   expirationDate: string;
-  cvv: string;
+  cvv: number;
   countryIssue: string;
 }
 
@@ -25,13 +25,13 @@ export interface IPse extends IPaymentMethod {
   email: string;
 }
 export interface IBillingAddress {
-  id?:string;
+  id?: number;
   addressOne: string;
   addressTwo: string;
   country: string;
   city: string;
   state: string;
-  postalCode: string;
-  numberPhone: string;
+  postalCode: number;
+  phoneNumber: string;
   email: string;
 }

@@ -1,1 +1,95 @@
-<p>credit-card-form-component works!</p>
+<section class="card-form" role="form">
+  <div class="card-form__title" aria-labelledby="formTitle">
+    <h2 id="formTitle">Información de la tarjeta de crédito</h2>
+    <p>Campos marcados con <span>*</span> son requeridos.</p>
+  </div>
+
+  <form [formGroup]="cardForm" (ngModelChange)="onInputChange()" (input)="onInputChange()">
+    <div class="card-form__form-group">
+      <label for="holderName">Nombre del Titular<span>*</span></label>
+      <input
+        id="holderName"
+        formControlName="holderName"
+        type="text"
+        placeholder="Ingresa el nombre como aparece en la tarjeta de crédito"
+        aria-required="true"
+      />
+      <div class="card-form__error-message">
+        <small *ngIf="cardForm.get('holderName')?.touched ? cardForm.get('holderName')?.errors?.['required'] : null">
+          <span><img src="required.png" width="15px" alt="Este campo es requerido"></span>El nombre del titular es obligatorio.
+        </small>
+      </div>
+    </div>
+
+    <div class="card-form__form-group">
+      <label for="number">Número de Tarjeta de Crédito<span>*</span></label>
+      <input
+        id="number"
+        formControlName="number"
+        type="text"
+        placeholder="Ingresa número de tarjeta de crédito"
+        aria-required="true"
+      />
+      <div class="card-form__error-message">
+        <small *ngIf="cardForm.get('number')?.touched ? cardForm.get('number')?.errors?.['required'] : null">
+          <span><img src="required.png" width="15px" alt="Este campo es requerido"></span>Este campo es requerido.
+        </small>
+        <small *ngIf="cardForm.get('number')?.touched ? cardForm.get('number')?.errors?.['pattern'] : null">
+          <span><img src="required.png" width="15px" alt="Este campo es requerido"></span> El número de tarjeta debe tener 16 dígitos.
+        </small>
+      </div>
+    </div>
+
+    <div class="card-form__input-row">
+      <div class="card-form__input-inline">
+        <label for="expirationDate">Fecha de Expiración<span>*</span></label>
+        <input
+          id="expirationDate"
+          formControlName="expirationDate"
+          type="text"
+          placeholder="MM/AAAA"
+          aria-required="true"
+        />
+        <div class="card-form__error-message">
+          <small *ngIf="cardForm.get('expirationDate')?.touched ? cardForm.get('expirationDate')?.errors?.['required'] : null">
+            <span><img src="required.png" width="15px" alt="Este campo es requerido"></span>La fecha de expiración es obligatoria.
+          </small>
+        </div>
+      </div>
+      <div class="card-form__input-inline">
+        <label for="cvv">CVV<span>*</span></label>
+        <input
+          id="cvv"
+          formControlName="cvv"
+          type="number"
+          placeholder="###"
+          aria-required="true"
+        />
+        <div class="card-form__error-message">
+          <small *ngIf="cardForm.get('cvv')?.touched ? cardForm.get('cvv')?.errors?.['required'] : null">
+            <span><img src="required.png" width="15px" alt="Este campo es requerido"></span> El CVV es obligatorio.
+          </small>
+          <small *ngIf="cardForm.get('cvv')?.touched ? cardForm.get('cvv')?.errors?.['pattern'] : null">
+            <span><img src="required.png" width="15px" alt="Este campo es requerido"></span> El CVV debe tener 3 dígitos.
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-form__form-group">
+      <label for="countryIssue">País de emisión de la tarjeta<span>*</span></label>
+      <input
+        id="countryIssue"
+        formControlName="countryIssue"
+        type="text"
+        placeholder="País de emisión de la tarjeta"
+        aria-required="true"
+      />
+      <div class="card-form__error-message">
+        <small *ngIf="cardForm.get('countryIssue')?.touched ? cardForm.get('countryIssue')?.errors?.['required'] : null">
+          <span><img src="required.png" width="15px" alt="Este campo es requerido"></span> El país de emisión de la tarjeta es obligatorio.
+        </small>
+      </div>
+    </div>
+  </form>
+</section>
