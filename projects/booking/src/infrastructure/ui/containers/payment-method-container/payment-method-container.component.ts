@@ -14,7 +14,7 @@ export class PaymentMethodContainerComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
     this._paymentUseCase.initSubscriptions();
-    const paymentData = this.paymentState.store().paymentData.snapshot();
+
   }
 
   onMethodSelected(method: 'CARD' | 'PSE' | null): void {
@@ -34,8 +34,8 @@ export class PaymentMethodContainerComponent implements OnInit, OnDestroy{
       }
     }
   }
-
   submitPayment(paymentData: any): void {
+    alert("Pago confirmado con exito.")
     console.log('Datos de pago confirmados:', paymentData);
     this._paymentUseCase.execute(paymentData);
   }

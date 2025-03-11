@@ -26,7 +26,6 @@ export class PaymentUseCase{
         this._state.payment.successMessage.set('No se puede procesar el pago: Datos incompletos.')
         return;
       }
-
       this.subscriptions.add(
         this._service
           .execute(paymentData)
