@@ -1,0 +1,150 @@
+@use '../../styles/variables' as variables;
+@use '../../styles/mixins' as mixins;
+@use './../../../../../../shared/src/infrastructure/ui/styles/variables.scss' as variablesGlobales;
+
+
+details[open] {
+    border-bottom: 2px solid variables.$blue;
+}
+
+details[open] .arrow-bottom {
+    transform: rotate(180deg);
+    transition: 0.5s;
+}
+
+.accordion {
+    border-bottom: 1px solid #ccc;
+    padding: 0;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+
+    &__header {
+        @include mixins.flex-style(column, nowrap, 5px);
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 0;
+    }
+
+    &__icon {
+        display: flex;
+        width: 100%;
+        padding-right: 20px;
+        justify-content: flex-end;
+        & img {
+            margin-top: 10px;
+            width: 30px;
+        }
+    }
+
+    &__content {
+        display: flex;
+        justify-content: space-between;
+        flex-grow: 1;
+        width: 100%;
+    }
+
+    &__info {
+        @include mixins.flex-style(row, nowrap, 20px);
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+
+        &-reserva {
+            @include mixins.flex-style(row, wrap, 0);
+            @include mixins.font-style(16, bold);
+            align-items: center;
+            width: 33%;
+            font-family: variablesGlobales.$primary-font;
+        }
+
+        &-icon {
+            transform: rotate(10deg);
+            width: 40px;
+            position: relative;
+        }
+
+        &-label {
+            @include mixins.font-style(variablesGlobales.$font-size-title-secondary, bold);
+            width: 60%;
+            font-family: variablesGlobales.$secondary-font;
+        }
+
+        &-number {
+            @include mixins.font-style(variablesGlobales.$font-size-paragraph, 500);
+            width: 70%;
+            padding-left: 30px;
+            font-family: variablesGlobales.$secondary-font;
+
+        }
+
+        &-calendar {
+            @include mixins.flex-style(column, nowrap, 5);
+            @include mixins.font-style(13px, 500, #494949);
+            align-items: center;
+            width: 33%;
+            font-family: variablesGlobales.$primary-font;
+        }
+
+        &-iconCalendar {
+            @include mixins.font-style(20px);
+            margin-bottom: 5px;
+        }
+
+
+        &-state {
+            display: flex;
+            width: 33%;
+            justify-content: end;
+            padding-right: 30px;
+            font-family: variablesGlobales.$primary-font;
+
+            & p {
+                @include mixins.font-style(variablesGlobales.$font-size-paragraph, bold);
+                padding: 5px 10%;
+                border-radius: 5px;
+                text-align: center;
+                justify-content: center
+            }
+        }
+    }
+
+    &__destination {
+        @include mixins.flex-style(row, nowrap, 15px);
+        align-items: center;
+        text-align: center;
+        justify-content: space-evenly;
+        width: 60%;
+        font-family: variablesGlobales.$secondary-font;
+
+        &-name {
+            @include mixins.font-style(22px, bold);
+            width: 30%;
+        }
+
+        &-details {
+            @include mixins.flex-style(column);
+            @include mixins.font-style(12px, 500, variables.$font-opacity);
+            align-items: center;
+        }
+
+        &-route {
+            @include mixins.font-style(19px, bold);
+            font-size: 19px;
+            font-weight: bold;
+        }
+    }
+
+}
+
+.pending {
+    background-color: variables.$state-pending;
+    color: variables.$white;
+}
+.confirmed {
+    background-color: variables.$state-confirmed;
+    color: variables.$white;
+}
+.cancelled {
+    background-color: variables.$state-cancelled;
+    color: variables.$white;
+}

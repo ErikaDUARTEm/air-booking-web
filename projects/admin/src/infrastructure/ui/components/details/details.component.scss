@@ -1,0 +1,117 @@
+@use '../../styles/variables' as variables;
+@use './../../../../../../shared/src/infrastructure/ui/styles/variables.scss' as variablesGlobales;
+@use '../../styles/mixins' as mixins;
+
+.details {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+    padding-top: 50px;
+    font-family: variablesGlobales.$font-size-title-secondary;
+
+    &__card {
+        @include mixins.card-modal;
+    }
+
+    &__header {
+        margin-bottom: 2rem;
+
+        & h1 {
+            @include mixins.font-style(1.5rem, bold, variablesGlobales.$font-size-title-main);
+            margin: 0;
+            font-family: variablesGlobales.$primary-font;
+        }
+    }
+
+    &__info {
+        display: flex;
+        width: 100%;
+        margin-bottom: 40px;
+    }
+
+    &__column {
+        @include mixins.flex-style(column, nowrap);
+        width: 100%;
+    }
+
+    &__row {
+        @include mixins.flex-style(row, wrap, 1rem);
+        justify-content: space-between;
+    }
+
+    &__group {
+        margin-bottom: 1rem;
+        width: 37%;
+    }
+
+    &__initial {
+        margin-bottom: 2rem;
+        width: 100%;
+    }
+
+    &__subtitle {
+        @include mixins.font-style(0.875rem, normal, variables.$font-opacity);
+        margin: 0 0 0.5rem 0;
+        width: 100%;
+        font-family: variablesGlobales.$font-size-title-secondary;
+
+    }
+
+    &__text {
+        @include mixins.font-style(1rem, 600, variables.$font-titles);
+        font-size: 1rem;
+        margin: 0;
+        font-family: variablesGlobales.$font-size-text-secondary;
+    }
+
+    &__status {
+        display: flex;
+        padding: 1rem;
+        border-radius: 4px;
+        width: 100%;
+    }
+
+    &__alert {
+        @include mixins.flex-style(row, nowrap, 0.5rem);
+        align-items: center;
+        margin: 0;
+        color: variables.$font-titles;
+
+        &-icon {
+            width: 40px;
+        }
+    }
+
+    &__actions {
+        @include mixins.flex-style(row, nowrap, 3rem);
+        justify-content: center;
+    }
+
+    &__button {
+        @include mixins.btn-details;
+        font-family: variablesGlobales.$font-size-text-secondary;
+        &:hover {
+            opacity: 90%;
+            transform: scale(1.1);
+        }
+        &--confirm {
+            background-color: variables.$state-confirmed;
+            color: white;
+        }
+        &--cancel {
+            background: #ff3d00;
+            color: white;
+        }
+    }
+}
+
+.pending {
+    background-color: #f5d742ab;
+}
+.confirmed {
+    background: #00c85387;
+}
+
+.cancelled {
+    background-color: #ff3c009e;
+}

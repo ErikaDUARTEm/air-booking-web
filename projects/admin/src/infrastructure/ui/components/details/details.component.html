@@ -1,0 +1,90 @@
+ <main class="details">   
+    <article class="details__card">
+        <header class="details__header">
+            <h1 class="details__title">Detalles de la reserva</h1>
+        </header>
+            <section class="details__info">
+                <div class="details__column">
+                    <div class="details__initial">
+                        <h2 class="details__subtitle">Pasajero</h2>
+                        <p class="details__text">{{detailsData().reservedBy}}</p>
+                    </div>
+    
+                    <div class="details__initial">
+                        <h2 class="details__subtitle">Clase</h2>
+                        <p class="details__text">{{detailsData().flightClass}}</p>
+                    </div>
+    
+                    <div class="details__initial">
+                        <h2 class="details__subtitle">Fecha de compra</h2>
+                        <p class="details__text">{{detailsData().purchaseDate}}</p>
+                    </div>
+    
+                    <div class="details__initial">
+                        <h2 class="details__subtitle">Método de pago</h2>
+                        <p class="details__text">{{detailsData().paymentMethod}}</p>
+                    </div>
+    
+                </div>
+    
+                <div class="details__row">
+                    <div class="details__group">
+                        <h2 class="details__subtitle">Documento del pasajero</h2>
+                        <p class="details__text">{{detailsData().email}}</p>
+                    </div>
+                    <div class="details__group">
+                        <h2 class="details__subtitle">Impuestos</h2>
+                        <p class="details__text">{{detailsData().tax}}</p>
+                    </div>
+    
+                    <div class="details__group">
+                        <h2 class="details__subtitle">Cantidad de pasajeros</h2>
+                        <p class="details__text">{{detailsData().passengersCount}}</p>
+                    </div>
+    
+                    <div class="details__group">
+                        <h2 class="details__subtitle">Precio</h2>
+                        <p class="details__text">{{detailsData().price}}</p>
+                    </div>
+    
+                    <div class="details__status" [ngClass]="{'pending': detailsData().status === 'Pending', 'confirmed': detailsData().status === 'Confirmed', 'cancelled': detailsData().status === 'Cancelled'}">
+                        @if (detailsData().status === "Pending") {
+                            <p class="details__alert">
+                                    <img src="admin/watch.svg" alt="warning" class="details__alert-icon">
+                                La reserva sigue pendiente
+                            </p>
+                        }
+                        @if (detailsData().status === "Confirmed") {
+                            <p class="details__alert">
+                                    <img src="admin/check.svg" alt="warning" class="details__alert-icon">
+                                La reserva ha sido confirmada
+                            </p>
+                        }@if (detailsData().status === "Cancelled") {
+                            <p class="details__alert">
+                                <img src="admin/watch.svg" alt="warning" class="details__alert-icon">
+                            La reserva ha sido cancelada
+                        </p>
+                        }
+                        
+                    </div>    
+                </div>
+            </section>
+            <footer class="details__actions" [ngStyle]="{'display': detailsData().status === 'Pending' ? 'flex' : 'none'}">
+            <lib-modal
+                [title]="'¿Estas seguro que quieres emitir?'"
+                [actionText]="'Confirmar'" 
+                (onConfirm)="confirma()"
+                (onCancel)="cancela()"
+                [variant]="'primary'"
+                ></lib-modal>
+                <lib-modal
+                [title]="'¿Estas seguro que quieres cancelar?'"
+                [actionText]="'Cancelar'" 
+                (onConfirm)="confirma()"
+                (onCancel)="cancela()"
+                [variant]="'secondary'"
+            ></lib-modal>
+        </footer>
+    </article>
+
+</main>
