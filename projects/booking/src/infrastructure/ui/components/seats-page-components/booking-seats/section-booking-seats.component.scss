@@ -147,17 +147,21 @@
     }
     
     &__separator-label {
-      background-color: white;
+ 
       padding: 0 5px;
       z-index: 2;
       font-size: 12px;
       
       &--left {
         color: #001E60;
+        font-weight: 500;
+        transform: translateY(90%);
       }
       
       &--right {
-        color: #001E60;
+        color: #ad7c59;
+        font-weight: 500;
+        transform: translateY(-100%);
       }
     }
     
