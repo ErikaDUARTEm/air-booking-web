@@ -6,7 +6,7 @@
 
   <div class="payment-method__back" *ngIf="selectedMethod">
     <button class="payment-method__back-button" (click)="handleSelectMethod(null)">
-      <img src="leftarrow.png" alt="Flecha atrás" class="payment-method__back-icon">
+      <img src="flecha-back.png" alt="Flecha atrás" class="payment-method__back-icon">
       Selecciona otro método de pago
     </button>
   </div>
@@ -27,7 +27,7 @@
         <img src="uatp.png" alt="UATP" class="payment-method__card-icon">
         <img src="diners.png" alt="Diners Club" class="payment-method__card-icon">
       </div>
-      <div class="payment-method__credit-card">
+      <div class="payment-method__credit-card"  *ngIf="selectedMethod !== 'PSE'">
         <div class="payment-method__card-info">
           <div class="payment-method__card-container">
             <img src="credit.png" width="25px" height="25px" alt="Tarjeta de crédito">
@@ -40,10 +40,10 @@
           </div>
         </div>
       </div>
-      <p class="payment-method__disclaimer"  *ngIf="selectedMethod !== 'CARD'">*Pago en cuotas solo disponible para algunas tarjetas de crédito.</p>
+      <p class="payment-method__disclaimer"  *ngIf="!selectedMethod">*Pago en cuotas solo disponible para algunas tarjetas de crédito.</p>
     </div>
 
-    <hr class="payment-method__divider" *ngIf="selectedMethod !== 'CARD'">
+    <hr class="payment-method__divider" *ngIf="!selectedMethod">
 
     <div class="payment-method__option"  *ngIf="selectedMethod !== 'CARD'">
       <h3 class="payment-method__title">Otras formas de pago</h3>
@@ -53,7 +53,7 @@
           <span class="payment-method__pse-title">PSE Colombia</span>
           <p class="payment-method__pse-description">Débitos a cuentas de ahorro/corriente en Colombia.</p>
         </div>
-        <div class="payment-method__container-button">
+        <div class="payment-method__container-button" *ngIf="selectedMethod !== 'PSE'">
           <button class="payment-method__select-button" (click)="handleSelectMethod('PSE')">
             Seleccionar
           </button>
