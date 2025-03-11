@@ -2,12 +2,18 @@
 
 .navbar {
     font-family: variables.$secondary-font;
+    position: fixed; // Fijado en la pantalla
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
     
     &__content {
         background-color: variables.$white;
         display: flex;
         padding: 1rem;
         position: relative;
+        
     }
     
     &__flight-info {
@@ -25,6 +31,7 @@
   
         h3 {
             font-size: 3rem;
+            font-weight:800;
         }
     }
 
@@ -62,6 +69,8 @@
         color: #fff;
         font-weight: 700;
         align-items: center;
+        
+        
     }
 
     &__seat-row {

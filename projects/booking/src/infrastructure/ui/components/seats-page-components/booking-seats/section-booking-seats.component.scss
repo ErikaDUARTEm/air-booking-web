@@ -13,15 +13,15 @@
       background: url('https://seats.copaair.com/static/media/boeing737-700.9edbc71ad9d25c6f3cfc.svg') no-repeat center ;
       padding-bottom: 128px;
       width: 100%;
-   
       display: flex;
       flex-direction: column;
       align-items: center;
       position: relative;
+      padding-top: calc(28px + 2rem);
     }
     
     &__header {
-      width: 80%;
+    //   width: 80%;
       color: black;
       display: flex;
       justify-content: space-between;
@@ -30,7 +30,7 @@
       border-radius: 8px 8px 0 0;
       
       .header-label {
-        width: 30px;
+        width: 35px;
         text-align: center;
         font-weight: bold;
       }
@@ -39,7 +39,7 @@
     &__seat-service-area {
       display: flex;
       justify-content: space-between;
-      width: 100%;
+      width: 15%;
       margin-bottom: 20px;
       padding: 0 15px;
     }
@@ -69,14 +69,14 @@
     
     &__seat-columns {
       display: flex;
-      width: 100%;
+    //   width: 100%;
       justify-content: space-between;
       margin-bottom: 10px;
     }
     
     &__col-left, &__col-right {
       display: flex;
-      gap: 10px;
+      gap: 4px;
     }
     
     &__col-left {
@@ -88,8 +88,8 @@
     }
     
     &__seat-label {
-      width: 30px;
-      height: 30px;
+      width: 38px;
+      height: 34px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -97,26 +97,30 @@
       border-radius: 4px;
       font-size: 14px;
       background-color: white;
+      &--left{
+        height: 34px;
+        width: 30px;
+      }
     }
    
     &__seat-row {
       display: flex;
-      width: 100%;
+    //   width: 30%;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 15px;
     }
     
     &__col-number {
-      width: 30px;
+      width: 35px;
       text-align: center;
       font-size: 14px;
       font-weight: bold;
     }
     
     &__diagonal-seat {
-      width: 30px;
-      height: 30px;
+      width: 32px;
+      height: 36px;
       background-image: linear-gradient(to bottom right, transparent calc(50% - 1px), #ccc, transparent calc(50% + 1px));
       margin-bottom: 5px;
       border-radius: 4px;
@@ -125,7 +129,7 @@
   
     &__class-separator {
       display: flex;
-      width: 100%;
+      width: 16vw;
       justify-content: space-between;
       margin: 20px 0;
       position: relative;
@@ -158,8 +162,8 @@
     }
     
     &__seat {
-      width: 30px;
-      height: 30px;
+      width: 32px;
+      height: 36px;
       margin-bottom: 5px;
       
       button {
@@ -208,6 +212,9 @@
       
       &--regular button {
         border: 1px solid #001E60;
+        img{
+          color: #001E60;
+        }
         
         &:hover {
           background-color: #f0f8ff;
@@ -220,14 +227,14 @@
       }
     }
   
-    &__executive-class, &__economy-class {
-      width: 100%;
-    }
+    // &__executive-class, &__economy-class {
+    // //   width: 20vw;
+    // }
     
     &__bottom-services {
       display: flex;
       flex-direction: column;
-      width: 100%;
+        width: 15%;
       margin-top: 20px;
       
       .service-row {
@@ -277,7 +284,7 @@
           background-color: #001E60;
           color: white;
           border: none;
-          padding: 10px 30px;
+          padding: 10px 40px;
           
           &:hover {
             background-color: #002855;

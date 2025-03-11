@@ -1,0 +1,57 @@
+@use "../../../../../../../shared/src/infrastructure/ui/styles/variables.scss" as variables;
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 25px;
+
+    &__content{
+        border-radius: 2px;
+        display: flex;
+        background-color: white;
+        width: 95%;
+        height: 72px;
+        justify-content: space-between;
+        padding: 20px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+
+    &__selected-seat{
+        display: flex;
+        align-items: center;
+        font-family: variables.$secondary-font;
+        font-size: 1.4rem;
+       
+    }
+
+    &__skip-button{
+        color: variables.$blue;
+        font-weight: 700;
+    }
+
+    &__next-button{
+        button{
+        font-family: variables.$secondary-font;
+
+            background-color: variables.$dark-blue;
+            color: variables.$white;
+            border: 0px;
+            padding: 10px 20px;
+        }
+    }
+
+
+    &__selection-buttons{
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        font-family: variables.$secondary-font;
+        font-size: 1.4rem;
+    }
+  
+}
