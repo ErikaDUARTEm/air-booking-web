@@ -4,15 +4,10 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "authentication": [
-        "./dist/authentication"
-      ],
-      "availability": [
-        "./dist/availability"
-      ],
-      "shared": [
-        "./dist/shared"
-      ]
+      "authentication": ["./dist/authentication"],
+      "availability": ["./dist/availability"],
+      "shared": ["./dist/shared"],
+      "booking": ["./dist/booking"]
     },
     "outDir": "./dist/out-tsc",
     "strict": true,

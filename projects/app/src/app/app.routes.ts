@@ -3,7 +3,7 @@ import { BodyLayoutComponent } from 'shared';
 
 export const routes: Routes = [
   {
-    path: '',
+    path: 'booking',
     loadChildren: () => import('booking').then((b) => b.bookingRoutes),
   },
 
