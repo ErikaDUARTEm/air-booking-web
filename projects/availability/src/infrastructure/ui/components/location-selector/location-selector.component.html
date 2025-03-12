@@ -1,7 +1,7 @@
 <div class="flight-search__main" [formGroup]="formGroup">
   <div class="flight-search__locations">
     <div class="flight-search__origin">
-      <div class="flight-search__field">
+      <div class="flight-search__field" formGroupName="origin">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="48"
@@ -29,11 +29,29 @@
         <input
           type="text"
           class="flight-search__field-input"
-          formControlName="origin"
+          formControlName="name"
           placeholder="Desde"
+          [ngClass]="{ 'flight-search__field-input--error': isFieldInvalid('origin') }"
+          (input)="filterCities($event, 'origin')"
+          (focus)="activeField = 'origin'"
         />
-        <span class="flight-search__field-swap"></span>
       </div>
+      @if (activeField === 'origin' && filteredCities.length > 0) {
+        <ul class="flight-search__city">
+          @for (city of filteredCities; track $index) {
+            <li (click)="selectCity('origin', city)">
+              <div>
+                <span class="flight-search__city-name">{{city.name}}</span>
+                <span class="flight-search__city-airport">{{city.airport}}</span>
+              </div>
+              <span class="flight-search__city-abbreviation">{{city.abbreviation}}</span>
+            </li>
+          }
+        </ul>
+      }
+      @if (isFieldInvalid('origin')) {
+        <span class="flight-search--error">❗Selecciona un origen</span>
+      }
     </div>
     <div class="flight-search__swap" (click)="swapLocations()">
       <svg
@@ -60,7 +78,7 @@
     </div>
 
     <div class="flight-search__destination">
-      <div class="flight-search__field">
+      <div class="flight-search__field" formGroupName="destination">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="48"
@@ -87,10 +105,29 @@
         <input
           type="text"
           class="flight-search__field-input"
-          formControlName="destination"
+          formControlName="name"
           placeholder="Hacia"
+          [ngClass]="{ 'flight-search__field-input--error': isFieldInvalid('destination') }"
+          (input)="filterCities($event, 'destination')"
+          (focus)="activeField = 'destination'"
         />
       </div>
+      @if (activeField === 'destination' && filteredCities.length > 0) {
+        <ul class="flight-search__city">
+          @for (city of filteredCities; track $index) {
+            <li (click)="selectCity('destination', city)">
+              <div>
+                <span class="flight-search__city-name">{{city.name}}</span>
+                <span class="flight-search__city-airport">{{city.airport}}</span>
+              </div>
+              <span class="flight-search__city-abbreviation">{{city.abbreviation}}</span>
+            </li>
+          }
+        </ul>
+      }
+      @if (isFieldInvalid('destination')) {
+        <span class="flight-search--error">❗Selecciona un destino</span>
+      }
     </div>
   </div>
 

@@ -1,6 +1,6 @@
 <div class="calendar">
   <div class="calendar__header">
-    <button (click)="prevMonth()">&#9664;</button>
+    <button (click)="prevMonth()" [disabled]="currentMonth.getMonth() === today.getMonth() && currentMonth.getFullYear() === today.getFullYear()">&#9664;</button>
     <span>{{ currentMonth | date : "MMMM yyyy" }}</span>
     <button (click)="nextMonth()">&#9654;</button>
   </div>
@@ -25,6 +25,7 @@
             date.getTime() === selectedReturnDate?.getTime()
           "
           [class.calendar__day--between]="isBetweenDates(date)"
+          [class.calendar__day--disabled]="isDisabled(date)"
         >
           {{ date.getDate() }}
         </div>

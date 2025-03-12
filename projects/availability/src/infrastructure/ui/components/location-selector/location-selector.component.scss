@@ -1,8 +1,6 @@
 /* flight-search.component.scss */
-@use "../../../../../../shared/src/infrastructure/ui/styles/variables.scss" as
-  variables;
-@use "../../../../../../shared/src/infrastructure/ui/styles/mixins.scss" as
-  mixins;
+@use "../../../../../../shared/src/infrastructure/ui/styles/variables.scss" as variables;
+@use "../../../../../../shared/src/infrastructure/ui/styles/mixins.scss" as mixins;
 
 .flight-search {
   &__locations {
@@ -18,6 +16,7 @@
     justify-content: center;
     padding: 25px;
   }
+
   &__swap {
     display: flex;
     align-items: center;
@@ -35,20 +34,37 @@
       border-bottom: 1px solid rgb(235, 235, 235);
       height: 40px;
       font-size: 2rem;
+
       &:hover,
       &:focus {
         border-bottom: 1px solid variables.$blue;
       }
+
       &:focus {
+        border-bottom: 2px solid variables.$blue;
         background-color: rgb(241, 246, 255);
         outline: none;
       }
+
       &::placeholder {
         color: rgb(175, 175, 175);
         font-size: 2rem;
       }
+
+      &--error {
+        border-bottom: 1px solid variables.$red;
+
+        &:hover {
+          border-bottom: 1px solid variables.$red;
+        }
+
+        &:focus {
+          border-bottom: 2px solid variables.$red;
+        }
+      }
     }
   }
+
 
   &__submit {
     display: flex;
@@ -67,9 +83,67 @@
       background-color: rgb(0, 26, 102);
       cursor: pointer;
     }
+
     &:active {
       outline: 1px solid variables.$black;
       outline-offset: 2px;
+    }
+  }
+
+  &--error {
+    color: variables.$red;
+    font-size: 13px;
+    font-weight: 500;
+    margin-top: 10px;
+    margin-left: 45px;
+  }
+
+  &__city {
+    position: absolute;
+    background: white;
+    border: 1px solid variables.$blue;
+    border-radius: 5px;
+    list-style: none;
+    margin-top: 10px;
+    margin-left: 50px;
+    width: 245px;
+    max-height: 230px;
+    overflow-y: auto;
+    z-index: 2;
+
+    li {
+      display: flex;
+      justify-content: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      gap: 5px;
+
+      div {
+        display: flex;
+        flex-direction: column;
+      }
+
+      &:hover {
+        background-color: variables.$background-color;
+        cursor: pointer;
+      }
+    }
+
+    &-name {
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    &-airport {
+      font-size: 14px;
+      color: variables.$gray;
+    }
+
+    &-abbreviation {
+      font-size: 18px;
+      font-weight: 500;
+      color: variables.$blue;
     }
   }
 }

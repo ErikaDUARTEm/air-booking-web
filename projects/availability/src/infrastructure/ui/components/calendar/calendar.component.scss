@@ -1,3 +1,5 @@
+@use "../../../../../../shared/src/infrastructure/ui/styles/variables.scss" as variables;
+
 .calendar {
   display: flex;
   flex-direction: column;
@@ -7,7 +9,9 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
   font-size: 1.5rem;
+
   &__header {
+    color: variables.$blue-dark;
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -26,6 +30,7 @@
   }
 
   &__months {
+    color: variables.$blue-dark;
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -42,9 +47,11 @@
   }
 
   &__weekdays {
+    color: variables.$blue-dark;
     flex-direction: row;
-    justify-content: space-around;
-    padding-right: 18px;
+    justify-content: center;
+    gap: 35px;
+
     div {
       font-weight: bold;
       text-align: center;
@@ -55,21 +62,26 @@
   &__weeks {
     div {
       display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 5px;
 
       div {
-        flex: 1;
         text-align: center;
-        padding: 10px;
+        padding: 20px;
         cursor: pointer;
-        border-radius: 4px;
+        border-radius: 50%;
         transition: background 0.3s;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: variables.$blue-dark;
 
         &:hover {
           background: #f0f0f0;
-        }
-
-        &.calendar__day--current {
-          background: #e0e0e0;
         }
 
         &.calendar__day--selected {
@@ -79,6 +91,14 @@
 
         &.calendar__day--between {
           background: #b3d4ff;
+        }
+
+        &.calendar__day--disabled {
+          pointer-events: none !important;
+          user-select: none;
+          cursor: not-allowed;
+          color: gray;
+          opacity: 0.5;
         }
       }
     }

@@ -1,0 +1,73 @@
+@use "../../../../../../shared/src/infrastructure/ui/styles/variables.scss" as
+  variables;
+@use "../../../../../../shared/src/infrastructure/ui/styles/mixins.scss" as
+  mixins;
+
+.footer {
+  background-color: variables.$background-color;
+  font-family: variables.$primary-font;
+  margin-top: 100px;
+  padding-block: 50px;
+  padding-inline: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  &-left {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 50%;
+    
+    &__logo {
+      width: 200px;
+      height: auto;
+    }
+
+    &__title {
+      margin-top: 10px;
+      font-size: 2.5rem;
+    }
+
+    &__description {
+      color: variables.$gray;
+      font-size: 1.8rem;
+    }
+
+    &__session-id {
+      font-size: 1.6rem;
+    }
+  }
+
+  &-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: end;
+    gap: 30px;
+    
+    &__star-alliance-logo {
+      width: 300px;
+    }
+
+    &__copyright {
+      color: variables.$gray;
+      font-size: 1.6rem;
+    }
+  }
+
+  &__options {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    a {
+      color: variables.$blue-light;
+      text-decoration: none;
+      font-size: 1.6rem;
+    }
+
+    span {
+      color: variables.$blue-light;
+    }
+  }
+}
