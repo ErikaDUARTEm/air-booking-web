@@ -1,5 +1,4 @@
-@use "../../../../../../shared/src/infrastructure/ui/styles/variables" as
-  variables;
+@use "../../../../../../shared/src/infrastructure/ui/styles/variables" as variables;
 
 .passenger-modal {
   position: fixed;
@@ -12,7 +11,6 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  border: 1px solid variables.$blue;
 
   &__content {
     background: white;
@@ -22,6 +20,7 @@
     width: 100%;
     max-width: 300px;
     text-align: center;
+    border: 1px solid variables.$blue;
   }
 
   &__row {
@@ -41,21 +40,35 @@
     &-button {
       background: none;
       border: 1px solid #ccc;
-      padding: 5px 10px;
+      padding: 10px;
       cursor: pointer;
-      border-radius: 50px;
-
-      &:last-child {
+      border-radius: 50%;
+      width: 25px;
+      height: 25px;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: variables.$gray;
+      
+      &--enabled {
         border-color: variables.$blue;
+        color: variables.$blue;
+      }
+      
+      &--disabled {
+        border-color: variables.$gray;
+        color: variables.$gray;
       }
     }
   }
 
   &__label {
-    font-size: 16px;
+    font-size: 18px;
     text-align: start;
 
     &-subtitle {
+      font-size: 12px;
       color: variables.$gray;
     }
   }

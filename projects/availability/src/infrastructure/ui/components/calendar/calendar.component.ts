@@ -15,8 +15,11 @@ export class CalendarComponent {
   weeks: Date[][] = [];
   selectedDepartureDate: Date | null = null;
   selectedReturnDate: Date | null = null;
+  today: Date = new Date();
 
   ngOnInit() {
+    this.today = new Date();
+    this.today.setHours(0, 0, 0, 0);
     this.generateCalendar(this.currentMonth);
   }
 
@@ -46,6 +49,10 @@ export class CalendarComponent {
   }
 
   onDateClick(date: Date) {
+    if (date.getTime() < this.today.getTime()) {
+      return;
+    }
+
     if (
       !this.selectedDepartureDate ||
       (this.selectedDepartureDate && this.selectedReturnDate)
@@ -65,10 +72,13 @@ export class CalendarComponent {
   }
 
   prevMonth() {
-    this.currentMonth = new Date(
-      this.currentMonth.setMonth(this.currentMonth.getMonth() - 1)
-    );
-    this.generateCalendar(this.currentMonth);
+    const previousMonth = new Date(this.currentMonth);
+    previousMonth.setMonth(previousMonth.getMonth() - 1);
+
+    if (previousMonth >= this.today) {
+      this.currentMonth = previousMonth;
+      this.generateCalendar(this.currentMonth);
+    }
   }
 
   nextMonth() {
@@ -85,5 +95,9 @@ export class CalendarComponent {
       );
     }
     return false;
+  }
+
+  isDisabled(date: Date): boolean {
+    return date.getTime() < this.today.getTime();
   }
 }

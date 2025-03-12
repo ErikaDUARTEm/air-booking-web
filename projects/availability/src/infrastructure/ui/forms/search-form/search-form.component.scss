@@ -12,4 +12,12 @@
     width: 70dvw;
     @include mixins.typography-base;
   }
+
+  &--error {
+    color: variables.$red;
+    font-size: 13px;
+    font-weight: 500;
+    position: absolute;
+    margin-top: 5px;
+  }
 }

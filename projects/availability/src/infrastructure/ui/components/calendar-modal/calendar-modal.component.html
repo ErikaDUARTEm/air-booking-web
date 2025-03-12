@@ -2,6 +2,9 @@
   <div class="calendar-modal__content">
     <h2>Selecciona las fechas</h2>
     <app-calendar (dateSelected)="onDateSelected($event)"></app-calendar>
-    <button (click)="closeModal()">Cerrar</button>
+    <div class="calendar-modal__buttons">
+      <button type="button" (click)="closeModal()">Cancelar</button>
+      <button type="button" (click)="onConfirmDates()">Confirmar</button>
+    </div>
   </div>
 </div>

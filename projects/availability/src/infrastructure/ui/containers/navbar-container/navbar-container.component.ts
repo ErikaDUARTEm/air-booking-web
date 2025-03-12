@@ -4,7 +4,6 @@ import { NavbarComponent } from '../../components/navbar/navbar.component';
 @Component({
   selector: 'lib-navbar-container',
   imports: [NavbarComponent],
-  templateUrl: './navbar-container.component.html',
-  styleUrl: './navbar-container.component.css',
+  templateUrl: './navbar-container.component.html'
 })
 export class NavbarContainerComponent {}
