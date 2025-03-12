@@ -1,0 +1,98 @@
+@use "../../../../../../shared/src/infrastructure/ui/styles/variables.scss" as variables;
+@use "../../../../../../shared/src/infrastructure/ui/styles/mixins.scss" as mixins;
+
+.passenger-form {
+  display: flex;
+  flex-direction: column;
+  padding: variables.$spacing-lg;
+  gap: variables.$spacing-base;
+  background-color: variables.$white;
+  margin-left: 10rem;
+
+  &__title {
+    @include mixins.title-main;
+    hyphens: auto;
+    line-height: 2.5rem;
+    letter-spacing: -0.063rem;
+    color: variables.$blue;
+  }
+
+  &__subtitle {
+    font-size: 2rem;
+    font-weight: variables.$font-weight-bold;
+    color: variables.$black;
+  }
+
+  &__description {
+    @include mixins.text-paragraph;
+    font-size: 1.5rem;
+    color: variables.$gray;
+    line-height: 1.5;
+  }
+
+  &__fields {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__label {
+    @include mixins.form-label;
+    font-size: 1.5rem;
+    font-weight: variables.$font-weight-semibold;
+    margin-bottom: variables.$spacing-base;
+  }
+
+  &__input, &__select {
+    @include mixins.form-field;
+    padding: variables.$spacing-base;
+    font-size: 1.5rem;
+    background-color: variables.$background-color;
+
+    &:focus {
+      border-color: variables.$blue-light;
+      box-shadow: 0 0 5px rgba(14, 104, 255, 0.3);
+    }
+  }
+
+  &__date-fields {
+    display: flex;
+    gap: variables.$spacing-base;
+
+    input, select {
+      flex: 1;
+    }
+  }
+
+  &__checkbox {
+    display: flex;
+    align-items: center;
+    margin-top: 1.5rem;
+    gap: variables.$spacing-xs;
+    font-size: 1.5rem;
+  }
+
+  &__submit {
+    @include mixins.button-primary;
+    font-size: 2rem;
+    margin-top: variables.$spacing-base;
+
+    &:hover {
+      background-color: darken(variables.$blue, 10%);
+    }
+  }
+
+  .passenger-form__submit:disabled {
+    @include mixins.button-disabled;
+  }
+
+  .error-message {
+    @include mixins.error-message;
+    font-size: 0.875rem;
+  }
+}

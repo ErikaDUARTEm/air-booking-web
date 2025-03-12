@@ -10,6 +10,9 @@
       "booking": [
         "./dist/booking"
       ],
+      "passanger": [
+        "./dist/passanger"
+      ],
       "authentication": [
         "./dist/authentication"
       ],
