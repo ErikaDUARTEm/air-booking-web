@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 interface Menu {
   title: string;
@@ -14,10 +14,11 @@ interface Menu {
 })
 export class SidenavComponent {
 
+
   public listMenu: Menu[] = [
     {
       title: 'Inicio',
-      path: '/Admin'
+      path: '/admin'
     },
     {
       title: 'Resumen',
@@ -25,8 +26,7 @@ export class SidenavComponent {
     },
     {
       title: 'Reservas',
-      path: '/Admin'
+      path: '/booking'
     }
   ]
-  
 }

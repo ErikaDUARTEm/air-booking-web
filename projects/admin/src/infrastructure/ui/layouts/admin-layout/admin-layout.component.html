@@ -5,11 +5,10 @@
 
     <div class="layout__content">
         <header class="layout__header">
-            <h1>Panel de Administración</h1>
+            <h1>{{title | titlecase}}</h1>
         </header>
-
         <div class="layout__body">
-            <router-outlet name="accordion"></router-outlet>
+          <router-outlet />
         </div>
     </div>
 

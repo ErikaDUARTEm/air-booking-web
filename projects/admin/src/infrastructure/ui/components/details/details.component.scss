@@ -17,7 +17,7 @@
         margin-bottom: 2rem;
 
         & h1 {
-            @include mixins.font-style(1.5rem, bold, variablesGlobales.$font-size-title-main);
+            @include mixins.font-style(25px, bold, variablesGlobales.$font-size-title-main);
             margin: 0;
             font-family: variablesGlobales.$primary-font;
         }
@@ -35,7 +35,7 @@
     }
 
     &__row {
-        @include mixins.flex-style(row, wrap, 1rem);
+        @include mixins.flex-style(row, wrap, 4rem);
         justify-content: space-between;
     }
 
@@ -50,7 +50,7 @@
     }
 
     &__subtitle {
-        @include mixins.font-style(0.875rem, normal, variables.$font-opacity);
+        @include mixins.font-style(15px, normal, variables.$font-opacity);
         margin: 0 0 0.5rem 0;
         width: 100%;
         font-family: variablesGlobales.$font-size-title-secondary;
@@ -58,8 +58,7 @@
     }
 
     &__text {
-        @include mixins.font-style(1rem, 600, variables.$font-titles);
-        font-size: 1rem;
+        @include mixins.font-style(16px, 600, variables.$font-titles);
         margin: 0;
         font-family: variablesGlobales.$font-size-text-secondary;
     }
@@ -75,6 +74,7 @@
         @include mixins.flex-style(row, nowrap, 0.5rem);
         align-items: center;
         margin: 0;
+        font-size: 16px;
         color: variables.$font-titles;
 
         &-icon {

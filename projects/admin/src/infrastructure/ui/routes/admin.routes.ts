@@ -8,9 +8,17 @@ export const adminRoutes: Routes = [
         component: AdminLayoutComponent,
         children: [
             {
-                path: '',
-                component: ReservaContainerComponent,   
-                outlet: 'accordion'
+              path: 'view',
+              loadComponent: () => import('../container/view-analytics-container/view-analytics-container.component').then(m => m.ViewAnalyticsContainerComponent)
+            },
+            {
+              path:'booking',
+              component: ReservaContainerComponent
+            },
+            {
+              path: '',
+              redirectTo: 'view',
+              pathMatch: 'full',
             }
         ]
     }
