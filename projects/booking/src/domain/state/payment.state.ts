@@ -1,5 +1,5 @@
 import { inject, Injectable } from "@angular/core";
-import { StateFactory } from "../../../../shared/src/public-api";
+import { StateFactory } from "shared";
 import { BehaviorSubject } from "rxjs";
 import { IPaymentData } from "../model/payment.model";
 

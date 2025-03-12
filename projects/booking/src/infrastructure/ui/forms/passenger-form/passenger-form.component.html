@@ -1,0 +1,126 @@
+@for (form of passengerForms; track $index) {
+  <form class="passenger-form" [formGroup]="form" (ngSubmit)="submit()">
+    <h2 class="passenger-form__title">Pasajero {{ $index + 1 }}</h2>
+    <p class="passenger-form__subtitle">{{ getPassengerType($index) }}</p>
+    <p class="passenger-form__description">La información del pasajero debe coincidir con su pasaporte. Una vez completes la reserva, no podrás cambiar esta información</p>
+
+    <div class="passenger-form__fields">
+      <!-- Campo Nombre -->
+      <div class="passenger-form__field">
+        <label class="passenger-form__label" for="name-{{$index}}">Nombre</label>
+        <input class="passenger-form__input" id="name-{{$index}}" formControlName="name">
+      </div>
+
+      <!-- Campo Apellido -->
+      <div class="passenger-form__field">
+        <label class="passenger-form__label" for="lastName-{{$index}}">Apellido</label>
+        <input class="passenger-form__input" id="lastName-{{$index}}" formControlName="lastName">
+      </div>
+
+      <!-- Campo Fecha de nacimiento -->
+      <div class="passenger-form__field">
+        <label class="passenger-form__label" for="birthDate-day-{{$index}}">Fecha de nacimiento</label>
+        <div class="passenger-form__date-fields">
+          <select class="passenger-form__select" id="birthDate-day-{{$index}}" formControlName="birthDateDay">
+            <option value="" disabled selected>Día</option>
+            @for (day of days; track day) {
+              <option [value]="day">{{ day }}</option>
+            }
+          </select>
+          <select class="passenger-form__select" id="birthDate-month-{{$index}}" formControlName="birthDateMonth">
+            <option value="" disabled selected>Mes</option>
+            @for (month of months; track month.value) {
+              <option [value]="month.value">{{ month.label }}</option>
+            }
+          </select>
+          <select class="passenger-form__select" id="birthDate-year-{{$index}}" formControlName="birthDateYear">
+            <option value="" disabled selected>Año</option>
+            @for (year of years; track year) {
+              <option [value]="year">{{ year }}</option>
+            }
+          </select>
+        </div>
+        @if (form.hasError('ageRange')) {
+          <div class="error-message">
+            La edad no es válida para este tipo de pasajero.
+          </div>
+        }
+      </div>
+      <!-- Campo Género -->
+      <div class="passenger-form__field">
+        <label class="passenger-form__label" for="gender-{{$index}}">Género</label>
+        <select class="passenger-form__select" id="gender-{{$index}}" formControlName="gender">
+          <option value="">Seleccionar</option>
+          <option value="male">Masculino</option>
+          <option value="female">Femenino</option>
+        </select>
+      </div>
+
+      <!-- Verificación antes de mostrar el campo Email -->
+      @if (form.controls['email']) {
+        <div class="passenger-form__field">
+          <label class="passenger-form__label" for="email-{{$index}}">Correo electrónico</label>
+          <input class="passenger-form__input" id="email-{{$index}}" type="email" formControlName="email">
+        </div>
+      }
+
+      <!-- Verificación antes de mostrar el campo Confirmar Email -->
+      @if (form.controls['confirmEmail']) {
+        <div class="passenger-form__field">
+          <label class="passenger-form__label" for="confirmEmail-{{$index}}">Confirmar correo electrónico</label>
+          <input class="passenger-form__input" id="confirmEmail-{{$index}}" type="email" formControlName="confirmEmail">
+        </div>
+      }
+
+      <!-- Código de país -->
+      @if (form.controls['countryCode']) {
+        <div class="passenger-form__field">
+          <label class="passenger-form__label" for="countryCode-{{$index}}">Código de país</label>
+          <select class="passenger-form__select" id="countryCode-{{$index}}" formControlName="countryCode">
+            <option value="">Seleccionar</option>
+            @for (country of countryCodes; track country.code) {
+              <option [value]="country.code">{{ country.name }} ({{ country.code }})</option>
+            }
+          </select>
+        </div>
+      }
+
+      <!-- Número de teléfono -->
+      @if (form.controls['phoneNumber']) {
+        <div class="passenger-form__field">
+          <label class="passenger-form__label" for="phoneNumber-{{$index}}">Número de teléfono</label>
+          <input 
+          class="passenger-form__input" 
+          id="phoneNumber-{{$index}}" 
+          type="tel" 
+          formControlName="phoneNumber"
+          inputmode="numeric"
+          >
+          @if (form.get('phoneNumber')?.hasError('pattern')) {
+            <div class="error-message">
+              Solo se permiten números.
+            </div>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- Checkbox de promociones -->
+    @if ($index === 0) {
+      <div class="passenger-form__checkbox">
+        <input type="checkbox" id="promotions-{{$index}}" formControlName="promotions">
+        <label for="promotions-{{$index}}">Quiero recibir información sobre promociones y noticias de Copa Airlines.</label>
+      </div>
+    }
+
+    @if (isLastForm($index)) {
+      <button 
+        type="button"
+        class="passenger-form__submit"
+        [disabled]="!areAllFormsValid()"
+        (click)="submit()">
+        Enviar
+      </button>
+    }
+  </form>
+}

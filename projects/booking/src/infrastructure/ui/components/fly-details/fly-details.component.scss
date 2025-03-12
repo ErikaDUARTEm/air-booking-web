@@ -1,0 +1,97 @@
+.fly-details {
+  background-color: #ffffff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  height: 600px;
+
+  &__header-container {
+    display: flex;
+    align-items: center; 
+    margin-bottom: 1.5rem;
+  }
+
+  &__image-container {
+    display: flex;
+    justify-content: center; 
+  }
+
+  &__image {
+    border-radius: 50%;
+    border: #272727;
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+
+    .fly-details__title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #272727;
+      margin-bottom: 0.5rem;
+    }
+
+    .fly-details__dates {
+
+      font-size: 1rem;
+      color: #666;
+      margin-left: 10px;
+    }
+  }
+
+  &__info {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #333;
+  }
+
+  &__pricing {
+    border-top: 1px solid #eee;
+    padding-top: 1.5rem;
+
+
+    .fly-details__label {
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .fly-details__fare,
+    .fly-details__extras,
+    .fly-details__subtotal,
+    .fly-details__taxes,
+    .fly-details__total {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      border-top: 1px solid #eee;
+      
+
+
+      .fly-details__value {
+        font-size: 0.9rem;
+        color: #333;
+      }
+
+      .fly-details__price {
+        font-size: 0.9rem;
+        color: #333;
+        font-weight: bold;
+      }
+    }
+
+    .fly-details__total {
+      border-top: 1px solid #eee;
+      padding-top: 1rem;
+      margin-top: 1rem;
+
+      .fly-details__price {
+        font-size: 1.2rem;
+        color: #0032A0;
+      }
+    }
+  }
+}
