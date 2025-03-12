@@ -179,12 +179,6 @@
             ]
           }
         }
-      }
-    }
-
-  },
-  "cli": {
-    "analytics": "52abf34f-5274-4e60-b9e5-cff61c5a199a"
       },
       "schematics": {
           "@schematics/angular:component": {
