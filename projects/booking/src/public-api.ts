@@ -3,4 +3,4 @@
  */
 
 
-export * from './infrastructure/ui/routes/booking.routes';
+export * from './infrastructure/routes/booking.routes';

@@ -1,16 +1,15 @@
 <footer class="footer">
     <section class="footer__content">
-     <div class="footer__selected-seat">
-            <span>Haz click en un asiento para seleccionarlo</span>
-     </div>
-     <div class="footer__selection-buttons">
-         <div class="footer__skip-button">
-             <span >Omitir seleccion</span>
-          </div>
-          <div class="footer__next-button">
-               <button>Siguiente vuelo</button>
-           </div>
-     </div>
+      <div class="footer__selected-seat">
+        <span>Haz click en un asiento para seleccionarlo</span>
+      </div>
+      <div class="footer__selection-buttons">
+        <div class="footer__skip-button">
+          <span>Omitir seleccion</span>
+        </div>
+        <div class="footer__next-button">
+          <button (click)="onNextFlightClick()">Siguiente vuelo</button>
+        </div>
+      </div>
     </section>
-
-</footer>
+  </footer>

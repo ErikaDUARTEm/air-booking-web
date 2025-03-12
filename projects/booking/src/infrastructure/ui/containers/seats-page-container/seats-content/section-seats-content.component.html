@@ -1,5 +1,23 @@
 <div>
-    <lib-section-booking-seats 
-      (seatSelected)="onSeatSelected($event)">
-    </lib-section-booking-seats>
+  <lib-section-booking-seats 
+    [flight]="flight"
+    [passengers]="passengers"
+    [currentPassenger]="currentPassenger"
+    [disableRows]="disableRows"
+    [premiumRows]="premiumRows"
+    [emergencyRows]="emergencyRows"
+    [favorableRows]="favorableRows"
+    [regularRows]="regularRows"
+    [leftTwoCols]="leftTwoCols"
+    [leftCols]="leftCols"
+    [rightCols]="rightCols"
+    [rightTwoCols]="rightTwoCols"
+    [seatClasses]="seatClasses"
+    [seatAvailability]="seatAvailability"
+    [seatPrices]="seatPrices"
+    [selectedSeats]="selectedSeats"
+    (seatClicked)="onSeatClicked({ flightType: currentFlightType, seatId: $event.row + $event.col })"
+    (nextPassengerRequested)="onNextPassenger()"
+    (previousPassengerRequested)="onPreviousPassenger()">
+  </lib-section-booking-seats>
 </div>

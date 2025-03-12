@@ -1,7 +1,5 @@
-
-import { Component } from '@angular/core';
-import { SeatsFooterComponent } from '../../../components/seats-page-components/seats-footer/seats-footer.component';
-
+import { SeatsFooterComponent } from './../../../components/seats-page-components/seats-footer/seats-footer.component';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'lib-seats-footer-content',
@@ -10,5 +8,12 @@ import { SeatsFooterComponent } from '../../../components/seats-page-components/
   styleUrl: './seats-footer-content.component.scss'
 })
 export class SeatsFooterContentComponent {
+  @Output() nextFlightRequested = new EventEmitter<void>();
+
+  handleNextFlightRequest(): void {
+    this.nextFlightRequested.emit();
+    console.log('Next flight requested');
+  }
+
 
 }

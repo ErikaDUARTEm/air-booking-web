@@ -1,6 +1,5 @@
-
-import { IFlight, IPassenger } from './../../../domain/model/seats.model';
-import { FlightState } from './../../../domain/state/seats.state';
+import { IFlight, IPassenger } from '../../../domain/model/seats.model';
+import { FlightState } from '../../../domain/state/seats.state';
 
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';

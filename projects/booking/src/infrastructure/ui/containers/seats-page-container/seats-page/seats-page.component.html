@@ -4,7 +4,7 @@
     </header>
 
     <section>
-        <lib-section-seats-content (seatSelected)="openModal($event)"/>
+        <lib-section-seats-content (seatSelected)="openModal($event)" [currentFlightType]="currentFlightType"/>
     </section>
 
     <div>
@@ -18,6 +18,6 @@
         (cancel)="cancelSeatSelection()"
         (close)="closeModal()"/>
     <footer>
-       <lib-seats-footer-content/>
+       <lib-seats-footer-content (nextFlightRequested)="handleNextFlightRequest()"/>
     </footer>
 </div>

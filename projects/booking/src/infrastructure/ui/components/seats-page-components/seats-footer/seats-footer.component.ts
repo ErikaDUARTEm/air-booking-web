@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'lib-seats-footer',
@@ -7,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrl: './seats-footer.component.scss'
 })
 export class SeatsFooterComponent {
+  @Output() nextFlightRequested = new EventEmitter<void>();
+
+  onNextFlightClick(): void {
+    this.nextFlightRequested.emit();
+  }
 
 }
