@@ -17,22 +17,24 @@ export class CalendarModalComponent {
   selectedDepartureDate: Date | null = null;
   selectedReturnDate: Date | null = null;
 
-  onDateSelected(date: Date) {
+   onDateSelected(date: Date) {
     if (!this.selectedDepartureDate) {
       this.selectedDepartureDate = date;
     } else if (!this.selectedReturnDate) {
       this.selectedReturnDate = date;
+    }
+  }
+
+  onConfirmDates() {
+    if (this.selectedDepartureDate && this.selectedReturnDate) {
       this.datesSelected.emit({
         departure: this.selectedDepartureDate,
         return: this.selectedReturnDate,
       });
       this.closeModal();
+    } else {
+      alert('Por favor, selecciona ambas fechas antes de guardar.');
     }
-  }
-
-  onConfirmDates(dates: { departure: Date; return: Date }) {
-    this.datesSelected.emit(dates);
-    this.closeModal();
   }
 
   onClearDates() {

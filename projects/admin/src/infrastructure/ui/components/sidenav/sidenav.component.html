@@ -1,0 +1,15 @@
+<aside class="sidenav" role="navigation">
+    <figure class="sidenav__logo">
+        <img src="admin/logo.png"
+            alt="logo de AirSofka">
+    </figure>
+    <nav class="sidenav__nav">
+        <menu class="sidenav__menu" role="menu" aria-label="Menu principal de navegación del panel de administración">
+            @for(item of listMenu; track $index){
+            <li class="sidenav__menu-item" role="menuitem">
+                <a>{{item.title}}</a>
+            </li>
+            }
+        </menu>
+    </nav>
+</aside>

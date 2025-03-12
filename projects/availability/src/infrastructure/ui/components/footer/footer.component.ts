@@ -6,7 +6,7 @@ import { FooterSectionModel } from '../../../../domain/model/footerSection.model
 
 @Component({
   selector: 'lib-footer',
-  imports: [LogoComponent, FooterSectionComponent, CommonModule],
+  imports: [FooterSectionComponent, CommonModule],
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.scss',
 })

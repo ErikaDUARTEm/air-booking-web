@@ -1,7 +1,5 @@
-@use "../../../../../../shared/src/infrastructure/ui/styles/variables.scss" as
-  variables;
-@use "../../../../../../shared/src/infrastructure/ui/styles/mixins.scss" as
-  mixins;
+@use "../../../../../../shared/src/infrastructure/ui/styles/variables.scss" as variables;
+@use "../../../../../../shared/src/infrastructure/ui/styles/mixins.scss" as mixins;
 
 .flight-search {
   &__options {
@@ -32,6 +30,7 @@
       background-color: rgb(239, 245, 255);
       cursor: pointer;
     }
+
     &:active {
       outline: 1px solid variables.$blue;
     }
@@ -56,6 +55,7 @@
       gap: variables.$spacing-xs;
       @include mixins.text-secondary;
       color: variables.$blue;
+      font-size: 16px;
     }
   }
 

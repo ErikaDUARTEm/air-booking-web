@@ -1,0 +1,25 @@
+import { Routes } from "@angular/router";
+import { AdminLayoutComponent } from "../layouts/admin-layout/admin-layout.component";
+import { ReservaContainerComponent } from "../container/reserva-container/reserva-container.component";
+
+export const adminRoutes: Routes = [
+    {
+        path: '',
+        component: AdminLayoutComponent,
+        children: [
+            {
+              path: 'view',
+              loadComponent: () => import('../container/view-analytics-container/view-analytics-container.component').then(m => m.ViewAnalyticsContainerComponent)
+            },
+            {
+              path:'booking',
+              component: ReservaContainerComponent
+            },
+            {
+              path: '',
+              redirectTo: 'view',
+              pathMatch: 'full',
+            }
+        ]
+    }
+]

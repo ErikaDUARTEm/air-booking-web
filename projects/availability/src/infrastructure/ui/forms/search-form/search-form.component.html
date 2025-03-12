@@ -20,4 +20,8 @@
       updateDates(flightForm.get('dates.departure')?.value, $event)
     "
   ></app-location-selector>
+  
+  <span *ngIf="errorMessage" class="flight-search--error">
+    {{ errorMessage }}
+  </span>
 </form>

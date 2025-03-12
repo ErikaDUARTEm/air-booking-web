@@ -1,0 +1,50 @@
+@if (dataReservas()){
+    @for(data of dataReservas(); track $index){
+        <details class="accordion" #accordion>
+            <summary class="accordion__header"  >
+                <section class="accordion__content">
+                    <div class="accordion__info">
+                        <div class="accordion__info-reserva">
+                            <img src="admin/Airport.svg" alt="airport" class="accordion__info-icon">
+                            <span class="accordion__info-label">Reserva N°</span>
+                            <span class="accordion__info-number">{{data.reservationCode}}</span>
+                        </div>
+                        <div class="accordion__info-calendar">
+                            <span class="accordion__info-iconCalendar">
+                                <img src="admin/calendar.svg" alt="calendar">
+                            </span>
+                            <span class="accordion__info-date accordion__info-date--especial">{{data.flightDate}}</span>
+                            <span class="accordion__info-time">{{data.arrivalTime}} - {{data.departureTime}}</span>
+                        </div>
+                        <div class="accordion__info-state">
+                                <p class="accordion__info-state" [ngClass]="{'pending': data.status === 'Pending', 'confirmed': data.status === 'Confirmed', 'cancelled': data.status === 'Cancelled'}">{{data.status}}</p>
+                        </div>
+                    </div>
+                </section>
+        
+                <span class="accordion__icon">
+                    <img src="admin/arrow-bottom.svg" alt="calendar" class="arrow-bottom">
+                </span>
+        
+                <section class="accordion__destination">
+                    <h3 class="accordion__destination-name">{{data.origin}}</h3>
+                    <div class="accordion__destination-details">
+                        <span class="accordion__destination-duration">1h 30m</span>
+                        <span class="accordion__destination-route">●—————————●</span>
+                        <span class="accordion__destination-modality">Directo</span>
+                    </div>
+                    <h3 class="accordion__destination-name">{{data.destination}}</h3>
+                </section>
+            </summary>
+        
+            <lib-details [detailsData]="data"></lib-details>
+        
+        </details>
+    }
+    
+}@else {
+    <h1>No hay reservas realizadas</h1>
+}
+
+
+
