@@ -7,7 +7,7 @@ export const routes: Routes = [
     loadChildren: () => import('admin').then((m) => m.adminRoutes),
   },
   {
-    path: '',
+    path: 'booking',
     loadChildren: () => import('booking').then((b) => b.bookingRoutes),
   },
 
