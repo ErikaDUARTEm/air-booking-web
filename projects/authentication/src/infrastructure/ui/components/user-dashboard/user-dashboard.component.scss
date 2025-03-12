@@ -1,0 +1,134 @@
+// Variables de colores
+$blue: #0032a0;
+$white: #ffffff;
+$black: #000000;
+$gray: rgba(79, 79, 79, 0.85);
+$green: #28a745;
+$red: #dc3545;
+
+// Tipografía
+$primary-font: 'Jost', sans-serif;
+$secondary-font: 'Montserrat', sans-serif;
+
+//Titulo
+.table-title{
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
+// Botones
+.add-button {
+  background-color: $green;
+  color: $white;
+  border-radius: 5px;
+  padding: 10px 16px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+  &:hover {
+    background-color: darken($green, 10%);
+  }
+}
+
+// Tablas
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: $white;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 24px;
+
+  thead {
+    background-color: $blue;
+    color: $white;
+    text-align: left;
+    font-size: 16px;
+  }
+
+  .table__header {
+    padding: 12px;
+    font-weight: bold;
+  }
+
+  .table__cell {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+    color: $black;
+  }
+}
+
+// Acciones en la tabla
+.table__actions {
+  display: flex;
+  gap: 12px;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+.table__actions--edit,
+.table__actions--delete {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+}
+
+.table__actions--edit {
+  color: $blue;
+  display: flex;
+  background: none;
+  border: none;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  &:hover {
+    color: darken($blue, 10%);
+  }
+  svg {
+    width: 16px;
+    height: 16px;
+    fill: $blue;
+    transition: fill 0.2s ease-in-out;
+  }
+}
+
+.table__actions--delete {
+  color: $red;
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 5px;
+  &:hover {
+    color: darken($red, 10%);
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+    fill: $red;
+    transition: fill 0.2s ease-in-out;
+  }
+}
+
+// Diseño de la página
+.container-dashboard {
+  padding: 24px;
+  font-family: $primary-font;
+  background-color: #f5f5f5;
+  width: 100vw;
+  height: 90vh;
+}
