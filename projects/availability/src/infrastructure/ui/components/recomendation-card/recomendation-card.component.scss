@@ -1,0 +1,33 @@
+@use "../../../../../../shared/src/infrastructure/ui/styles/variables.scss" as
+  variables;
+
+.recomendation-card {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  font-family: variables.$primary-font;
+
+  &__image {
+    width: 70px;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    justify-content: space-between;
+    align-items: start;
+
+    &-title {
+      font-size: 2.3rem;
+      color: variables.$blue;
+    }
+
+    &-description {
+      font-size: 1.6rem;
+      color: variables.$gray;
+      flex-wrap: wrap;
+      max-width: 400px;
+    }
+  }
+}

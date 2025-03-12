@@ -1,0 +1,45 @@
+<div class="flight-list">
+  <header class="flight-list__header">
+    <h1 class="flight-list__title">Mejores vuelos con Copa</h1>
+
+    <div class="flight-list__filters">
+      <div class="flight-list__filter">
+        <select [(ngModel)]="selectedRoute" class="flight-list__select">
+          <option value="">Seleccione ruta</option>
+          <option value="BOG-PTY">Bogotá a Panamá</option>
+          <option value="CLO-PTY">Cali a Panamá</option>
+          <option value="MDE-PTY">Medellín a Panamá</option>
+          <option value="CLO-SCL">Cali a Santiago de Chile</option>
+          <option value="BAQ-PTY">Barranquilla a Panamá</option>
+          <option value="CUC-SCL">Cúcuta a Santiago de Chile</option>
+        </select>
+      </div>
+
+      <button class="flight-list__clear-btn" (click)="clearFilter()">
+        Limpiar
+      </button>
+    </div>
+  </header>
+
+  <div class="flight-list__container">
+    <ng-container *ngFor="let flight of flights">
+      <lib-best-flights-card
+        *ngIf="
+          !selectedRoute ||
+          selectedRoute === flight.origin.code + '-' + flight.destination.code
+        "
+        [flight]="flight"
+      >
+      </lib-best-flights-card>
+    </ng-container>
+  </div>
+
+  <div class="flight-list__footer">
+    <button class="flight-list__more-btn">VER MÁS</button>
+
+    <p class="flight-list__disclaimer">
+      *Aplican restricciones, consulte nuestros
+      <a href="#">Términos y condiciones</a>.
+    </p>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="promotions-card">
+  <img
+    class="promotions-card__image"
+    src="{{ promotion.image }}"
+    alt="{{ promotion.title }}"
+  />
+  <div class="promotions-card__banner"></div>
+  <img
+    class="promotions-card__icon"
+    src="{{ promotion.icon }}"
+    alt="promotion icon"
+  />
+  <div
+    class="promotions-card__info"
+    [ngStyle]="{ 'background-color': promotion.infoColor }"
+  >
+    <h2 class="promotions-card__title">{{ promotion.title }}</h2>
+    <p class="promotions-card__description">{{ promotion.description }}</p>
+    <button class="promotions-card__button">
+      {{ promotion.textButton }}
+      <svg
+        class="promotions-card__button-icon"
+        width="8"
+        height="12"
+        viewBox="0 0 8 12"
+        fill="#FFFFFF"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M0.456055 10.6L4.94163 6L0.456055 1.4L1.82123 0L7.67198 6L1.82123 12L0.456055 10.6Z"
+        ></path>
+      </svg>
+    </button>
+  </div>
+</div>

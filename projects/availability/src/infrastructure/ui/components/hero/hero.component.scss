@@ -1,0 +1,32 @@
+@use "../../../../../../shared/src/infrastructure/ui/styles/variables.scss" as
+  variables;
+@use "../../../../../../shared/src/infrastructure/ui/styles/mixins.scss" as
+  mixins;
+
+.flight-search {
+  @include mixins.typography-base;
+  padding-bottom: 1.6rem;
+  padding: 80px;
+
+  &__title {
+    @include mixins.text-paragraph;
+    padding-bottom: variables.$spacing-base;
+    color: variables.$white;
+  }
+
+  &__extras {
+    margin-top: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__extras-title {
+    @include mixins.text-secondary;
+    color: variables.$blue;
+  }
+
+  hr {
+    height: 40px;
+  }
+}

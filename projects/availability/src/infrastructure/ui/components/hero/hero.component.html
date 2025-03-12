@@ -1,0 +1,15 @@
+<div class="flight-search">
+  <h2 class="flight-search__title">¿A dónde quieres volar?</h2>
+  <lib-search-form></lib-search-form>
+  <div class="flight-search__extras">
+    <h3 class="flight-search__extras-title">Más opciones para ti</h3>
+    <hr />
+    <lib-extra-option
+      *ngFor="let option of extraOptions"
+      [href]="option.href"
+      [imgSrc]="option.imgSrc"
+      [imgAlt]="option.imgAlt"
+      [text]="option.text"
+    ></lib-extra-option>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="recomendations-section">
+  <div class="recomendations-section__header">
+    <img
+      class="recomendations-section__header-image"
+      src="https://www.copaair.com/assets/Check-in.svg"
+      alt="Prepárate para viajar!"
+    />
+    <h2 class="recomendations-section__header-title">Prepárate para viajar.</h2>
+    <p class="recomendations-section__header-description">
+      Sigue estas recomendaciones para hacer de tu próximo vuelo una experiencia
+      agradable.
+    </p>
+  </div>
+  <div class="recomendations-section__content">
+    <ng-container *ngFor="let recomendation of recomendations">
+      <lib-recomendation-card
+        [recomendation]="recomendation"
+        class="recomendations-section__card"
+      ></lib-recomendation-card>
+    </ng-container>
+    <button class="recomendations-section__button">
+      Ir a requisitos
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        fill="none"
+        class="recomendations-section__button-icon"
+        focusable="false"
+        aria-hidden="true"
+        viewBox="0 0 20 20"
+      >
+        <path
+          d="M7.166 13.833 11 10 7.166 6.167 8.333 5l5 5-5 5-1.167-1.167Z"
+        ></path>
+      </svg>
+    </button>
+  </div>
+</div>

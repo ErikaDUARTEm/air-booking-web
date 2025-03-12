@@ -1,0 +1,7 @@
+<div class="calendar-modal">
+  <div class="calendar-modal__content">
+    <h2>Selecciona las fechas</h2>
+    <app-calendar (dateSelected)="onDateSelected($event)"></app-calendar>
+    <button (click)="closeModal()">Cerrar</button>
+  </div>
+</div>

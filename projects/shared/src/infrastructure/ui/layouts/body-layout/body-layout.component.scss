@@ -1,0 +1,22 @@
+@use "../../../../../../shared/src/infrastructure/ui/styles/variables" as
+  variables;
+@use "../../../../../../shared/src/infrastructure/ui/styles/mixins" as mixins;
+
+.layout {
+  &__header {
+    @include mixins.header;
+    overflow: hidden;
+  }
+
+  &__main {
+    background: linear-gradient(
+      to bottom,
+      variables.$blue 195.55px,
+      variables.$white 40px
+    );
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

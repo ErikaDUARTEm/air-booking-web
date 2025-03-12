@@ -1,0 +1,124 @@
+.calendar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  font-size: 1.5rem;
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10px;
+
+    button {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+  }
+
+  &__body {
+    width: 100%;
+  }
+
+  &__months {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &__month {
+    width: 48%;
+  }
+
+  &__weekdays,
+  &__weeks {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__weekdays {
+    flex-direction: row;
+    justify-content: space-around;
+    padding-right: 18px;
+    div {
+      font-weight: bold;
+      text-align: center;
+      padding: 5px 0;
+    }
+  }
+
+  &__weeks {
+    div {
+      display: flex;
+
+      div {
+        flex: 1;
+        text-align: center;
+        padding: 10px;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: background 0.3s;
+
+        &:hover {
+          background: #f0f0f0;
+        }
+
+        &.calendar__day--current {
+          background: #e0e0e0;
+        }
+
+        &.calendar__day--selected {
+          background: #0e68ff;
+          color: white;
+        }
+
+        &.calendar__day--between {
+          background: #b3d4ff;
+        }
+      }
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px;
+
+    button {
+      background: #0e68ff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.3s;
+
+      &:hover {
+        background: #0c5edb;
+      }
+
+      &:active {
+        background: #0a54c2;
+      }
+    }
+
+    button:last-child {
+      background: #f0f0f0;
+      color: black;
+
+      &:hover {
+        background: #e0e0e0;
+      }
+
+      &:active {
+        background: #d0d0d0;
+      }
+    }
+  }
+}

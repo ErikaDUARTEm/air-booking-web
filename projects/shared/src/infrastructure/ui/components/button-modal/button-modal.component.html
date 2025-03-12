@@ -1,0 +1,5 @@
+<button class="button"
+    [ngClass]="{'button--primary': variant() === 'primary', 'button--secondary': variant() === 'secondary'}"
+    (click)="onClick.emit()">
+    {{ text() }}
+</button>
