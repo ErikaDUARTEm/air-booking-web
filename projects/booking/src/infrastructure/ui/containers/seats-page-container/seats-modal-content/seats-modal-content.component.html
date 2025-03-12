@@ -1,0 +1,12 @@
+
+
+<div *ngIf="isOpen">
+    <div class="modal-container">
+      <lib-booking-seats-modal
+        [seatInfo]="seatInfo"
+        (confirm)="handleConfirm()"
+        (cancel)="handleCancel()"
+        (close)="handleClose()">
+      </lib-booking-seats-modal>
+    </div>
+</div>

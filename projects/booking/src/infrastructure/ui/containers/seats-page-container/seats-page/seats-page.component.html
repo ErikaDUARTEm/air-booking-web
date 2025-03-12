@@ -1,0 +1,23 @@
+<div>
+    <header>
+        <lib-navbar-content/>
+    </header>
+
+    <section>
+        <lib-section-seats-content (seatSelected)="openModal($event)" [currentFlightType]="currentFlightType"/>
+    </section>
+
+    <div>
+        <lib-seats-details-content/>
+    </div>
+
+    <lib-seats-modal-content
+        [isOpen]="modalOpen"
+        [seatInfo]="selectedSeat"
+        (confirm)="confirmSeatSelection()"
+        (cancel)="cancelSeatSelection()"
+        (close)="closeModal()"/>
+    <footer>
+       <lib-seats-footer-content (nextFlightRequested)="handleNextFlightRequest()"/>
+    </footer>
+</div>

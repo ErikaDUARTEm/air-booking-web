@@ -1,0 +1,120 @@
+@use "../../../../../../../shared/src/infrastructure/ui/styles/variables.scss" as variables;
+.seats-details {
+    font-family: variables.$secondary-font;
+    bottom: auto;
+    left: auto;
+    max-height: 100%;
+    position: fixed;
+    right: 38px;
+    top: 20vh;
+    transition: height .25s;
+    width: 296px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    // padding: 15px 15px 0px 15px;
+    border-radius: 10px;
+    &__flight-info{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        border-bottom: 1px solid #eaeaea;
+        margin: 10px 0px;
+    }
+
+    &__flight-title{
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: variables.$black;
+    }
+
+    &__flight-duration{
+        font-size: 1.25rem;
+        color: variables.$gray;
+    }
+
+    &__seats-info{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__prices-container{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 5px;
+        padding: 10px;
+    }
+
+    &__seat-price{
+        padding: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      
+    }
+
+    &__price-label{
+        font-family: variables.$secondary-font;
+        
+        font-size: 1.25rem;
+        font-weight: 600;
+    }
+   
+    &__price-type{
+        font-size: 1.35rem;
+        font-family: variables.$secondary-font;
+        color: variables.$gray;
+   }    
+
+   &__price-color{
+        width: 32px;
+        height: 32px;
+        border: 1px solid #eaeaea;
+        border-radius: 4px;
+        background-color: white;
+        color: #001E60;
+        font-weight: bold;
+
+        &--extra{
+            background-color: variables.$dark-blue;
+            color: white;
+        }
+
+        &--favorable{
+            background-color: variables.$blue;
+            color: white;
+        }
+        &--emergency{
+            background-color: variables.$icon-primary;
+            color: white;
+        }
+        &--regular{
+            border-color: variables.$icon-primary;
+        }
+        &--no-available{
+            background-color: #eaeaea;
+            background-image: linear-gradient(to bottom right, transparent calc(50% - 1px), variables.$gray, transparent calc(50% + 1px));
+    
+            border: 1px solid #eaeaea;
+        }
+   }
+
+
+   &__info{
+    background-color: #eaeaea;
+    display: flex;
+    padding: 10px;
+    font-size: 1.25rem;
+    color: #666;
+    align-items: flex-start;
+    gap: 5px;
+
+    img{
+        width: 15px;
+        height: 15px;
+    }
+
+   }
+}
