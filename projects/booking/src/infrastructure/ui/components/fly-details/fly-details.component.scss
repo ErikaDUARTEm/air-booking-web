@@ -50,7 +50,7 @@
   }
 
   &__pricing {
-    border-top: 1px solid #eee;
+   
     padding-top: 1.5rem;
 
 
@@ -59,7 +59,26 @@
       color: #666;
     }
 
-    .fly-details__fare,
+    .fly-details__fare{
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      height: 60px;
+      margin-top: 10px;
+
+
+      .fly-details__value {
+        font-size: 0.9rem;
+        color: #333;
+      }
+
+      .fly-details__price {
+        font-size: 0.9rem;
+        color: #333;
+        font-weight: bold;
+      }
+    }
+
     .fly-details__extras,
     .fly-details__subtotal,
     .fly-details__taxes,
@@ -68,7 +87,7 @@
       justify-content: space-between;
       margin-bottom: 1rem;
       border-top: 1px solid #eee;
-      
+      height: 60px;
 
 
       .fly-details__value {

@@ -5,6 +5,7 @@ import { Observable, Subject } from 'rxjs';
 import { IPassenger, IPassengerData } from '../../../../domain/model/passenger.model';
 import { AsyncPipe } from '@angular/common';
 import { SavePassengersUseCase } from '../../../../application/booking/save-passengers.usecase';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'lib-passanger-container',
@@ -14,6 +15,7 @@ import { SavePassengersUseCase } from '../../../../application/booking/save-pass
 export class PassangerContainerComponent implements OnInit{
   private readonly getFlyUsecase = inject(GetFlyUsecase);
   private readonly savePassengersUseCase = inject(SavePassengersUseCase);
+  private readonly router = inject(Router);
   public passengersData$!: Observable<IPassengerData>;
 
 
@@ -24,6 +26,7 @@ export class PassangerContainerComponent implements OnInit{
   handleSubmit(passengers: IPassenger[]): void {
     console.log("Datos de pasajeros enviados:", passengers);
     this.savePassengersUseCase.savePassengers(passengers); 
+    this.router.navigate(['/seats']);
   }
 
 
