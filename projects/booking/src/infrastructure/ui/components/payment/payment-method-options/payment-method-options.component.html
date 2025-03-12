@@ -1,0 +1,93 @@
+<section class="payment-method">
+  <div class="payment-method__text" *ngIf="!selectedMethod">
+    <h2>Selecciona un método de pago</h2>
+    <p>Ingresa la información de tu método de pago.</p>
+  </div>
+
+  <div class="payment-method__back" *ngIf="selectedMethod">
+    <button class="payment-method__back-button" (click)="handleSelectMethod(null)">
+      <img src="flecha-back.png" alt="Flecha atrás" class="payment-method__back-icon">
+      Selecciona otro método de pago
+    </button>
+  </div>
+
+  <div class="payment-method__container">
+    <div class="payment-method__option">
+      <div class="payment-method__header">
+        <h3 class="payment-method__title">Tarjeta de crédito</h3>
+        <div class="payment-method__installments">
+          <img src="calendar.png" alt="Pago en cuotas" class="payment-method__icon">
+          <span class="payment-method__installments-text">Pago en cuotas disponible*</span>
+        </div>
+      </div>
+      <div class="payment-method__card-icons">
+        <img src="Visa_icon.png" alt="Visa" class="payment-method__card-icon">
+        <img src="MasterCard.png" alt="MasterCard" class="payment-method__card-icon">
+        <img src="american_express.png" class="payment-method__card-icon">
+        <img src="uatp.png" alt="UATP" class="payment-method__card-icon">
+        <img src="diners.png" alt="Diners Club" class="payment-method__card-icon">
+      </div>
+      <div class="payment-method__credit-card"  *ngIf="selectedMethod !== 'PSE'">
+        <div class="payment-method__card-info">
+          <div class="payment-method__card-container">
+            <img src="credit.png" width="25px" height="25px" alt="Tarjeta de crédito">
+            <span class="payment-method__card-text">Ingresa una tarjeta de crédito</span>
+          </div>
+          <div class="payment-method__container-button" *ngIf="selectedMethod !== 'CARD'">
+            <button class="payment-method__select-button" (click)="handleSelectMethod('CARD')">
+              Seleccionar
+            </button>
+          </div>
+        </div>
+      </div>
+      <p class="payment-method__disclaimer"  *ngIf="!selectedMethod">*Pago en cuotas solo disponible para algunas tarjetas de crédito.</p>
+    </div>
+
+    <hr class="payment-method__divider" *ngIf="!selectedMethod">
+
+    <div class="payment-method__option"  *ngIf="selectedMethod !== 'CARD'">
+      <h3 class="payment-method__title">Otras formas de pago</h3>
+      <div class="payment-method__pse-option">
+        <img src="pse.webp" alt="PSE" class="payment-method__pse-icon">
+        <div class="payment-method__pse-info">
+          <span class="payment-method__pse-title">PSE Colombia</span>
+          <p class="payment-method__pse-description">Débitos a cuentas de ahorro/corriente en Colombia.</p>
+        </div>
+        <div class="payment-method__container-button" *ngIf="selectedMethod !== 'PSE'">
+          <button class="payment-method__select-button" (click)="handleSelectMethod('PSE')">
+            Seleccionar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <lib-credit-card-form-component
+      [class.hidden]="selectedMethod !== 'CARD'"
+      (onFormValidityChange)="handleFormValidity('CARD', $event.isValid, $event.formData)">
+    </lib-credit-card-form-component>
+  </div>
+
+  <div>
+    <lib-pse-form-component
+      [class.hidden]="selectedMethod !== 'PSE'"
+      (onFormValidityChange)="handleFormValidity('PSE', $event.isValid, $event.formData)">
+    </lib-pse-form-component>
+  </div>
+
+  <div>
+    <lib-billing-form
+      [class.hidden]="selectedMethod === null"
+      (onFormValidityChange)="handleFormValidity('BILLING', $event.isValid, $event.formData)">
+    </lib-billing-form>
+  </div>
+
+  <div class="payment-method__button">
+    <button class="payment-method__confirm-button"
+      [disabled]="!isConfirmButtonEnabled()"
+      (click)="confirmPayment()">
+      Confirmar Pago y Continuar
+    </button>
+  </div>
+</section>

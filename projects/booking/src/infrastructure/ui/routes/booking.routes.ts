@@ -10,7 +10,7 @@ export const bookingRoutes: Routes = [
     component: ReservationLayoutComponent,
     children: [
       {
-        path: '',
+        path: 'payment',
         component: PaymentMethodContainerComponent
       },
       {

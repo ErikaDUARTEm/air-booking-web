@@ -1,0 +1,48 @@
+<section class="pse-form" role="form" aria-labelledby="formTitle">
+  <h2 class="pse-form-title" id="formTitle">Información del cliente</h2>
+  <form [formGroup]="pseForm" (ngModelChange)="onInputChange()" (input)="onInputChange()">
+    <div class="pse-form__form-group" id="groupType">
+      <div class="pse-form__radio-group">
+        <label>
+          Tipo de Cliente:
+          <input type="radio" name="clientType" value="natural" />
+          Persona Natural
+        </label>
+        <label>
+          <input type="radio" name="clientType" value="juridica" />
+          Persona Jurídica
+        </label>
+      </div>
+    </div>
+    <div class="pse-form__form-group" id="group1">
+      <div class="pse-form__input-inline">
+        <label for="holderName">Nombre completo<span>*</span></label>
+        <input id="holderName" formControlName="holderName" type="text" placeholder="Nombre completo del titular"
+          aria-required="true" />
+        <div class="pse-form__error-message">
+          <small *ngIf="pseForm.get('holderName')?.touched ? pseForm.get('holderName')?.errors?.['required'] : null">
+            <span><img src="required.png" width="15px" alt="Este campo es requerido"> El nombre del titular es
+              obligatorio.</span>
+          </small>
+        </div>
+      </div>
+    </div>
+    <div class="pse-form__form-group" id="group2">
+      <div class="pse-form__input-inline">
+        <label for="email">Correo Electrónico <span>*</span></label>
+        <input id="email" formControlName="email" type="email" placeholder="Ingresa tu correo electrónico"
+          aria-required="true" />
+        <div class="pse-form__error-message">
+          <small *ngIf="pseForm.get('email')?.touched ? pseForm.get('email')?.errors?.['required'] : null">
+            <span><img src="required.png" width="15px" alt="Este campo es requerido">El correo electrónico es
+              obligatorio.</span>
+          </small>
+          <small *ngIf="pseForm.get('email')?.touched ? pseForm.get('email')?.errors?.['email'] : null">
+            <span><img src="required.png" width="15px" alt="Este campo es requerido"> Debe ingresar un correo
+              electrónico válido.</span>
+          </small>
+        </div>
+      </div>
+    </div>
+  </form>
+</section>

@@ -1,0 +1,35 @@
+<div class="calendar">
+  <div class="calendar__header">
+    <button (click)="prevMonth()" [disabled]="currentMonth.getMonth() === today.getMonth() && currentMonth.getFullYear() === today.getFullYear()">&#9664;</button>
+    <span>{{ currentMonth | date : "MMMM yyyy" }}</span>
+    <button (click)="nextMonth()">&#9654;</button>
+  </div>
+  <div class="calendar__body">
+    <div class="calendar__weekdays">
+      <div
+        *ngFor="let day of ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb']"
+      >
+        {{ day }}
+      </div>
+    </div>
+    <div class="calendar__weeks">
+      <div *ngFor="let week of weeks">
+        <div
+          *ngFor="let date of week"
+          (click)="onDateClick(date)"
+          [class.calendar__day--current]="
+            date.getMonth() === currentMonth.getMonth()
+          "
+          [class.calendar__day--selected]="
+            date.getTime() === selectedDepartureDate?.getTime() ||
+            date.getTime() === selectedReturnDate?.getTime()
+          "
+          [class.calendar__day--between]="isBetweenDates(date)"
+          [class.calendar__day--disabled]="isDisabled(date)"
+        >
+          {{ date.getDate() }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

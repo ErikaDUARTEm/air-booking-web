@@ -1,0 +1,10 @@
+<div class="footer-section">
+  <h4 class="footer-section__title">{{ section.title }}</h4>
+  <menu class="footer-section__menu">
+    <ng-container *ngFor="let item of section.links">
+      <li class="footer-section__menu-item">
+        <a [href]="item.link">{{ item.text }}</a>
+      </li>
+    </ng-container>
+  </menu>
+</div>

@@ -1,0 +1,45 @@
+@mixin flex-style ($flex-direction, $flex-wrap: nowrap, $gap: 0px) {
+  display: flex;
+  flex-direction: $flex-direction;
+  flex-wrap: $flex-wrap;
+  gap: $gap;
+}
+
+@mixin font-style ($font-size: 16px, $font-weight: 500, $color: black) {
+  font-size: $font-size;
+  font-weight: $font-weight;
+  color: $color;
+}
+
+@mixin modal-opacity() {
+  background-color: #333333d2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+}
+
+@mixin card-modal() {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.434);
+  padding: 2rem;
+  width: 100%;
+  max-width: 700px;
+  height: max-content;
+  position: relative;
+  top: 15%;
+  z-index: 1000;
+  cursor: default;
+}
+
+@mixin btn-details() {
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: opacity 0.2s;
+  cursor: pointer;
+}

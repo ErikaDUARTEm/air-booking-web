@@ -1,0 +1,107 @@
+@use "variables.scss" as variables;
+
+@mixin typography-base {
+  font-family: variables.$primary-font;
+  font-weight: variables.$font-weight-regular;
+  color: variables.$black;
+}
+
+@mixin title-main {
+  font-size: variables.$font-size-title-main;
+  font-weight: variables.$font-weight-semibold;
+  color: variables.$white;
+}
+
+@mixin title-secondary {
+  font-family: variables.$secondary-font;
+  font-size: variables.$font-size-title-secondary;
+  font-weight: variables.$font-weight-bold;
+  color: variables.$black;
+}
+
+@mixin text-paragraph {
+  font-size: variables.$font-size-paragraph;
+  font-weight: variables.$font-weight-regular;
+  color: variables.$black;
+}
+
+@mixin text-secondary {
+  font-size: variables.$font-size-text-secondary;
+  font-weight: variables.$font-weight-regular;
+  color: variables.$gray;
+}
+
+@mixin button-base {
+  font-size: variables.$font-size-button;
+  font-weight: variables.$font-weight-bold;
+  padding: variables.$spacing-sm variables.$spacing-md;
+  border-radius: variables.$border-radius;
+  text-align: center;
+  cursor: pointer;
+}
+
+@mixin button-primary {
+  @include button-base;
+  background-color: variables.$green;
+  color: variables.$white;
+
+  &:hover {
+    background-color: darken(variables.$green, 10%);
+  }
+}
+
+@mixin button-secondary {
+  @include button-base;
+  background-color: variables.$red;
+  color: variables.$white;
+
+  &:hover {
+    background-color: darken(variables.$red, 10%);
+  }
+}
+
+@mixin button-disabled {
+  @include button-base;
+  background-color: variables.$gray;
+  color: variables.$white;
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@mixin form-field {
+  padding: variables.$spacing-md;
+  font-size: variables.$font-size-paragraph;
+  color: variables.$black;
+  border: 1px solid variables.$gray;
+  border-radius: variables.$border-radius;
+
+  &:focus {
+    outline: none;
+    border-color: variables.$icon-primary;
+  }
+}
+
+@mixin form-label {
+  font-size: variables.$font-size-label;
+  color: variables.$black;
+  font-weight: variables.$font-weight-regular;
+  margin-bottom: variables.$spacing-xs;
+}
+
+@mixin error-message {
+  font-size: variables.$font-size-error;
+  color: variables.$red;
+  margin-top: variables.$spacing-xs;
+}
+
+@mixin icon($size: variables.$icon-size-large, $color: $icon-primary) {
+  width: variables.$size;
+  height: variables.$size;
+  fill: variables.$color;
+}
+
+@mixin header {
+  background-color: variables.$white;
+  height: variables.$header-height;
+  box-shadow: variables.$header-shadow;
+}

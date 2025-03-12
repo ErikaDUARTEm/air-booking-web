@@ -1,0 +1,57 @@
+<div class="passenger-modal">
+  <div class="passenger-modal__content">
+    <div class="passenger-modal__row">
+      <div class="passenger-modal__row-label">
+        <span class="passenger-modal__label">Adulto</span>
+        <span class="passenger-modal__label-subtitle">Mayores de 12 años</span>
+      </div>
+      <button type="button" class="passenger-modal__row-button" (click)="decrementAdults()" [ngClass]="{'passenger-modal__row-button--enabled': adults >= 2}">
+        -
+      </button>
+      <span class="passenger-modal__count">{{ adults }}</span>
+      <button type="button" class="passenger-modal__row-button passenger-modal__row-button--enabled" (click)="incrementAdults()" [ngClass]="{'passenger-modal__row-button--disabled': totalPersons === 8}">
+        +
+      </button>
+    </div>
+    <div class="passenger-modal__row">
+      <div class="passenger-modal__row-label">
+        <span class="passenger-modal__label">Niño</span>
+        <span class="passenger-modal__label-subtitle">2-11 años</span>
+      </div>
+      <button type="button" class="passenger-modal__row-button" (click)="decrementChildren()" [ngClass]="{'passenger-modal__row-button--enabled': children >= 1}">
+        -
+      </button>
+      <span class="passenger-modal__count">{{ children }}</span>
+      <button type="button" class="passenger-modal__row-button passenger-modal__row-button--enabled" (click)="incrementChildren()" [ngClass]="{'passenger-modal__row-button--disabled': totalPersons === 8}">
+        +
+      </button>
+    </div>
+    <div class="passenger-modal__row">
+      <div class="passenger-modal__row-label">
+        <span class="passenger-modal__label">Infante</span>
+        <span class="passenger-modal__label-subtitle">Menos de 2 años</span>
+      </div>
+      <button type="button" class="passenger-modal__row-button" (click)="decrementInfants()" [ngClass]="{'passenger-modal__row-button--enabled': infants >= 1}">
+        -
+      </button>
+      <span class="passenger-modal__count">{{ infants }}</span>
+      <button type="button" class="passenger-modal__row-button passenger-modal__row-button--enabled" (click)="incrementInfants()" [ngClass]="{'passenger-modal__row-button--disabled': totalPersons === 8}">
+        +
+      </button>
+    </div>
+    <button
+      type="button"
+      class="passenger-modal__button passenger-modal__button-save"
+      (click)="save()"
+    >
+      Guardar
+    </button>
+    <button
+      type="button"
+      class="passenger-modal__button passenger-modal__button-close"
+      (click)="closeModal()"
+    >
+      Cerrar
+    </button>
+  </div>
+</div>

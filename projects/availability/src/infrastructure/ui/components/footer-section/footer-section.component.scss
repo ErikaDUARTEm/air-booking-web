@@ -1,0 +1,30 @@
+@use "../../../../../../shared/src/infrastructure/ui/styles/variables.scss" as
+  variables;
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+  gap: variables.$spacing-lg;
+  &__title {
+    font-size: variables.$font-size-paragraph;
+    color: variables.$blue;
+  }
+  &__menu {
+    display: flex;
+    flex-direction: column;
+    gap: variables.$spacing-sm;
+    list-style: none;
+    max-width: 250px;
+
+    a {
+      color: variables.$gray;
+
+      text-decoration: none;
+      font-size: variables.$font-size-text-secondary;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

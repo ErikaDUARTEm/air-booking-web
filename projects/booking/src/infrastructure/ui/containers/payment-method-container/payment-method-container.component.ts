@@ -1,11 +1,44 @@
-import { Component } from '@angular/core';
-import { PaymentMethodOptionsComponent } from "../../components/payment-method-options/payment-method-options.component";
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { PaymentAndSummaryComponentComponent } from '../../components/payment/payment-and-summary-component/payment-and-summary-component.component';
+import { PaymentState } from '../../../../domain/state/payment.state';
+import { PaymentUseCase } from '../../../../application/booking/payment.usecase';
 
 @Component({
   selector: 'lib-payment-method-container',
-  imports: [PaymentMethodOptionsComponent],
+  imports: [PaymentAndSummaryComponentComponent],
   templateUrl: './payment-method-container.component.html'
 })
-export class PaymentMethodContainerComponent {
+export class PaymentMethodContainerComponent implements OnInit, OnDestroy{
+  private readonly paymentState = inject(PaymentState);
+  private readonly _paymentUseCase = inject(PaymentUseCase);
 
+  ngOnInit(): void {
+    this._paymentUseCase.initSubscriptions();
+
+  }
+
+  onMethodSelected(method: 'CARD' | 'PSE' | null): void {
+    this.paymentState.updateSelectedMethod(method);
+  }
+
+  onFormValidityChange(event: { formType: 'CARD' | 'BILLING' | 'PSE', isValid: boolean, formData: any }): void {
+    if (event.isValid) {
+      console.log(event.formData, event.isValid)
+      if (event.formType === 'CARD' || event.formType === 'PSE') {
+        console.log(event.formType)
+        this.paymentState.updatePaymentData(event.formData);
+      }
+      if (event.formType === 'BILLING') {
+        console.log(event.formData)
+        this.paymentState.updateBillingData(event.formData);
+      }
+    }
+  }
+  submitPayment(paymentData: any): void {
+    this._paymentUseCase.execute(paymentData);
+  }
+  ngOnDestroy(): void {
+    this._paymentUseCase.destroySubscriptions();
+
+  }
 }
