@@ -23,7 +23,7 @@
       <div class="payment-method__card-icons">
         <img src="Visa_icon.png" alt="Visa" class="payment-method__card-icon">
         <img src="MasterCard.png" alt="MasterCard" class="payment-method__card-icon">
-        <img src="american_express.png" alt="American Express" class="payment-method__card-icon">
+        <img src="american_express.png" class="payment-method__card-icon">
         <img src="uatp.png" alt="UATP" class="payment-method__card-icon">
         <img src="diners.png" alt="Diners Club" class="payment-method__card-icon">
       </div>
@@ -31,7 +31,7 @@
         <div class="payment-method__card-info">
           <div class="payment-method__card-container">
             <img src="credit.png" width="25px" height="25px" alt="Tarjeta de crédito">
-            <span>Ingresa una tarjeta de crédito</span>
+            <span class="payment-method__card-text">Ingresa una tarjeta de crédito</span>
           </div>
           <div class="payment-method__container-button" *ngIf="selectedMethod !== 'CARD'">
             <button class="payment-method__select-button" (click)="handleSelectMethod('CARD')">

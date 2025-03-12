@@ -22,8 +22,14 @@ export class BillingFormComponent {
         postalCode: [''],
         phoneCode: ['+57', [Validators.required]],
         phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
-        email: ['', Validators.email],
+        email: ['', [Validators.required, Validators.email]],
+
     });
+    ngOnInit(): void {
+      this.billingForm.valueChanges.subscribe(() => {
+        this.onInputChange();
+      });
+    }
 
     onInputChange(): void {
 
@@ -37,7 +43,18 @@ export class BillingFormComponent {
       this.onFormValidityChange.emit({ isValid, formData });
     }
     resetForm(): void {
-      this.billingForm.reset();
+      this.billingForm.reset({
+        addressOne: '',
+        addressTwo: '',
+        country: '',
+        city: '',
+        state: '',
+        postalCode: '',
+        phoneCode: '+57',
+        phone: '',
+        email: '',
+      });
+      console.log('Formulario de facturación reiniciado a los valores predeterminados.');
       this.billingForm.patchValue({});
       console.log('Formulario de billing reiniciado');
     }

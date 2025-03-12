@@ -6,7 +6,7 @@
 
   <form [formGroup]="cardForm" (ngModelChange)="onInputChange()" (input)="onInputChange()">
     <div class="card-form__form-group">
-      <label for="holderName">Nombre del Titular<span>*</span></label>
+      <label for="holderName" class="cardForm__label">Nombre del Titular<span>*</span></label>
       <input
         id="holderName"
         formControlName="holderName"
@@ -22,7 +22,7 @@
     </div>
 
     <div class="card-form__form-group">
-      <label for="number">Número de Tarjeta de Crédito<span>*</span></label>
+      <label for="number" class="cardForm__label">Número de Tarjeta de Crédito<span>*</span></label>
       <input
         id="number"
         formControlName="number"

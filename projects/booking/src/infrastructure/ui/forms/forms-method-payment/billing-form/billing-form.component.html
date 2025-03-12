@@ -60,7 +60,7 @@
   </div>
 
   <div class="billing-form__group">
-    <label for="phone">Número de Teléfono*</label>
+    <label for="phone">Número de Teléfono<span>*</span></label>
     <div class="billing-form__phone-container">
       <input
         id="phoneCode"
@@ -80,10 +80,10 @@
       />
     </div>
     <div class="billing-form__error-message">
-      <small *ngIf="billingForm.get('phoneNumber')?.touched ? billingForm.get('phoneNumber')?.errors?.['required'] : null">
+      <small *ngIf="billingForm.get('phoneCode')?.touched ? billingForm.get('phone')?.errors?.['required'] : null">
         <span><img src="required.png" width="15px" alt="Este campo es requerido">El número de teléfono es obligatorio.</span>
       </small>
-      <small *ngIf="billingForm.get('phoneNumber')?.touched ? billingForm.get('phoneNumber')?.errors?.['required'] : null">
+      <small *ngIf="billingForm.get('phone')?.touched ? billingForm.get('phone')?.errors?.['required'] : null">
         <span><img src="required.png" width="15px" alt="Este campo es requerido"> Debe ser un número de teléfono válido.</span>
       </small>
     </div>

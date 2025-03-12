@@ -12,8 +12,8 @@ export class CreditCardFormComponentComponent {
   @Output() onFormValidityChange = new EventEmitter<{ isValid: boolean, formData: any }>();
 
   public cardForm = this.formBuilder.group({
-    number: ['', [Validators.required, Validators.pattern(/^\d{16}$/)]],
     holderName: ['', [Validators.required]],
+    number: ['', [Validators.required, Validators.pattern(/^\d{16}$/)]],
     expirationDate: ['', [Validators.required]],
     cvv: ['', [Validators.required, Validators.pattern(/^\d{3}$/)]],
     countryIssue: ['', [Validators.required]],
@@ -25,7 +25,13 @@ export class CreditCardFormComponentComponent {
     this.onFormValidityChange.emit({ isValid, formData });
   }
   resetForm(): void {
-    this.cardForm.reset();
+    this.cardForm.reset({
+      holderName: "",
+      number:"",
+      expirationDate:"",
+      cvv:"",
+      countryIssue:""
+    });
     this.cardForm.patchValue({});
     console.log('Formulario de tarjeta reiniciado');
   }

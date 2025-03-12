@@ -1,4 +1,4 @@
-import { Component, inject, output, ViewChild} from '@angular/core';
+import { Component, output, ViewChild} from '@angular/core';
 import { CreditCardFormComponentComponent } from '../../../forms/forms-method-payment/credit-card-form-component/credit-card-form-component.component';
 import { PseFormComponentComponent } from "../../../forms/forms-method-payment/pse-form-component/pse-form-component.component";
 import { CommonModule } from '@angular/common';
@@ -34,19 +34,20 @@ export class PaymentMethodOptionsComponent {
     this.selectedMethod = method;
     const componentsToReset = {
       default: [this.creditCardFormComponent, this.pseFormComponent, this.billingFormComponent],
-      CARD: [this.pseFormComponent],
-      PSE: [this.creditCardFormComponent]
+      CARD: [this.pseFormComponent, this.billingFormComponent],
+      PSE: [this.creditCardFormComponent, this.billingFormComponent]
     };
 
     const key = method === null ? 'default' : method;
 
     (componentsToReset[key] || []).forEach((component, index) => {
-      if (component) {
+      if (component && component.resetForm) {
         component.resetForm();
       } else {
         console.warn(`Componente no inicializado en posición ${index}`);
       }
     });
+    console.log("Método de pago seleccionado:", method);
     this.onMethodSelected.emit(method);
   }
 
@@ -65,12 +66,15 @@ export class PaymentMethodOptionsComponent {
   }
 
   confirmPayment(): void {
+
     const paymentData = {
       method: this.selectedMethod,
       cardData: this.formStates.CARD.formData,
       pseData: this.formStates.PSE.formData,
       billingData: this.formStates.BILLING.formData,
     };
+    alert("Pago confirmado con exito")
     this.onConfirmPayment.emit(paymentData);
   }
+
 }

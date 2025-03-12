@@ -31,7 +31,10 @@ export class PseFormComponentComponent {
     this.onFormValidityChange.emit({ isValid, formData });
   }
   resetForm(): void {
-    this.pseForm.reset();
+    this.pseForm.reset({
+      holderName:"",
+      email:""
+    });
     this.pseForm.patchValue({});
     console.log('Formulario de tarjeta reiniciado');
   }
