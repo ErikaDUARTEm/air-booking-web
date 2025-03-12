@@ -1,7 +1,7 @@
 import { inject, Injectable } from "@angular/core";
 import { StateFactory } from "shared";
 import { BehaviorSubject } from "rxjs";
-import { IFlightData, IPassenger, IPassengerData } from "../model/passenger.model";
+import { IFlightData, IPassenger } from "../model/passenger.model";
 
 @Injectable({
   providedIn: 'root',
@@ -29,7 +29,7 @@ export class PassengerState {
     passengers: {
       adult: 1,
       children: 0,
-      infants: 3,
+      infants: 0,
     },
   });
 

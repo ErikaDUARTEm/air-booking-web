@@ -1,25 +1,30 @@
+@use "../../../../../../shared/src/infrastructure/ui/styles/variables.scss" as variables;
+@use "../../../../../../shared/src/infrastructure/ui/styles/mixins.scss" as mixins;
+
 .fly-details {
-  background-color: #ffffff;
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  width: 400px;
+  background-color: variables.$background-color;
+  padding: variables.$spacing-lg;
+  border-radius: variables.$border-radius;
+  box-shadow: 0 2px 8px variables.$shadow-color;
+  width: 50rem;
   height: 600px;
+  margin-top: 10rem;
+  position: fixed;
 
   &__header-container {
     display: flex;
-    align-items: center; 
-    margin-bottom: 1.5rem;
+    align-items: center;
+    margin-bottom: variables.$spacing-lg;
   }
 
   &__image-container {
     display: flex;
-    justify-content: center; 
+    justify-content: center;
   }
 
   &__image {
     border-radius: 50%;
-    border: #272727;
+    border: 2px solid variables.$black;
   }
 
   &__header {
@@ -29,53 +34,53 @@
     text-align: center;
 
     .fly-details__title {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #272727;
-      margin-bottom: 0.5rem;
+      font-size: 3rem;
+      margin-bottom: variables.$spacing-xs;
     }
 
-    .fly-details__dates {
 
-      font-size: 1rem;
-      color: #666;
-      margin-left: 10px;
+    .fly-details__dates {
+      @include mixins.text-secondary;
+      font-size: 1.5rem;
+      margin-left: variables.$spacing-xs;
     }
   }
 
   &__info {
-    margin-top: 1rem;
+    margin-top: variables.$spacing-lg;
+    @include mixins.text-paragraph;
     font-size: 0.9rem;
-    color: #333;
+
+  }
+
+  &__route{
+      font-size: 1.5rem;
   }
 
   &__pricing {
-   
-    padding-top: 1.5rem;
-
+    padding-top: variables.$spacing-lg;
 
     .fly-details__label {
-      font-size: 0.9rem;
-      color: #666;
+      @include mixins.text-secondary;
+      font-size: 1.7rem;
     }
 
-    .fly-details__fare{
+    .fly-details__fare {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 1rem;
+      margin-bottom: variables.$spacing-base;
       height: 60px;
-      margin-top: 10px;
-
+      margin-top: variables.$spacing-xs;
 
       .fly-details__value {
-        font-size: 0.9rem;
-        color: #333;
+        @include mixins.text-paragraph;
+        font-size: 1.7rem;
       }
 
       .fly-details__price {
-        font-size: 0.9rem;
-        color: #333;
-        font-weight: bold;
+        @include mixins.text-paragraph;
+        font-size: 1.7rem;
+        font-weight: variables.$font-weight-bold;
       }
     }
 
@@ -85,31 +90,31 @@
     .fly-details__total {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 1rem;
-      border-top: 1px solid #eee;
+      margin-bottom: variables.$spacing-base;
+      border-top: 1px solid variables.$gray;
       height: 60px;
-
+      align-items: center;
 
       .fly-details__value {
-        font-size: 0.9rem;
-        color: #333;
+        @include mixins.text-paragraph;
+        font-size: 1.4rem;
       }
 
       .fly-details__price {
-        font-size: 0.9rem;
-        color: #333;
-        font-weight: bold;
+        @include mixins.text-paragraph;
+        font-size: 1.6rem;
+        font-weight: variables.$font-weight-bold;
       }
     }
 
     .fly-details__total {
       border-top: 1px solid #eee;
-      padding-top: 1rem;
-      margin-top: 1rem;
+      padding-top: variables.$spacing-base;
+      margin-top: variables.$spacing-base;
 
       .fly-details__price {
-        font-size: 1.2rem;
-        color: #0032A0;
+        font-size: 1.6rem;
+        color: variables.$blue;
       }
     }
   }
