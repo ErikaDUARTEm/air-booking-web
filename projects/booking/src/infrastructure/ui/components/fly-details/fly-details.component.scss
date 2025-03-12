@@ -1,0 +1,121 @@
+@use "../../../../../../shared/src/infrastructure/ui/styles/variables.scss" as variables;
+@use "../../../../../../shared/src/infrastructure/ui/styles/mixins.scss" as mixins;
+
+.fly-details {
+  background-color: variables.$background-color;
+  padding: variables.$spacing-lg;
+  border-radius: variables.$border-radius;
+  box-shadow: 0 2px 8px variables.$shadow-color;
+  width: 50rem;
+  height: 600px;
+  margin-top: 10rem;
+  position: fixed;
+
+  &__header-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: variables.$spacing-lg;
+  }
+
+  &__image-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__image {
+    border-radius: 50%;
+    border: 2px solid variables.$black;
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+
+    .fly-details__title {
+      font-size: 3rem;
+      margin-bottom: variables.$spacing-xs;
+    }
+
+
+    .fly-details__dates {
+      @include mixins.text-secondary;
+      font-size: 1.5rem;
+      margin-left: variables.$spacing-xs;
+    }
+  }
+
+  &__info {
+    margin-top: variables.$spacing-lg;
+    @include mixins.text-paragraph;
+    font-size: 0.9rem;
+
+  }
+
+  &__route{
+      font-size: 1.5rem;
+  }
+
+  &__pricing {
+    padding-top: variables.$spacing-lg;
+
+    .fly-details__label {
+      @include mixins.text-secondary;
+      font-size: 1.7rem;
+    }
+
+    .fly-details__fare {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: variables.$spacing-base;
+      height: 60px;
+      margin-top: variables.$spacing-xs;
+
+      .fly-details__value {
+        @include mixins.text-paragraph;
+        font-size: 1.7rem;
+      }
+
+      .fly-details__price {
+        @include mixins.text-paragraph;
+        font-size: 1.7rem;
+        font-weight: variables.$font-weight-bold;
+      }
+    }
+
+    .fly-details__extras,
+    .fly-details__subtotal,
+    .fly-details__taxes,
+    .fly-details__total {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: variables.$spacing-base;
+      border-top: 1px solid variables.$gray;
+      height: 60px;
+      align-items: center;
+
+      .fly-details__value {
+        @include mixins.text-paragraph;
+        font-size: 1.4rem;
+      }
+
+      .fly-details__price {
+        @include mixins.text-paragraph;
+        font-size: 1.6rem;
+        font-weight: variables.$font-weight-bold;
+      }
+    }
+
+    .fly-details__total {
+      border-top: 1px solid #eee;
+      padding-top: variables.$spacing-base;
+      margin-top: variables.$spacing-base;
+
+      .fly-details__price {
+        font-size: 1.6rem;
+        color: variables.$blue;
+      }
+    }
+  }
+}
