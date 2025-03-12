@@ -27,11 +27,11 @@ export class SectionSeatsContentComponent implements OnInit, OnDestroy {
   passengers: IPassenger[] = [];
   currentPassenger!: IPassenger;
   
-  disableRows: number[] = [1, 2, 3];
+  bussinessRows: number[] = [1, 2, 3, 4];
   premiumRows: number[] = [5, 6, 7, 8, 9, 10, 11];
   emergencyRows: number[] = [17];
   favorableRows: number[] = [18, 19, 20];
-  regularRows: number[] = [21, 22, 23, 24, 25, 26, 27, 28, 29];
+  regularRows: number[] = [21, 22, 23, 24, 25, 26, 27, 28, 29,30,31,32];
   leftTwoCols: string[] = ['A', 'B'];
   rightTwoCols: string[] = ['D', 'E'];
   leftCols: string[] = ['A', 'B', 'C'];

@@ -17,7 +17,7 @@
       flex-direction: column;
       align-items: center;
       position: relative;
-      padding-top: calc(28px + 2rem);
+      padding-top: calc(28px + 7rem);
     }
     
     &__header {
@@ -191,7 +191,7 @@
         }
       }
       
-      &--premium button {
+      &--economy button {
         background-color: #001E60;
         color: white;
         
@@ -201,7 +201,7 @@
       }
       
       &--favorable button {
-        background-color: #001E60;
+        background-color: #0032a0;
         color: white;
       }
       
@@ -296,47 +296,56 @@
         }
       }
     }
-    &__passanger-navigation{
-      height: 20px;
+
+
+    &__passanger-navigation {
       position: fixed;
-      bottom: 16vh;
       display: flex;
-      left: 40px;
-      right: 40px;
-      padding: 5px;
-      width: 130px;
+      bottom: 15vh;
+      justify-content: space-between;
+      width: 10%;
+      left: 65px;
+      margin-top: 20px;
       align-items: center;
-      justify-content: center;
-      gap: 10px;
-      button{
-        background-color: #0070E0;
-        border: none;
-        width: 20px;
-        height: 20px;
-        border-radius: 100px;
-        color: white;
+      
+      button {
+        padding: 5px 10px;
+        border-radius:100px;
+        font-weight: bold;
         cursor: pointer;
+        border: none;
+        background-color: variables.$blue-dark;
+        color: white;
+        
+      }
+      
+    }
+    &__passenger-info{
+      background-color: white;
+      padding: 10px;
+      position: fixed;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      bottom: 20vh;
+      left: 50px;
+      margin-top: 20px;
+      border-radius: 8px;
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+      
+      h3{
+        font-size: 1.4rem;
+        margin-bottom: 10px;
+      }
+      p{
+        font-size: 1.2rem;
+        margin-bottom: 10px;
       }
     }
 
-
-    &__passenger-info{
-      border-radius: 5px;
-      background-color: white;
+    &__passenger-indicators{
       display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-      height: 100px;
-      bottom: 20vh;
-      position: fixed;
-      left: 2vw;
-      padding: 10px;
-      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    }
-
-    &__selected-seat{
-      font-weight:700;
+      gap: 10px;
     }
 
   }

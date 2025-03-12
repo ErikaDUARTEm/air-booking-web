@@ -38,8 +38,6 @@ export class SeatsPageComponent implements OnInit {
 
     this.flightSeatsService.loadFlightData('FL123');
 
-    // Aquí puedes determinar si es un vuelo de ida o ida y vuelta basado en los datos de los vuelos
-    // Por ejemplo, si no hay datos de vuelo de regreso, entonces es solo ida
     if (!this.flight.return) {
       this.isRoundTrip = false;
     }
@@ -97,7 +95,7 @@ export class SeatsPageComponent implements OnInit {
         console.log(`Flight type changed to ${this.currentFlightType}`);
         console.log(this.flight)
       } else {
-        this.router.navigate(['/next-page']);
+        this.router.navigate(['/booking/payment']);
         console.log(this.flight)
       }
     } else {

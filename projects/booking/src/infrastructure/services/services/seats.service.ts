@@ -24,69 +24,101 @@ export class FlightSeatsService {
     }
   
     private initializeFlightSeats(flight: IFlight): void {
-      const regularRows = [21, 22, 23, 24, 25, 26, 27, 28, 29];
-      const allColumns = ['A', 'B', 'C', 'D', 'E', 'F'];
-      const unavailableSeats = ['21C', '23F', '25A', '26A', '26B', '27C', '28A'];
-      const premiumRows = [5, 6, 7, 8, 9, 10, 11];
-      const emergencyRows = [17];
-      const favorableSeats = ['18A', '18B', '19A', '19F', '20A', '20B', '20E', '20F'];
+      const businessRows = [1, 2, 3, 4];
+  const economyRows = [5, 6, 7, 8];
+  const favorableRows = [9, 10, 11];
+  const emergencyRows = [17, 18];
+  const favorableRows2 = [19, 20];
+  const regularRows = Array.from({ length: 34 - 21 + 1 }, (_, i) => i + 21);
   
-      regularRows.forEach(row => {
-        allColumns.forEach(col => {
-          const seatId = `${row}${col}`;
-          flight.seats[seatId] = {
-            id: seatId,
-            type: 'regular',
-            price: 0,
-            isAvailable: !unavailableSeats.includes(seatId)
-          };
-        });
-      });
-  
-      premiumRows.forEach(row => {
-        allColumns.forEach(col => {
-          const seatId = `${row < 10 ? '0' + row : row}${col}`;
-          flight.seats[seatId] = {
-            id: seatId,
-            type: 'premium',
-            price: 25,
-            isAvailable: true
-          };
-        });
-      });
-  
-      emergencyRows.forEach(row => {
-        allColumns.forEach(col => {
-          const seatId = `${row}${col}`;
-          flight.seats[seatId] = {
-            id: seatId,
-            type: 'emergency',
-            price: 15,
-            isAvailable: true
-          };
-        });
-      });
-  
-      favorableSeats.forEach(seatId => {
-        if (flight.seats[seatId]) {
-          flight.seats[seatId].type = 'favorable';
-          flight.seats[seatId].price = 10;
-        } else {
-          flight.seats[seatId] = {
-            id: seatId,
-            type: 'favorable',
-            price: 10,
-            isAvailable: true
-          };
-        }
-      });
-  
-      if (flight.type === 'outbound') {
-        this.flightState.outboundFlightState.set(flight);
-      } else {
-        this.flightState.returnFlightState.set(flight);
-      }
-    }
+  const allColumns = ['A', 'B', 'C', 'D', 'E', 'F'];
+  const unavailableSeats = ['21C', '23F', '25A', '26A', '26B', '27C', '28A'];
+
+  // Business class seats
+  businessRows.forEach(row => {
+    allColumns.forEach(col => {
+      const seatId = `${row}${col}`;
+      flight.seats[seatId] = {
+        id: seatId,
+        type: 'bussiness',
+        price: 0,
+        isAvailable: !unavailableSeats.includes(seatId)
+      };
+    });
+  });
+
+  // Economy class seats
+  economyRows.forEach(row => {
+    allColumns.forEach(col => {
+      const seatId = `${row}${col}`;
+      flight.seats[seatId] = {
+        id: seatId,
+        type: 'economy',
+        price: 15,
+        isAvailable: !unavailableSeats.includes(seatId)
+      };
+    });
+  });
+
+  // Favorable class seats (9 - 11)
+  favorableRows.forEach(row => {
+    allColumns.forEach(col => {
+      const seatId = `${row}${col}`;
+      flight.seats[seatId] = {
+        id: seatId,
+        type: 'favorable',
+        price: 10,
+        isAvailable: !unavailableSeats.includes(seatId)
+      };
+    });
+  });
+
+  // Emergency exit seats (17, 18)
+  emergencyRows.forEach(row => {
+    allColumns.forEach(col => {
+      const seatId = `${row}${col}`;
+      flight.seats[seatId] = {
+        id: seatId,
+        type: 'emergency',
+        price: 20,
+        isAvailable: true
+      };
+    });
+  });
+
+  // Favorable class seats (19, 20)
+  favorableRows2.forEach(row => {
+    allColumns.forEach(col => {
+      const seatId = `${row}${col}`;
+      flight.seats[seatId] = {
+        id: seatId,
+        type: 'favorable',
+        price: 10,
+        isAvailable: true
+      };
+    });
+  });
+
+  // Regular class seats (21 - 33)
+  regularRows.forEach(row => {
+    allColumns.forEach(col => {
+      const seatId = `${row}${col}`;
+      flight.seats[seatId] = {
+        id: seatId,
+        type: 'regular',
+        price: 5,
+        isAvailable: !unavailableSeats.includes(seatId)
+      };
+    });
+  });
+
+  // Actualizar el estado del vuelo
+  if (flight.type === 'outbound') {
+    this.flightState.outboundFlightState.set(flight);
+  } else {
+    this.flightState.returnFlightState.set(flight);
+  }
+}
     
     getOutboundFlight(): Observable<IFlight> {
       return this.flightState.outboundFlightState.$();

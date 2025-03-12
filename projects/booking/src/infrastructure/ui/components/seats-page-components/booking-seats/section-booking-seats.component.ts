@@ -12,7 +12,7 @@ export class SectionBookingSeatsComponent {
   @Input() flight!: { outbound: IFlight, return: IFlight };
   @Input() passengers: IPassenger[] = [];
   @Input() currentPassenger!: IPassenger;
-  @Input() disableRows: number[] = [];
+  @Input() bussinessRows: number[] = [];
   @Input() premiumRows: number[] = [];
   @Input() emergencyRows: number[] = [];
   @Input() favorableRows: number[] = [];
