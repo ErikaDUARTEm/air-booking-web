@@ -23,7 +23,7 @@ export class SeatsPageComponent implements OnInit {
   selectedSeat = '';
   currentFlightType: 'outbound' | 'return' = 'outbound';
   flight: { outbound: IFlight | null, return: IFlight | null } = { outbound: null, return: null };
-  isRoundTrip = true; // Asume que el usuario ha seleccionado un vuelo de ida y vuelta por defecto
+  isRoundTrip = true; 
   
   constructor(private flightSeatsService: FlightSeatsService, private router: Router) {} // Inyecta el Router
   
