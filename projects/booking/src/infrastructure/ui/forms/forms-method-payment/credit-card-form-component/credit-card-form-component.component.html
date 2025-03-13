@@ -7,89 +7,83 @@
   <form [formGroup]="cardForm" (ngModelChange)="onInputChange()" (input)="onInputChange()">
     <div class="card-form__form-group">
       <label for="holderName" class="cardForm__label">Nombre del Titular<span>*</span></label>
-      <input
-        id="holderName"
-        formControlName="holderName"
-        type="text"
-        placeholder="Ingresa el nombre como aparece en la tarjeta de crédito"
-        aria-required="true"
-      />
+      <input id="holderName" formControlName="holderName" type="text"
+        placeholder="Ingresa el nombre como aparece en la tarjeta de crédito" aria-required="true" />
       <div class="card-form__error-message">
         <small *ngIf="cardForm.get('holderName')?.touched ? cardForm.get('holderName')?.errors?.['required'] : null">
-          <span><img src="required.png" width="15px" alt="Este campo es requerido"></span>El nombre del titular es obligatorio.
+          <span><img src="required.png" width="15px" alt="Este campo es requerido"></span>El nombre del titular es
+          obligatorio.
         </small>
       </div>
     </div>
 
     <div class="card-form__form-group">
       <label for="number" class="cardForm__label">Número de Tarjeta de Crédito<span>*</span></label>
-      <input
-        id="number"
-        formControlName="number"
-        type="text"
-        placeholder="Ingresa número de tarjeta de crédito"
-        aria-required="true"
-      />
+      <input id="number" formControlName="number" type="text" placeholder="Ingresa número de tarjeta de crédito"
+        aria-required="true" />
       <div class="card-form__error-message">
         <small *ngIf="cardForm.get('number')?.touched ? cardForm.get('number')?.errors?.['required'] : null">
           <span><img src="required.png" width="15px" alt="Este campo es requerido"></span>Este campo es requerido.
         </small>
         <small *ngIf="cardForm.get('number')?.touched ? cardForm.get('number')?.errors?.['pattern'] : null">
-          <span><img src="required.png" width="15px" alt="Este campo es requerido"></span> El número de tarjeta debe tener 16 dígitos.
+          <span><img src="required.png" width="15px" alt="Este campo es requerido"></span> El número de tarjeta debe
+          tener 16 dígitos.
         </small>
       </div>
     </div>
-
     <div class="card-form__input-row">
       <div class="card-form__input-inline">
-        <label for="expirationDate">Fecha de Expiración<span>*</span></label>
-        <input
-          id="expirationDate"
-          formControlName="expirationDate"
-          type="text"
-          placeholder="MM/AAAA"
-          aria-required="true"
-        />
-        <div class="card-form__error-message">
-          <small *ngIf="cardForm.get('expirationDate')?.touched ? cardForm.get('expirationDate')?.errors?.['required'] : null">
-            <span><img src="required.png" width="15px" alt="Este campo es requerido"></span>La fecha de expiración es obligatoria.
-          </small>
+        <div>
+          <label for="expirationDate">Fecha de Expiración<span>*</span></label>
+          <div class="card-form__date-fields">
+            <select class="card-form__select" id="expirationDateMonth" formControlName="expirationMonth" aria-required="true">
+              <option value="" disabled selected>Mes</option>
+              @for(month of months; track month){
+              <option [value]="month.value">{{ month.value }}</option>
+              }
+            </select>
+            <select class="card-form__select" id="expirationDateYear" formControlName="expirationYear" aria-required="true">
+              <option value="" disabled selected>Año</option>
+              @for(year of years; track year){
+              <option [value]="year">{{ year }}</option>
+              }
+            </select>
         </div>
-      </div>
-      <div class="card-form__input-inline">
-        <label for="cvv">CVV<span>*</span></label>
-        <input
-          id="cvv"
-          formControlName="cvv"
-          type="number"
-          placeholder="###"
-          aria-required="true"
-        />
-        <div class="card-form__error-message">
-          <small *ngIf="cardForm.get('cvv')?.touched ? cardForm.get('cvv')?.errors?.['required'] : null">
-            <span><img src="required.png" width="15px" alt="Este campo es requerido"></span> El CVV es obligatorio.
-          </small>
-          <small *ngIf="cardForm.get('cvv')?.touched ? cardForm.get('cvv')?.errors?.['pattern'] : null">
-            <span><img src="required.png" width="15px" alt="Este campo es requerido"></span> El CVV debe tener 3 dígitos.
-          </small>
+          <div class="card-form__error-message">
+            <small
+              *ngIf="cardForm.get('expirationDateMonth')?.touched ? cardForm.get('expirationDateYear')?.errors?.['required'] : null">
+              <img src="required.png" width="15px" alt="Este campo es requerido">La fecha de expiración es
+              obligatoria.
+            </small>
+          </div>
+        </div>
+        <div class="card-form__input-inline">
+          <label for="cvv" id="cvv">CVV<span>*</span></label>
+          <input id="cvv" formControlName="cvv" type="number" placeholder="###" aria-required="true" />
+          <div class="card-form__error-message">
+            <small *ngIf="cardForm.get('cvv')?.touched ? cardForm.get('cvv')?.errors?.['required'] : null">
+              <img src="required.png" width="15px" alt="Este campo es requerido"> El CVV es obligatorio.
+            </small>
+            <small *ngIf="cardForm.get('cvv')?.touched ? cardForm.get('cvv')?.errors?.['pattern'] : null">
+              <img src="required.png" width="15px" alt="Este campo es requerido"> El CVV debe tener 3
+              dígitos.
+            </small>
+          </div>
         </div>
       </div>
     </div>
+      <div class="card-form__form-group">
+        <label for="countryIssued">País de emisión de la tarjeta<span>*</span></label>
+        <input id="countryIssued" formControlName="countryIssued" type="text" placeholder="País de emisión de la tarjeta"
+          aria-required="true" />
+        <div class="card-form__error-message">
+          <small
+            *ngIf="cardForm.get('countryIssued')?.touched ? cardForm.get('countryIssued')?.errors?.['required'] : null">
+            <span><img src="required.png" width="15px" alt="Este campo es requerido"></span> El país de emisión de la
+            tarjeta es obligatorio.
+          </small>
+        </div>
+      </div>
 
-    <div class="card-form__form-group">
-      <label for="countryIssue">País de emisión de la tarjeta<span>*</span></label>
-      <input
-        id="countryIssue"
-        formControlName="countryIssue"
-        type="text"
-        placeholder="País de emisión de la tarjeta"
-        aria-required="true"
-      />
-      <div class="card-form__error-message">
-        <small *ngIf="cardForm.get('countryIssue')?.touched ? cardForm.get('countryIssue')?.errors?.['required'] : null">
-          <span><img src="required.png" width="15px" alt="Este campo es requerido"></span> El país de emisión de la tarjeta es obligatorio.
-        </small>
-      </div>
-    </div>
   </form>
 </section>

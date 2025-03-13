@@ -1,0 +1,16 @@
+@use '../../styles/variables.scss' as variables;
+
+.header{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    background-color: transparent;
+    height: 160px;
+    overflow: hidden;
+    &__content {
+        font-size: variables.$font-size-title-main;
+        font-family: variables.$primary-font;
+    }
+}

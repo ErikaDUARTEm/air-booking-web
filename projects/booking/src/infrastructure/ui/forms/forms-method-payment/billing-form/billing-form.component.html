@@ -4,9 +4,9 @@
     <input id="addressOne" formControlName="addressOne" type="text" placeholder="Ingresa dirección principal" aria-required="true">
     <div class="billing-form__error-message">
       <small *ngIf="billingForm.get('addressOne')?.touched ? billingForm.get('addressOne')?.errors?.['required'] : null">
-        <span>
+
           <img src="required.png" width="15px" alt="icono de requerido">La dirección principal es obligatoria.
-        </span>
+
       </small>
     </div>
   </div>
@@ -22,9 +22,9 @@
     <input id="country" formControlName="country" type="text" placeholder="Ingresa país" aria-required="true">
     <div class="billing-form__error-message">
       <small *ngIf="billingForm.get('country')?.touched ? billingForm.get('country')?.errors?.['required'] : null">
-        <span>
+
           <img src="required.png" width="15px" alt="icono de requerido">El país es obligatorio.
-        </span>
+
       </small>
     </div>
   </div>
@@ -34,7 +34,7 @@
     <input id="city" formControlName="city" type="text" placeholder="Ingresa la ciudad" aria-required="true">
     <div class="billing-form__error-message">
       <small *ngIf="billingForm.get('city')?.touched ? billingForm.get('city')?.errors?.['required'] : null">
-        <span><img src="required.png" width="15px" alt="icono de requerido"> La ciudad es obligatoria.</span>
+        <img src="required.png" width="15px" alt="icono de requerido"> La ciudad es obligatoria.
       </small>
     </div>
   </div>
@@ -44,7 +44,7 @@
     <input id="state" formControlName="state" type="text" placeholder="Ingresa estado o provincia" aria-required="true">
     <div class="billing-form__error-message">
       <small *ngIf="billingForm.get('state')?.touched ? billingForm.get('state')?.errors?.['required'] : null">
-        <span><img src="required.png" width="15px" alt="icono de requerido">El estado o provincia es obligatorio.</span>
+        <img src="required.png" width="15px" alt="icono de requerido">El estado o provincia es obligatorio.
       </small>
     </div>
   </div>
@@ -54,7 +54,7 @@
     <input id="postalCode" formControlName="postalCode" type="text" placeholder="Ingresa código postal">
     <div class="billing-form__error-message">
       <small *ngIf="billingForm.get('postalCode')?.touched ? billingForm.get('postalCode')?.errors?.['required'] : null">
-        <span><img src="required.png" width="15px" alt="Este campo es requerido">El código postal es obligatorio.</span>
+        <img src="required.png" width="15px" alt="Este campo es requerido">El código postal es obligatorio.
       </small>
     </div>
   </div>
@@ -81,10 +81,10 @@
     </div>
     <div class="billing-form__error-message">
       <small *ngIf="billingForm.get('phoneCode')?.touched ? billingForm.get('phone')?.errors?.['required'] : null">
-        <span><img src="required.png" width="15px" alt="Este campo es requerido">El número de teléfono es obligatorio.</span>
+        <img src="required.png" width="15px" alt="Este campo es requerido">El número de teléfono es obligatorio.
       </small>
       <small *ngIf="billingForm.get('phone')?.touched ? billingForm.get('phone')?.errors?.['required'] : null">
-        <span><img src="required.png" width="15px" alt="Este campo es requerido"> Debe ser un número de teléfono válido.</span>
+        <img src="required.png" width="15px" alt="Este campo es requerido"> Debe ser un número de teléfono válido.
       </small>
     </div>
   </div>
@@ -97,20 +97,20 @@
     </small>
     <div class="billing-form__error-message">
       <small *ngIf="billingForm.get('email')?.touched ? billingForm.get('email')?.errors?.['required'] : null">
-        <span><img src="required.png" width="15px" alt="Este campo es requerido"> El correo electrónico es obligatorio.</span>
+        <img src="required.png" width="15px" alt="Este campo es requerido"> El correo electrónico es obligatorio.
       </small>
       <small *ngIf="billingForm.get('email')?.touched ? billingForm.get('email')?.errors?.['email'] : null">
-        <span><img src="required.png" width="15px" alt="Este campo es requerido">Debe ingresar un correo electrónico válido.</span>
+        <img src="required.png" width="15px" alt="Este campo es requerido">Debe ingresar un correo electrónico válido.
       </small>
     </div>
   </div>
 
   <div class="billing-form__checkbox">
-    <input id="terms" type="checkbox">
+    <input id="terms" type="checkbox" checked>
     <label class="billing-form__terminos-text">
       He leído y acepto las <span class="billing-form__terminos">reglas de tarifa</span>,
       los <span class="billing-form__terminos">términos y condiciones de viaje </span>,
-      el<span class="billing-form__terminos">contrato de transporte</span>,
+      el<span class="billing-form__terminos"> contrato de transporte</span>,
       la  <span class="billing-form__terminos">política de privacidad</span>,
       la información acerca de <span class="billing-form__terminos">artículos restringidos </span>
       y los <span class="billing-form__terminos">términos y condiciones de selección avanzada de asientos.</span>

@@ -1,0 +1,13 @@
+<main class="chart">
+  <header class="chart__header">
+    <h2>{{chartHeader() | titlecase}}</h2>
+  </header>
+  <section class="chart__content">
+    @if(!isBar){
+      <lib-pie-chart [pieDataSeries]="chartData()"  />
+
+    } @else {
+      <lib-bar-chart [barData]="chartData()"  />
+    }
+  </section>
+</main>
