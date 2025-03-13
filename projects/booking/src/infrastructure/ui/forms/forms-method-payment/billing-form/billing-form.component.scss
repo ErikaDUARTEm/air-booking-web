@@ -1,3 +1,5 @@
+@use "../../../../../../../shared/src/infrastructure/ui/styles/variables.scss" as variables;
+@use "../../../styles/mixins.scss" as mixin;
 .billing-form {
   display: flex;
   flex-direction: column;
@@ -54,12 +56,12 @@
 
   }
   &__error-message {
-    color: red;
+    color: variables.$gray;
     margin-top: 0.5rem;
-
     small {
       font-size: 1.2rem;
-      display: block;
+      display: flex;
+      align-items: center;
     }
   }
 
@@ -70,9 +72,12 @@
   }
   &__terminos-text{
     font-size: 12px;
+    font-family: variables.$secondary-font;
   }
   &__terminos{
     color: #0073e6;
+    font-size: 12px;
+    font-family: variables.$secondary-font;
     font-weight: bold;
   }
 }

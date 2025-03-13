@@ -1,3 +1,6 @@
+@use "../../../../../../../shared/src/infrastructure/ui/styles/variables.scss" as variables;
+@use "../../../styles/mixins.scss" as mixin;
+
 .pse-form {
   display: flex;
   flex-direction: column;
@@ -11,8 +14,16 @@
   &__form-group {
     margin-bottom: 1.5rem;
   }
-  span{
-    color: red;
+
+  &__error-message {
+    color: variables.$gray;
+    margin-top: 0.5rem;
+
+    small {
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+    }
   }
   &__radio-group {
     display: flex;

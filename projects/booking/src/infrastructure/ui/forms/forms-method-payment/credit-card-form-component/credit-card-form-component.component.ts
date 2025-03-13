@@ -10,7 +10,14 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 export class CreditCardFormComponentComponent {
   private readonly formBuilder = inject(FormBuilder);
   @Output() onFormValidityChange = new EventEmitter<{ isValid: boolean, formData: any }>();
+  public years: number[] = [];
 
+  public ngOnInit(): void {
+  const currentYear = new Date().getFullYear();
+  for (let i = 0; i < 10; i++) {
+    this.years.push(currentYear + i);
+  }
+}
   public cardForm = this.formBuilder.group({
     holderName: ['', [Validators.required]],
     number: ['', [Validators.required, Validators.pattern(/^\d{16}$/)]],
@@ -35,4 +42,18 @@ export class CreditCardFormComponentComponent {
     this.cardForm.patchValue({});
     console.log('Formulario de tarjeta reiniciado');
   }
+  public months = [
+    { value: '01', label: 'Enero' },
+    { value: '02', label: 'Febrero' },
+    { value: '03', label: 'Marzo' },
+    { value: '04', label: 'Abril' },
+    { value: '05', label: 'Mayo' },
+    { value: '06', label: 'Junio' },
+    { value: '07', label: 'Julio' },
+    { value: '08', label: 'Agosto' },
+    { value: '09', label: 'Septiembre' },
+    { value: '10', label: 'Octubre' },
+    { value: '11', label: 'Noviembre' },
+    { value: '12', label: 'Diciembre' },
+  ];
 }

@@ -1,0 +1,10 @@
+@use "./variables.scss" as variables;
+
+
+@mixin font-base {
+  font-family: variables.$font-title-primary;
+  font-optical-sizing: variables.$font-optical-sizing;
+  font-weight: variables.$font-weight;
+  font-style: variables.$font-style;
+  color: variables.$black;
+}
