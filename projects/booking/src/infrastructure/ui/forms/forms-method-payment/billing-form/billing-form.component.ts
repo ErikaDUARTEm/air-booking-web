@@ -21,7 +21,7 @@ export class BillingFormComponent {
         state: ['', Validators.required],
         postalCode: [''],
         phoneCode: ['+57', [Validators.required]],
-        phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
+        phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/), Validators.minLength(10), Validators.maxLength(10)]],
         email: ['', [Validators.required, Validators.email]],
 
     });

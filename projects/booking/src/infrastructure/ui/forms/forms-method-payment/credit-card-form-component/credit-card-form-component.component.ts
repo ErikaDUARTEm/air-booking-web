@@ -21,26 +21,34 @@ export class CreditCardFormComponentComponent {
   public cardForm = this.formBuilder.group({
     holderName: ['', [Validators.required]],
     number: ['', [Validators.required, Validators.pattern(/^\d{16}$/)]],
-    expirationDate: ['', [Validators.required]],
+    expirationMonth: ['1', [Validators.required]],
+    expirationYear: ['1', [Validators.required]],
     cvv: ['', [Validators.required, Validators.pattern(/^\d{3}$/)]],
-    countryIssue: ['', [Validators.required]],
+    countryIssued: ['', [Validators.required]],
   });
 
   onInputChange(): void {
     const isValid = this.cardForm.valid;
-    const formData = this.cardForm.value;
+    const formData = {
+      ...this.cardForm.value,
+      expirationDate: `${this.cardForm.get('expirationMonth')?.value}/${this.cardForm.get('expirationYear')?.value}` // Combina mes y año
+    };
+
+    delete formData.expirationMonth;
+    delete formData.expirationYear;
+
     this.onFormValidityChange.emit({ isValid, formData });
   }
   resetForm(): void {
     this.cardForm.reset({
       holderName: "",
       number:"",
-      expirationDate:"",
+      expirationMonth: '',
+      expirationYear: '',
       cvv:"",
-      countryIssue:""
+      countryIssued:""
     });
     this.cardForm.patchValue({});
-    console.log('Formulario de tarjeta reiniciado');
   }
   public months = [
     { value: '01', label: 'Enero' },
