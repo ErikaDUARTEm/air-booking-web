@@ -17,7 +17,6 @@ export class PaymentUseCase{
       this.subscriptions = new Subscription();
     }
 
-
     execute(paymentData: IPaymentData): void {
       const billingData = this._state.payment.billingData.snapshot();
       const selectedMethod = this._state.payment.selectedMethod.snapshot();
@@ -39,8 +38,6 @@ export class PaymentUseCase{
       );
       console.log(paymentData.paymentDetails)
     }
-
-
     destroySubscriptions(): void {
       this.subscriptions.unsubscribe();
     }
