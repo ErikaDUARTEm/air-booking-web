@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { IFlight, IPassenger } from './../../../../../domain/model/seats.model';
+import { IFlight } from './../../../../../domain/model/seats.model';
+import { IPassenger } from '../../../../../domain/model/passenger.model';
+
 
 @Component({
   selector: 'lib-section-booking-seats',

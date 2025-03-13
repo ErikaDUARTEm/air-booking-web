@@ -26,7 +26,7 @@ export class PassangerContainerComponent implements OnInit{
   handleSubmit(passengers: IPassenger[]): void {
     console.log("Datos de pasajeros enviados:", passengers);
     this.savePassengersUseCase.savePassengers(passengers); 
-    this.router.navigate(['/seats']);
+    this.router.navigate(['booking/seats']);
   }
 
 

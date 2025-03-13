@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 
 import { BehaviorSubject } from 'rxjs';
-import { IFlight, IPassenger } from './../model/seats.model';
+// import { IFlight, IPassenger } from './../model/seats.model';
+import { IFlight } from './../model/seats.model';
 import { IState, StateFactory } from 'shared';
+import { IPassenger } from '../model/passenger.model';
+
 
 @Injectable({
     providedIn: 'root'
@@ -24,11 +27,7 @@ import { IState, StateFactory } from 'shared';
       type: 'return'
     });
   
-    private passengersSubject$ = new BehaviorSubject<IPassenger[]>([
-      { id: 'P1', name: 'Juan', lastName: 'Pérez', documentId: '123456789' },
-      { id: 'P2', name: 'María', lastName: 'García', documentId: '987654321' },
-      { id: 'P3', name: 'Carlos', lastName: 'López', documentId: '456789123' }
-    ]);
+    private passengersSubject$ = new BehaviorSubject<IPassenger[]>([]);
   
     public outboundFlightState: IState<IFlight>;
     public returnFlightState: IState<IFlight>;

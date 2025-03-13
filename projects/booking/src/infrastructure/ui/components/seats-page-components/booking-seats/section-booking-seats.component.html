@@ -4,8 +4,13 @@
       <!-- Información del pasajero actual -->
       <div class="main__passenger-info">
         <h3>Seleccionando asiento para:</h3>
-        <p>{{currentPassenger?.name}} {{currentPassenger?.lastName}}</p>
-        <p *ngIf="currentPassenger?.selectedSeat">Asiento seleccionado: <span class="main__selected-seat">{{currentPassenger?.selectedSeat}}</span></p>
+        <p>{{ currentPassenger?.name }} {{ currentPassenger?.lastName }}</p>
+        <p *ngIf="currentPassenger?.departureSeat">
+          Asiento de ida: <span class="main__selected-seat">{{ currentPassenger?.departureSeat }}</span>
+        </p>
+        <p *ngIf="currentPassenger?.returnSeat">
+          Asiento de regreso: <span class="main__selected-seat">{{ currentPassenger?.returnSeat }}</span>
+        </p>
       </div>
 
       <!-- Header con seat column labels -->
@@ -219,7 +224,7 @@
         <div class="main__passenger-indicators">
           <span *ngFor="let passenger of passengers; let i = index" 
                 [class.active]="passenger.id === currentPassenger?.id"
-                [class.completed]="passenger.selectedSeat">
+                [class.completed]="passenger.departureSeat && passenger.returnSeat">
             <span>{{i + 1}}</span>
           </span>
         </div>

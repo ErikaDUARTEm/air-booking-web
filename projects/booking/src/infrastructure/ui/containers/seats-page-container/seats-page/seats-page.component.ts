@@ -25,7 +25,7 @@ export class SeatsPageComponent implements OnInit {
   flight: { outbound: IFlight | null, return: IFlight | null } = { outbound: null, return: null };
   isRoundTrip = true; 
   
-  constructor(private flightSeatsService: FlightSeatsService, private router: Router) {} // Inyecta el Router
+  constructor(private flightSeatsService: FlightSeatsService, private router: Router) {}
   
   ngOnInit(): void {
     this.flightSeatsService.getOutboundFlight().subscribe(flight => {
@@ -58,7 +58,7 @@ export class SeatsPageComponent implements OnInit {
   confirmSeatSelection(): void {
     const success = this.flightSeatsService.selectSeat(this.currentFlightType, this.selectedSeat);
     if (success) {
-      console.log(`Asiento ${this.selectedSeat} confirmado`);
+      console.log(`Asiento ${this.selectedSeat} confirmado para el vuelo ${this.currentFlightType}`);
     } else {
       console.error(`No se pudo asignar el asiento ${this.selectedSeat}`);
     }
@@ -95,11 +95,13 @@ export class SeatsPageComponent implements OnInit {
         console.log(`Flight type changed to ${this.currentFlightType}`);
         console.log(this.flight)
       } else {
-        this.router.navigate(['/booking/payment']);
+        // this.router.navigate(['/booking/payment']);
+        console.log(this.flightSeatsService.getPassengers())
         console.log(this.flight)
       }
     } else {
-      this.router.navigate(['/booking/payment']);
+      // this.router.navigate(['/booking/payment']);
+      console.log(this.flightSeatsService.getPassengers())
       console.log(this.flight)
     }
   }

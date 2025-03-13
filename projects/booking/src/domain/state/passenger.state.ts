@@ -28,7 +28,7 @@ export class PassengerState {
     },
     passengers: {
       adult: 1,
-      children: 0,
+      children: 1,
       infants: 0,
     },
   });
