@@ -1,49 +1,77 @@
 <article class="fly-details">
+  <!-- Encabezado del vuelo -->
   <div class="fly-details__header-container">
     <div class="fly-details__image-container">
       <img src="city.webp" alt="Ciudad" width="80px" height="80px" class="fly-details__image" />
     </div>
     <section class="fly-details__header">
-      <h2 class="fly-details__title">{{ flyDetails()?.destination.name }}</h2>
+      <h2 class="fly-details__title">
+        {{ flyDetails()?.departureFlight?.destination || 'Destino desconocido' }}
+      </h2>
       <p class="fly-details__dates">
-        {{ flyDetails()?.dates.departure | date: 'MMM. dd' }} - {{ flyDetails()?.dates.return | date: 'MMM. dd' }}
+        {{ flyDetails()?.departureFlight?.departureTime | date: 'MMM dd, yyyy' }} - 
+        {{ flyDetails()?.returnFlight?.departureTime | date: 'MMM dd, yyyy' }}
       </p>
     </section>
   </div>
 
+  <!-- Información del vuelo -->
   <div class="fly-details__info">
     <p class="fly-details__route">
-      {{ flyDetails()?.origin.abbreviation }} · {{ flyDetails()?.dates.departure | date: 'h:mm a' }} →
-      {{ flyDetails()?.destination.abbreviation }} · {{ flyDetails()?.dates.return | date: 'h:mm a' }}
+      {{ flyDetails()?.departureFlight?.origin || 'N/A' }} · 
+      {{ flyDetails()?.departureFlight?.departureTime | date: 'h:mm a' }} →
+      {{ flyDetails()?.departureFlight?.destination || 'N/A' }} · 
+      {{ flyDetails()?.departureFlight?.arrivalTime | date: 'h:mm a' }}
+    </p>
+    <p class="fly-details__route">
+      {{ flyDetails()?.returnFlight?.origin || 'N/A' }} · 
+      {{ flyDetails()?.returnFlight?.departureTime | date: 'h:mm a' }} →
+      {{ flyDetails()?.returnFlight?.destination || 'N/A' }} · 
+      {{ flyDetails()?.returnFlight?.arrivalTime | date: 'h:mm a' }}
     </p>
   </div>
 
+  <!-- Información de Precios -->
   <section class="fly-details__pricing">
     <span class="fly-details__label">TARIFA AÉREA</span>
     <div class="fly-details__fare"> 
-      <span class="fly-details__value">Ida y vuelta ({{ flyDetails()?.passengers.adult }} adulto)</span>
-      <span class="fly-details__price">953.200 COP</span>
+      <span class="fly-details__value">
+        Ida y vuelta (1 adulto)
+      </span>
+      <span class="fly-details__price">
+        {{ (flyDetails()?.departureFlight?.prices + flyDetails()?.returnFlight?.prices) | currency: 'COP' }}
+      </span>
     </div>
 
     <div class="fly-details__extras">
       <span class="fly-details__label">EXTRAS DE VIAJE</span>
-      <span class="fly-details__value">Asiento Regular (4)</span>
-      <span class="fly-details__price">214.400 COP</span>
+      <span class="fly-details__value">
+        Asiento Regular (4)
+      </span>
+      <span class="fly-details__price">
+        {{ 214400 | currency: 'COP' }}
+      </span>
     </div>
 
     <div class="fly-details__subtotal">
       <span class="fly-details__label">Subtotal</span>
-      <span class="fly-details__price">1.167.600 COP</span>
+      <span class="fly-details__price">
+        {{ (flyDetails()?.departureFlight?.prices + flyDetails()?.returnFlight?.prices + 214400) | currency: 'COP' }}
+      </span>
     </div>
 
     <div class="fly-details__taxes">
       <span class="fly-details__label">Tasas e impuestos</span>
-      <span class="fly-details__price">752.050 COP</span>
+      <span class="fly-details__price">
+        {{ (flyDetails()?.departureFlight?.tax + flyDetails()?.returnFlight?.tax) | currency: 'COP' }}
+      </span>
     </div>
 
     <div class="fly-details__total">
       <span class="fly-details__label">Total</span>
-      <span class="fly-details__price">1.919.650 COP</span>
+      <span class="fly-details__price">
+        {{ (flyDetails()?.departureFlight?.prices + flyDetails()?.returnFlight?.prices + flyDetails()?.departureFlight?.tax + flyDetails()?.returnFlight?.tax + 214400) | currency: 'COP' }}
+      </span>
     </div>
   </section>
 </article>

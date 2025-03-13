@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { GetFlightDetailsUseCase } from '../../../../application/booking/get-fly-details.usecase';
 import { Observable } from 'rxjs';
-import { IFlightData } from '../../../../domain/model/passenger.model';
+import { IFlightSelection } from '../../../../domain/model/passenger.model';
 import { FlyDetailsComponent } from '../../components/fly-details/fly-details.component';
 import { AsyncPipe } from '@angular/common';
 
@@ -12,9 +12,12 @@ import { AsyncPipe } from '@angular/common';
 })
 export class DetailsContainerComponent implements OnInit {
   private readonly getFlightDetailsUseCase  = inject(GetFlightDetailsUseCase);
-  public flightData$!: Observable<IFlightData>;
+  public flightData$!: Observable<IFlightSelection>;
 
   ngOnInit() {
     this.flightData$ = this.getFlightDetailsUseCase.flightData$();
+    this.flightData$.subscribe(data => {
+      console.log('Datos del vuelo recibidos:', data);
+    });
   }
 }

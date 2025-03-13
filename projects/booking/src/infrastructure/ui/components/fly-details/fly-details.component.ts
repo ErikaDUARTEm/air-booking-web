@@ -1,14 +1,14 @@
 import { Component, input } from '@angular/core';
-import { IFlightData } from '../../../../domain/model/passenger.model';
-import { DatePipe } from '@angular/common';
+import { IFlightData, IFlightSelection } from '../../../../domain/model/passenger.model';
+import { CurrencyPipe, DatePipe } from '@angular/common';
 
 @Component({
   selector: 'lib-fly-details',
-  imports: [DatePipe],
+  imports: [DatePipe, CurrencyPipe],
   templateUrl: './fly-details.component.html',
   styleUrl: './fly-details.component.scss'
 })
 export class FlyDetailsComponent {
- public flyDetails = input<IFlightData>();
+ public flyDetails = input<IFlightSelection>();
 
 }
