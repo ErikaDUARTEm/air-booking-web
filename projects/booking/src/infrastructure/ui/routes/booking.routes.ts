@@ -3,6 +3,7 @@ import { ReservationLayoutComponent } from "../layouts/reservation-layout/reserv
 import { PaymentMethodContainerComponent } from "../containers/payment-method-container/payment-method-container.component";
 import { PassangerContainerComponent } from "../containers/passanger-container/passanger-container.component";
 import { FormLayoutComponent } from "../layouts/form-layout/form-layout.component";
+import { SeatsPageComponent } from "../containers/seats-page-container/seats-page/seats-page.component";
 
 export const bookingRoutes: Routes = [
   {
@@ -11,17 +12,29 @@ export const bookingRoutes: Routes = [
     children: [
       {
         path: 'payment',
-        component: PaymentMethodContainerComponent
+        component: FormLayoutComponent,
+        children: [
+          {
+            path: '',
+            component: PaymentMethodContainerComponent,
+          },
+        ],
       },
+
+      {
+        path: 'seats',
+        component: SeatsPageComponent,
+      },
+
       {
         path: 'passanger',
         component: FormLayoutComponent,
         children: [
           {
             path: '',
-            component: PassangerContainerComponent
+            component: PassangerContainerComponent,
           },
-        ]
+        ],
       },
     ],
   },

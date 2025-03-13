@@ -14,7 +14,6 @@ export class PaymentMethodContainerComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
     this._paymentUseCase.initSubscriptions();
-
   }
 
   onMethodSelected(method: 'CARD' | 'PSE' | null): void {

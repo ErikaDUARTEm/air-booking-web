@@ -2,6 +2,8 @@
  * Public API Surface of shared
  */
 
+export { AdminHeaderComponent } from './infrastructure/ui/components/admin-header/admin-header.component';
+
 export { StateFactory } from './domain/state/state.factory';
 export type { IState } from './domain/model/state.model';
 export { BodyLayoutComponent } from './infrastructure/ui/layouts/body-layout/body-layout.component';

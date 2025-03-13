@@ -1,6 +1,6 @@
 @use './../../styles/mixins' as mixins;
 @use './../../styles/variables' as variables;
-@use './../../../../../../shared/src/infrastructure/ui/styles/variables.scss' as variablesGlobales;
+@use './../../../../../../shared/src/infrastructure/ui/styles/variables.scss' as globalVariables;
 
 
 .sidenav {
@@ -23,10 +23,16 @@
         @include mixins.flex-style(column, nowrap, 45px);
     }
 
+    &__link {
+      text-decoration: none;
+      color: globalVariables.$white;
+      font-family: globalVariables.$secondary-font;
+    }
+
     &__menu-item {
         @include mixins.flex-style(column, nowrap, 0px);
-        @include mixins.font-style(variablesGlobales.$font-size-title-secondary, variablesGlobales.$font-weight-regular, variablesGlobales.$background-color);
-        font-family: variablesGlobales.$font-size-text-secondary;
+        @include mixins.font-style(globalVariables.$font-size-title-secondary, globalVariables.$font-weight-regular, globalVariables.$background-color);
+        font-family: globalVariables.$font-size-text-secondary;
         justify-content: space-between;
         align-items: center;
         cursor: pointer;

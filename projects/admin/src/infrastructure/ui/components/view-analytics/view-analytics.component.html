@@ -1,1 +1,11 @@
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis esse libero aperiam. Ullam quibusdam sint officiis reiciendis illum minus, pariatur quod fuga temporibus nobis ipsam, quae voluptatem animi labore dolore.</p>
+<lib-admin-header title="analísis de reservas"/>
+<section class="cards">
+  @for (item of cards(); track $index) {
+    <lib-analitical-card [carData]="item" />
+  }
+</section>
+
+<section class="charts">
+  <lib-canvas-card chartHeader="reservas por estado" [chartData]="chartMetrics" isBar="true" />
+  <lib-canvas-card chartHeader="distribucion de estados" [chartData]="chartMetrics" isBar="false" />
+</section>

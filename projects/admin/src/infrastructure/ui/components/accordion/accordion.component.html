@@ -21,11 +21,11 @@
                         </div>
                     </div>
                 </section>
-        
+
                 <span class="accordion__icon">
                     <img src="admin/arrow-bottom.svg" alt="calendar" class="arrow-bottom">
                 </span>
-        
+
                 <section class="accordion__destination">
                     <h3 class="accordion__destination-name">{{data.origin}}</h3>
                     <div class="accordion__destination-details">
@@ -36,12 +36,12 @@
                     <h3 class="accordion__destination-name">{{data.destination}}</h3>
                 </section>
             </summary>
-        
+
             <lib-details [detailsData]="data"></lib-details>
-        
+
         </details>
     }
-    
+
 }@else {
     <h1>No hay reservas realizadas</h1>
 }

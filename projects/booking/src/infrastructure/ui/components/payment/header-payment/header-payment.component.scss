@@ -1,3 +1,5 @@
+@use "../../../../../../../shared/src/infrastructure/ui/styles/variables.scss" as variables;
+@use "../../../styles/mixins.scss" as mixin;
 .header {
   display: flex;
   align-items: center;
@@ -18,7 +20,7 @@
   }
   &__subtitle {
     font-size: 14px;
-    color: #666;
+    color: variables.$gray;
     margin: 0;
     padding-bottom: 10px;
   }
@@ -26,7 +28,8 @@
   &__title {
     font-size: 25px;
     font-weight: bold;
-    color: #333;
+    color: variables.$black;
     margin: 0;
+    @include mixin.font-base;
   }
 }

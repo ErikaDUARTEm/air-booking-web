@@ -1,4 +1,5 @@
-
+@use "../../../../../../../shared/src/infrastructure/ui/styles/variables.scss" as variables;
+@use "../../../styles/mixins.scss" as mixin;
 .payment-method {
   &__back {
     margin-bottom: 20px;
@@ -10,8 +11,8 @@
     gap: 8px;
     background: none;
     border: none;
-    font-size: 14px;
-    color: #0073e6;
+    font-size: variables.$font-size-text-secondary;
+    color: variables.$blue-light;
     cursor: pointer;
 
     &:hover {
@@ -22,8 +23,7 @@
     max-width: 600px;
     margin: 20px auto;
     padding: 20px;
-    font-family: Arial, sans-serif;
-    background-color: #ffffff;
+    background-color: variables.$white;
     padding-bottom: 0;
     margin-bottom: 0;
   }
@@ -33,21 +33,26 @@
     padding: 20px;
     padding-bottom: 0;
     margin-bottom: 0;
-
-    h2 {
-      font-size: 25px;
-      color: #0e4091;
-    }
-    p {
-      color: #999;
-      font-size: 14px;
-    }
   }
+  &__text1{
+    font-size: 25px;
+    @include mixin.font-base;
+    color: variables.$blue-dark;
+    padding-bottom: 20px;
+  }
+  &__text2{
+    color: #999;
+    font-family: variables.$secondary-font;
+    font-size: variables.$font-size-label;
+    font-weight: variables.$font-weight-semibold;
+  }
+
   &__option {
     margin-bottom: 30px;
   }
   &__title {
-    font-size: 18px;
+    font-size: variables.$font-size-paragraph;
+    @include mixin.font-base;
   }
   &__header {
     display: flex;
@@ -64,12 +69,14 @@
 
   &__installments {
     display: flex;
+    font-family: variables.$secondary-font;
     align-items: center;
-    font-size: 14px;
-    width: 120px;
-    gap: 10px;
-    color: #444343;
     font-size: 12px;
+    width: 150px;
+    min-width: 150px;
+    gap: 10px;
+    color: variables.$black;
+    font-weight: variables.$font-weight-semibold;
     border: 2px solid rgba(190, 186, 186, 0.678);
     padding: 5px;
     border-radius: 10px;
@@ -92,7 +99,7 @@
 
     &:hover {
       background: #f1f1f1;
-      border: 1px solid #ccc;
+      border: 1px solid #ddd;
     }
   }
 
@@ -112,6 +119,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    font-family: variables.$secondary-font;
+    color: variables.$blue-dark;
+    font-size: variables.$font-size-label;
   }
   &__card-container {
     display: flex;
@@ -137,10 +147,12 @@
     cursor: pointer;
   }
   &__disclaimer {
-    font-size: 12px;
     color: #999;
     margin-top: 10px;
     text-align: left;
+    font-weight: bold;
+    font-size: variables.$font-size-error;
+    font-family: variables.$secondary-font;
   }
 
   &__divider {
@@ -160,11 +172,13 @@
     font-size: 14px;
     font-weight: bold;
     color: #0e4091;
+    font-family: variables.$secondary-font;
   }
 
   &__pse-description {
     font-size: 12px;
-    color: #666;
+    font-weight: bold;
+    color: #999;
     margin: 0;
   }
   &__button {

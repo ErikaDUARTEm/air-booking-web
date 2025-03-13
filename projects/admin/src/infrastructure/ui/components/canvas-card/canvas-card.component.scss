@@ -1,0 +1,18 @@
+@use '../../../../../../shared/src/infrastructure/ui/styles/variables.scss' as global;
+
+.chart{
+  width: 100%;
+  background-color: global.$background-color;
+  font-size: calc(global.$font-size-label / 1.25);
+  padding: 2rem;
+
+  &__header{
+    font-family: global.$primary-font;
+    font-weight: global.$font-weight-semibold;
+    margin-bottom: global.$spacing-md;
+  }
+
+  &__content{
+  width: 100%;
+  }
+}

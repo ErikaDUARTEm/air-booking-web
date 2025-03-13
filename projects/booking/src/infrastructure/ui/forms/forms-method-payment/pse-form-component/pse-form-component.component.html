@@ -5,7 +5,7 @@
       <div class="pse-form__radio-group">
         <label>
           Tipo de Cliente:
-          <input type="radio" name="clientType" value="natural" />
+          <input type="radio" name="clientType" value="natural" checked/>
           Persona Natural
         </label>
         <label>
@@ -21,8 +21,8 @@
           aria-required="true" />
         <div class="pse-form__error-message">
           <small *ngIf="pseForm.get('holderName')?.touched ? pseForm.get('holderName')?.errors?.['required'] : null">
-            <span><img src="required.png" width="15px" alt="Este campo es requerido"> El nombre del titular es
-              obligatorio.</span>
+            <img src="required.png" width="15px" alt="Este campo es requerido"> El nombre del titular es
+              obligatorio.
           </small>
         </div>
       </div>
@@ -34,12 +34,12 @@
           aria-required="true" />
         <div class="pse-form__error-message">
           <small *ngIf="pseForm.get('email')?.touched ? pseForm.get('email')?.errors?.['required'] : null">
-            <span><img src="required.png" width="15px" alt="Este campo es requerido">El correo electrónico es
-              obligatorio.</span>
+            <img src="required.png" width="15px" alt="Este campo es requerido">El correo electrónico es
+              obligatorio.
           </small>
           <small *ngIf="pseForm.get('email')?.touched ? pseForm.get('email')?.errors?.['email'] : null">
-            <span><img src="required.png" width="15px" alt="Este campo es requerido"> Debe ingresar un correo
-              electrónico válido.</span>
+            <img src="required.png" width="15px" alt="Este campo es requerido"> Debe ingresar un correo
+              electrónico válido.
           </small>
         </div>
       </div>
