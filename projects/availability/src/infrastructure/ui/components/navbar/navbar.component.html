@@ -49,7 +49,7 @@
         >
       </button>
     </div>
-    <button class="header__nav-user-login">
+    <a [routerLink]="['/users/login']" aria-label="Iniciar Sesión" class="header__nav-user-login">
       <svg
         focusable="false"
         aria-hidden="true"
@@ -61,6 +61,6 @@
         ></path>
       </svg>
       <span>Iniciar sesión</span>
-    </button>
+    </a>
   </div>
 </nav>

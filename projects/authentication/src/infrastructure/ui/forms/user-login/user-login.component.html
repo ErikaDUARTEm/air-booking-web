@@ -1,1 +1,32 @@
-<p>user-login works!</p>
+<div class="login">
+    <div class="logincontainer">
+      <a class="logo" [routerLink]="['/']" aria-label="Volver al inicio">
+        <img
+          src="home/logo.png"
+          alt="AirSofka - Volver al inicio"
+          class="logo__image"
+          role="img"
+          aria-hidden="false"
+        />
+      </a>      
+      <h2 class="logintitle">Bienvenido</h2>
+      <p class="loginsubtitle">Ingrese su información de inicio de sesión de AirSofka</p>
+  
+      <form class="loginform">
+        <label class="loginlabel" for="email">Correo Electrónico*</label>
+        <input type="email" id="email" class="logininput" placeholder="Ingrese su correo electrónico" />
+  
+        <label class="loginlabel" for="password">Contraseña*</label>
+        <input type="password" id="email" class="logininput" placeholder="Ingrese su contraseña" />
+  
+        <a href="http://localhost:8080/oauth2/authorization/google" aria-label="Iniciar Sesión" class="google-login-button">
+          <img src="https://images-ext-1.discordapp.net/external/jjt61Pvt2moB-_xtns46TatVBfXgsoxCJLBTW469fQ8/https/upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%2522G%2522_logo.svg/768px-Google_%2522G%2522_logo.svg.png?format=webp&quality=lossless&width=627&height=627" alt="Google" class="google-login-button__image" />
+          Iniciar sesión con Google
+        </a>
+
+        <a type="submit" class="loginbutton">Iniciar Sesión</a>
+      </form>
+  
+      <p class="loginregister">¿No tiene una cuenta? <a href="users/register" class="login__link">Regístrese</a></p>
+    </div>
+  </div>
