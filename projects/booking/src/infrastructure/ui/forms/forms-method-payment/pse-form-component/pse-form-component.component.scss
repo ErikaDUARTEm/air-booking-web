@@ -9,12 +9,14 @@
   max-width: 600px;
   margin: 0 auto;
   font-size: 1.4rem;
-  font-family: Arial, sans-serif;
+  @include mixin.font-base;
 
   &__form-group {
     margin-bottom: 1.5rem;
   }
-
+  span{
+    color: variables.$red;
+  }
   &__error-message {
     color: variables.$gray;
     margin-top: 0.5rem;
@@ -33,8 +35,8 @@
     align-items: center;
 
     label {
-      font-size: 12px;
-      color: #333;
+      font-size: 14px;
+      color: variables.$black;
       display: flex;
       align-items: center;
       gap: 5px;
@@ -55,6 +57,7 @@
     label {
       font-size: 1.4rem;
       margin-bottom: 0.5rem;
+      font-weight: 400;
     }
 
     input {

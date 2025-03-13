@@ -24,7 +24,7 @@ export class CreditCardFormComponentComponent {
     expirationMonth: ['1', [Validators.required]],
     expirationYear: ['1', [Validators.required]],
     cvv: ['', [Validators.required, Validators.pattern(/^\d{3}$/)]],
-    countryIssue: ['', [Validators.required]],
+    countryIssued: ['', [Validators.required]],
   });
 
   onInputChange(): void {
@@ -46,7 +46,7 @@ export class CreditCardFormComponentComponent {
       expirationMonth: '',
       expirationYear: '',
       cvv:"",
-      countryIssue:""
+      countryIssued:""
     });
     this.cardForm.patchValue({});
   }

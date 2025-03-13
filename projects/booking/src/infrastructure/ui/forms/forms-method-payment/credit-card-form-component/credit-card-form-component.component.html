@@ -73,12 +73,12 @@
       </div>
     </div>
       <div class="card-form__form-group">
-        <label for="countryIssue">País de emisión de la tarjeta<span>*</span></label>
-        <input id="countryIssue" formControlName="countryIssue" type="text" placeholder="País de emisión de la tarjeta"
+        <label for="countryIssued">País de emisión de la tarjeta<span>*</span></label>
+        <input id="countryIssued" formControlName="countryIssued" type="text" placeholder="País de emisión de la tarjeta"
           aria-required="true" />
         <div class="card-form__error-message">
           <small
-            *ngIf="cardForm.get('countryIssue')?.touched ? cardForm.get('countryIssue')?.errors?.['required'] : null">
+            *ngIf="cardForm.get('countryIssued')?.touched ? cardForm.get('countryIssued')?.errors?.['required'] : null">
             <span><img src="required.png" width="15px" alt="Este campo es requerido"></span> El país de emisión de la
             tarjeta es obligatorio.
           </small>
