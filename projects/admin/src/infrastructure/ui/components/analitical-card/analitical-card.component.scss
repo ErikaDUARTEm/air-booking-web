@@ -1,0 +1,53 @@
+@use '../../../../../../shared/src/infrastructure/ui/styles/variables.scss' as global;
+.card {
+  width: 32rem;
+  height: 8rem;
+  font-family: global.$secondary-font;
+  display: grid;
+  grid-template-columns: 1;
+  grid-template-rows: 1;
+  gap: global.$spacing-md;
+  padding: .25rem .75rem;
+  border-radius: global.$border-radius;
+  box-shadow:0px 4px 6px global.$shadow-color;
+
+  &__header{
+    color: global.$gray;
+    &__content{
+      font-size: calc(global.$font-size-label / 1.25);
+
+    }
+  }
+  &__icon{
+    font-size: global.$font-size-button;
+  }
+
+  &__wrapper{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 25% auto;
+  }
+
+  &__content{
+    width: 100%;
+    display: grid;
+    gap: global.$spacing-sm;
+    margin-block: .5rem;
+
+    &__item{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+
+
+    }
+
+    &__text{
+      font-size: calc(global.$font-size-paragraph * 1.25);
+      font-weight: global.$font-weight-bold;
+      letter-spacing: .25rem;
+
+    }
+
+  }
+}

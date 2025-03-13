@@ -4,10 +4,13 @@ import { GetReservationUseCase } from '../../../../application/get-reservations.
 import { Observable } from 'rxjs';
 import { IReservationData } from '../../../../domain/model/reservation.model';
 import { AsyncPipe } from '@angular/common';
+import { AdminHeaderComponent } from 'shared';
+
+
 
 @Component({
     selector: 'lib-reserva-container',
-    imports: [AccordionComponent, AsyncPipe],
+    imports: [AccordionComponent, AsyncPipe, AdminHeaderComponent],
     templateUrl: './reserva-container.component.html',
 })
 export class ReservaContainerComponent implements OnInit {

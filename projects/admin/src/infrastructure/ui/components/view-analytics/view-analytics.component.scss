@@ -1,3 +1,16 @@
-.text{
-  text-align: center;
+@use '../../../../../../shared/src/infrastructure/ui/styles/variables.scss' as global;
+
+.cards{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: global.$spacing-base;
+  margin-bottom: 4rem;
+}
+
+.charts{
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: global.$spacing-base;
+  margin-bottom: 4rem;
 }

@@ -10,6 +10,4 @@ import { CommonModule } from '@angular/common';
 })
 export class AdminLayoutComponent {
 
-  @Input() title: string ='Titulo de ventana';
-
 }

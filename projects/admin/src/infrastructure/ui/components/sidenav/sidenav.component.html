@@ -7,7 +7,7 @@
         <menu class="sidenav__menu" role="menu" aria-label="Menu principal de navegación del panel de administración">
             @for(item of listMenu; track $index){
             <li class="sidenav__menu-item" role="menuitem">
-                <a>{{item.title}}</a>
+                <a [routerLink]="item.path"  class="sidenav__link">{{item.title}}</a>
             </li>
             }
         </menu>
