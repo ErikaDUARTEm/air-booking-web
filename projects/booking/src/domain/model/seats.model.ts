@@ -11,7 +11,7 @@ export interface ISeat {
   seatNumber: string;
 	row: number;
 	column: string,
-  type: 'Business Class' | 'Economy Extra' | 'Exit' | 'Favorable' | 'Regular' | 'unavailable';
+  type: 'businessclass' | 'economyextra' | 'exit' | 'favorable' | 'regular' | 'unavailable';
   price?: number;
   isAvailable: boolean;
   passenger?: string;

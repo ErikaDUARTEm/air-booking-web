@@ -24,10 +24,8 @@ export class FlightSeatsService {
 
 
   getAvailableSeats(aggregateId: string): Observable<any> {
-    const url = 'http://localhost:8080/api/seat';
-    const body = { aggregateId };
-  
-    return this._http.get<any>(url,  { params: body });
+    const url = `http://localhost:8080/api/seat/${aggregateId}`;
+    return this._http.get<any>(url);
   }
   
   
@@ -39,131 +37,39 @@ export class FlightSeatsService {
     
   }
 
-  // private initializeFlightSeats(flight: IFlight): void {
-  //   const businessRows = [1, 2, 3, 4];
-  //   const economyRows = [5, 6, 7, 8];
-  //   const favorableRows = [9, 10, 11];
-  //   const emergencyRows = [17, 18];
-  //   const favorableRows2 = [19, 20];
-  //   const regularRows = Array.from({ length: 34 - 21 + 1 }, (_, i) => i + 21);
-
-  //   const allColumns = ['A', 'B', 'C', 'D', 'E', 'F'];
-  //   const unavailableSeats = ['21C', '23F', '25A', '26A', '26B', '27C', '28A'];
-
-  //   // Business class seats
-  //   businessRows.forEach((row) => {
-  //     allColumns.forEach((col) => {
-  //       const seatId = `${row}${col}`;
-  //       flight.seats[seatId] = {
-  //         id: seatId,
-  //         type: 'bussiness',
-  //         price: 0,
-  //         isAvailable: !unavailableSeats.includes(seatId),
-  //       };
-  //     });
-  //   });
-
-  //   // Economy class seats
-  //   economyRows.forEach((row) => {
-  //     allColumns.forEach((col) => {
-  //       const seatId = `${row}${col}`;
-  //       flight.seats[seatId] = {
-  //         id: seatId,
-  //         type: 'economy',
-  //         price: 15,
-  //         isAvailable: !unavailableSeats.includes(seatId),
-  //       };
-  //     });
-  //   });
-
-  //   // Favorable class seats (9 - 11)
-  //   favorableRows.forEach((row) => {
-  //     allColumns.forEach((col) => {
-  //       const seatId = `${row}${col}`;
-  //       flight.seats[seatId] = {
-  //         id: seatId,
-  //         type: 'favorable',
-  //         price: 10,
-  //         isAvailable: !unavailableSeats.includes(seatId),
-  //       };
-  //     });
-  //   });
-
-  //   // Emergency exit seats (17, 18)
-  //   emergencyRows.forEach((row) => {
-  //     allColumns.forEach((col) => {
-  //       const seatId = `${row}${col}`;
-  //       flight.seats[seatId] = {
-  //         id: seatId,
-  //         type: 'emergency',
-  //         price: 20,
-  //         isAvailable: true,
-  //       };
-  //     });
-  //   });
-
-  //   // Favorable class seats (19, 20)
-  //   favorableRows2.forEach((row) => {
-  //     allColumns.forEach((col) => {
-  //       const seatId = `${row}${col}`;
-  //       flight.seats[seatId] = {
-  //         id: seatId,
-  //         type: 'favorable',
-  //         price: 10,
-  //         isAvailable: true,
-  //       };
-  //     });
-  //   });
-
-  //   // Regular class seats (21 - 33)
-  //   regularRows.forEach((row) => {
-  //     allColumns.forEach((col) => {
-  //       const seatId = `${row}${col}`;
-  //       flight.seats[seatId] = {
-  //         id: seatId,
-  //         type: 'regular',
-  //         price: 5,
-  //         isAvailable: !unavailableSeats.includes(seatId),
-  //       };
-  //     });
-  //   });
-
-  //   if (flight.type === 'outbound') {
-  //     this._state.store().outboundFlight.set(flight);
-  //   } else {
-  //     this._state.store().returnFlight.set(flight);
-  //   }
-  // }
-
   initializeSeatsWithRealData(aggregateId: string, flightType: 'outbound' | 'return'): void {
-    this.getAvailableSeats(aggregateId).subscribe(response => {
-      const seats = response.seats;
-      const flight: IFlight = {
-        id: aggregateId,
-        type: flightType,
-        flightNumber: response.flightNumber || '',
-        aircraft: response.aircraft || '',
-        seats: {}
-      };
-
-      seats.forEach((seat: any) => {
-        flight.seats[seat.seatId] = {
-          id: seat.seatId,
-          row: seat.row,
-          column: seat.column,
-          seatNumber: seat.seatNumber,
-          type: seat.seatClass.toLowerCase(),
-          price: seat.price,
-          isAvailable: seat.isAvailable,
+    this.getAvailableSeats(aggregateId).subscribe({
+      next: (response) => {
+        const seats = response.seats;
+        const flight: IFlight = {
+          id: aggregateId,
+          type: flightType,
+          flightNumber: response.flightNumber || '',
+          aircraft: response.aircraft || '',
+          seats: {}
         };
-      });
-
-      if (flightType === 'outbound') {
-        this._state.store().outboundFlight.set(flight);
-        console.log(this._state.store().outboundFlight.snapshot());
-      } else {
-        this._state.store().returnFlight.set(flight);
-        console.log(this._state.store().returnFlight.snapshot());
+  
+        seats.forEach((seat: any) => {
+          const seatId = seat.seatNumber; // Usa seatNumber como seatId
+          flight.seats[seatId] = {
+            id: seatId,
+            row: seat.row,
+            column: seat.column,
+            seatNumber: seat.seatNumber,
+            type: seat.seatClass?.toLowerCase() || 'regular',
+            price: seat.price || 0,
+            isAvailable: seat.isAvailable !== false,
+          };
+        });
+  
+        if (flightType === 'outbound') {
+          this._state.store().outboundFlight.set(flight);
+        } else {
+          this._state.store().returnFlight.set(flight);
+        }
+      },
+      error: (err) => {
+        console.error(`Error loading seat data for ${flightType}:`, err);
       }
     });
   }
@@ -196,53 +102,64 @@ export class FlightSeatsService {
     const flight = flightType === 'outbound'
       ? this._state.store().outboundFlight.snapshot()
       : this._state.store().returnFlight.snapshot();
-
+  
     const seat = flight.seats[seatId];
+    
+    // Asegúrate de que el asiento exista y esté disponible
     if (!seat || !seat.isAvailable) {
+      console.error(`Seat ${seatId} is not available`);
       return false;
     }
-
+  
     const passengers = this._passengerState.store().allPassengers.snapshot();
     const currentPassenger = passengers[this.currentPassengerIndex];
-
+  
     if (!currentPassenger) {
       console.error('No hay un pasajero actual definido.');
       return false;
     }
     
+    // Liberar el asiento antiguo si existe
     if (flightType === 'outbound' && currentPassenger.departureSeat) {
-      const oldSeat = flight.seats[currentPassenger.departureSeat];
+      const oldSeatId = currentPassenger.departureSeat;
+      const oldSeat = flight.seats[oldSeatId];
       if (oldSeat) {
         oldSeat.passenger = undefined;
         oldSeat.isAvailable = true;
       }
     } else if (flightType === 'return' && currentPassenger.returnSeat) {
-      const oldSeat = flight.seats[currentPassenger.returnSeat];
+      const oldSeatId = currentPassenger.returnSeat;
+      const oldSeat = flight.seats[oldSeatId];
       if (oldSeat) {
         oldSeat.passenger = undefined;
         oldSeat.isAvailable = true;
       }
     }
-
+  
+    // Asignar el nuevo asiento
     if (flightType === 'outbound') {
       currentPassenger.departureSeat = seatId;
     } else {
       currentPassenger.returnSeat = seatId;
     }
+    
+    // Marcar el asiento como ocupado
     seat.passenger = currentPassenger.id;
     seat.isAvailable = false;
-
   
+    // Actualizar el estado de los pasajeros
     const updatedPassengers = [...passengers];
-    updatedPassengers[this.currentPassengerIndex] = currentPassenger;
+    updatedPassengers[this.currentPassengerIndex] = { ...currentPassenger };
     this._passengerState.store().allPassengers.set(updatedPassengers);
-
+  
+    // Actualizar el estado del vuelo
     if (flightType === 'outbound') {
       this._state.store().outboundFlight.set({ ...flight });
     } else {
       this._state.store().returnFlight.set({ ...flight });
     }
-
+  
+    console.log(`Seat ${seatId} assigned to passenger ${currentPassenger.id}`);
     return true;
   }
 

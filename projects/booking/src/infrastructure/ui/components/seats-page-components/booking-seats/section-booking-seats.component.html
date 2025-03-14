@@ -45,7 +45,7 @@
           <div class="main__seat-row">
             <div class="main__col-left">
               <ng-container *ngFor="let col of ['A', 'B']">
-                <div class="main__seat" [ngClass]="getSeatClass(row, col)">
+                <div class="main__seat main__seat--businessclass" [ngClass]="getSeatClass(row, col)">
                   <button 
                     [disabled]="!isSeatAvailable(row, col)"
                     [class.selected]="isSeatSelected(row, col)"
@@ -58,7 +58,7 @@
             <div class="main__col-number">{{ row }}</div>
             <div class="main__col-right">
               <ng-container *ngFor="let col of ['E', 'F']">
-                <div class="main__seat" [ngClass]="getSeatClass(row, col)">
+                <div class="main__seat main__seat--businessclass" [ngClass]="getSeatClass(row, col)">
                   <button 
                     [disabled]="!isSeatAvailable(row, col)"
                     [class.selected]="isSeatSelected(row, col)"
@@ -78,11 +78,11 @@
         </div>
 
         <!-- Clase Económica (Economy) -->
-        <ng-container *ngFor="let row of [5, 6, 7, 8, 9, 10, 11]">
+        <ng-container *ngFor="let row of [5, 6, 7, 8]">
           <div class="main__seat-row">
             <div class="main__col-left">
               <ng-container *ngFor="let col of ['A', 'B', 'C']">
-                <div class="main__seat" [ngClass]="getSeatClass(row, col)">
+                <div class="main__seat main__seat--economy" [ngClass]="getSeatClass(row, col)">
                   <button 
                     [disabled]="!isSeatAvailable(row, col)"
                     [class.selected]="isSeatSelected(row, col)"
@@ -95,7 +95,7 @@
             <div class="main__col-number">{{ row }}</div>
             <div class="main__col-right">
               <ng-container *ngFor="let col of ['D', 'E', 'F']">
-                <div class="main__seat" [ngClass]="getSeatClass(row, col)">
+                <div class="main__seat main__seat--economy" [ngClass]="getSeatClass(row, col)">
                   <button 
                     [disabled]="!isSeatAvailable(row, col)"
                     [class.selected]="isSeatSelected(row, col)"
@@ -108,12 +108,43 @@
           </div>
         </ng-container>
 
+
+        <ng-container *ngFor="let row of [9, 10, 11]">
+          <div class="main__seat-row">
+            <div class="main__col-left">
+              <ng-container *ngFor="let col of ['A', 'B', 'C']">
+                <div class="main__seat main__seat--favorable" [ngClass]="getSeatClass(row, col)">
+                  <button 
+                    [disabled]="!isSeatAvailable(row, col)"
+                    [class.selected]="isSeatSelected(row, col)"
+                    (click)="onSeatClick(row, col)">
+                    <img *ngIf="getSeatPrice(row, col) > 0" src="./booking/dollar-sign.svg" alt="Favorable">
+                  </button>
+                </div>
+              </ng-container>
+            </div>
+            <div class="main__col-number">{{ row }}</div>
+            <div class="main__col-right">
+              <ng-container *ngFor="let col of ['D', 'E', 'F']">
+                <div class="main__seat  main__seat--favorable" [ngClass]="getSeatClass(row, col)">
+                  <button 
+                    [disabled]="!isSeatAvailable(row, col)"
+                    [class.selected]="isSeatSelected(row, col)"
+                    (click)="onSeatClick(row, col)">
+                    <img *ngIf="getSeatPrice(row, col) > 0" src="./booking/dollar-sign.svg" alt="Favorable">
+                  </button>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </ng-container>
+
         <!-- Asientos de emergencia -->
         <ng-container *ngFor="let row of [17, 18]">
           <div class="main__seat-row">
             <div class="main__col-left">
               <ng-container *ngFor="let col of ['A', 'B', 'C']">
-                <div class="main__seat" [ngClass]="getSeatClass(row, col)">
+                <div class="main__seat main__seat--emergency" [ngClass]="getSeatClass(row, col)">
                   <button 
                     [disabled]="!isSeatAvailable(row, col)"
                     [class.selected]="isSeatSelected(row, col)"
@@ -126,7 +157,7 @@
             <div class="main__col-number">{{ row }}</div>
             <div class="main__col-right">
               <ng-container *ngFor="let col of ['D', 'E', 'F']">
-                <div class="main__seat" [ngClass]="getSeatClass(row, col)">
+                <div class="main__seat main__seat--emergency" [ngClass]="getSeatClass(row, col)">
                   <button 
                     [disabled]="!isSeatAvailable(row, col)"
                     [class.selected]="isSeatSelected(row, col)"
@@ -144,7 +175,7 @@
           <div class="main__seat-row">
             <div class="main__col-left">
               <ng-container *ngFor="let col of ['A', 'B', 'C']">
-                <div class="main__seat" [ngClass]="getSeatClass(row, col)">
+                <div class="main__seat main__seat--favorable" [ngClass]="getSeatClass(row, col)">
                   <button 
                     [disabled]="!isSeatAvailable(row, col)"
                     [class.selected]="isSeatSelected(row, col)"
@@ -157,7 +188,7 @@
             <div class="main__col-number">{{ row }}</div>
             <div class="main__col-right">
               <ng-container *ngFor="let col of ['D', 'E', 'F']">
-                <div class="main__seat" [ngClass]="getSeatClass(row, col)">
+                <div class="main__seat  main__seat--favorable" [ngClass]="getSeatClass(row, col)">
                   <button 
                     [disabled]="!isSeatAvailable(row, col)"
                     [class.selected]="isSeatSelected(row, col)"
@@ -171,11 +202,11 @@
         </ng-container>
 
         <!-- Asientos regulares -->
-        <ng-container *ngFor="let row of [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32]">
+        <ng-container *ngFor="let row of [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33]">
           <div class="main__seat-row">
             <div class="main__col-left">
               <ng-container *ngFor="let col of ['A', 'B', 'C']">
-                <div class="main__seat main__seat--premium">
+                <div class="main__seat main__seat--regular">
                   <button 
                     [disabled]="!isSeatAvailable(row, col)"
                     [class.selected]="isSeatSelected(row, col)"
@@ -187,7 +218,7 @@
             <div class="main__col-number">{{ row }}</div>
             <div class="main__col-right">
               <ng-container *ngFor="let col of ['D', 'E', 'F']">
-                <div class="main__seat aaaaa" [ngClass]="getSeatClass(row, col)">
+                <div class="main__seat main__seat--regular" [ngClass]="getSeatClass(row, col)">
                   <button 
                     [disabled]="!isSeatAvailable(row, col)"
                     [class.selected]="isSeatSelected(row, col)"

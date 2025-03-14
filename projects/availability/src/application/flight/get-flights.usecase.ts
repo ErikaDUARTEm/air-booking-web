@@ -1,7 +1,7 @@
 import { inject, Injectable } from "@angular/core";
 import { GetFlightsService } from "../../infrastructure/services/get-flights.service";
 import { State } from "../../domain/state";
-import { Observable, Subscription, tap } from "rxjs";
+import { map, Observable, Subscription, tap } from "rxjs";
 import { IFlight, IFlightSelected, IRequiredFlight } from "../../domain/model/flight.model";
 
 
@@ -29,6 +29,20 @@ export class GetFlightsUsecase {
   flightDestinationSelected$(): Observable<IFlightSelected> {
     return this._state.flights.flightDestinationSelected.$() as Observable<IFlightSelected>;
   }
+
+
+  getFlightOriginSelectedId(): Observable<string> {
+    return this.flightOriginSelected$().pipe(
+      map(flight => flight.flightId)
+    );
+  }
+  
+  getFlightDestinationSelectedId(): Observable<string> {
+    return this.flightDestinationSelected$().pipe(
+      map(flight => flight.flightId)
+    );
+  }
+
   //#endregion
 
   //#region Public Methods

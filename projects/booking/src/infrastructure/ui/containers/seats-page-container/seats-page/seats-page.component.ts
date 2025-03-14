@@ -1,7 +1,8 @@
+
 import { SelectSeatUseCase } from './../../../../../application/booking/select-seat.usecase';
 import { IFlight } from './../../../../../domain/model/seats.model';
 import { FlightSeatsService } from '../../../../services/services/seats.service';
-import { Router } from '@angular/router'; // Importa el Router para la redirección
+import { Router } from '@angular/router'; 
 
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -11,6 +12,7 @@ import { SectionSeatsContentComponent } from './../seats-content/section-seats-c
 import { SeatsFooterContentComponent } from "../seats-footer-content/seats-footer-content.component";
 import { SeatsDetailsContentComponent } from "../seats-details-content/seats-details-content.component";
 import { SeatsModalContentComponent } from "../seats-modal-content/seats-modal-content.component";
+import { GetFlightsUsecase } from 'availability';
 
 @Component({
   selector: 'lib-seats-page',
@@ -36,6 +38,7 @@ export class SeatsPageComponent implements OnInit {
 
   constructor(
     private flightSeatsService: FlightSeatsService,
+    private getFlightsUseCase: GetFlightsUsecase,
     private selectSeatUseCase: SelectSeatUseCase,
     private router: Router
   ) {}
@@ -57,20 +60,22 @@ export class SeatsPageComponent implements OnInit {
   // }
 
   ngOnInit(): void {
-    const aggregateId = '680166f2-495f-466c-8bbd-58c35d35df07'; // Reemplaza con el ID real del vuelo
-    this.selectSeatUseCase.initializeSeats(aggregateId, 'outbound');
-    this.selectSeatUseCase.initializeSeats(aggregateId, 'return');
-
+    this.getFlightsUseCase.getFlightOriginSelectedId().subscribe(aggregateId => {
+      this.selectSeatUseCase.initializeSeats(aggregateId, 'outbound');
+    });
+  
+    this.getFlightsUseCase.getFlightDestinationSelectedId().subscribe(aggregateId => {
+      this.selectSeatUseCase.initializeSeats(aggregateId, 'return');
+    });
+  
     this.flightSeatsService.getOutboundFlight().subscribe(flight => {
       this.flight.outbound = flight;
     });
-
+  
     this.flightSeatsService.getReturnFlight().subscribe(flight => {
       this.flight.return = flight;
     });
-
-    console.log(this.flight);
-
+  
     if (!this.flight.return) {
       this.isRoundTrip = false;
     }
@@ -91,7 +96,6 @@ export class SeatsPageComponent implements OnInit {
     const success = this.flightSeatsService.selectSeat(this.currentFlightType, this.selectedSeat);
     if (success) {
       console.log(`Asiento ${this.selectedSeat} confirmado`);
-      console.log()
     } else {
       console.error(`No se pudo asignar el asiento ${this.selectedSeat}`);
     }

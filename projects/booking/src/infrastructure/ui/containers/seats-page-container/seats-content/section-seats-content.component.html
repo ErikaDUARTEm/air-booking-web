@@ -7,7 +7,7 @@
     [seatAvailability]="seatAvailability"
     [seatPrices]="seatPrices"
     [selectedSeats]="selectedSeats"
-    (seatClicked)="onSeatClicked({ flightType: currentFlightType, seatId: $event.seatId })"
+    (seatClicked)="onSeatClicked({ seatId: $event.seatId })"
     (nextPassengerRequested)="onNextPassenger()"
     (previousPassengerRequested)="onPreviousPassenger()">
   </lib-section-booking-seats>

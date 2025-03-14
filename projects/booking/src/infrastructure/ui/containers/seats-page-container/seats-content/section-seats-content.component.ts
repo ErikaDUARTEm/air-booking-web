@@ -128,15 +128,15 @@ export class SectionSeatsContentComponent implements OnInit, OnDestroy {
     });
   }
 
-  onSeatClicked(data: { flightType: 'outbound' | 'return', seatId: string }): void {
-    const { flightType, seatId } = data;
-
+  onSeatClicked(data: { seatId: string }): void {
+    const seatId = data.seatId;
+    
     if (this.seatAvailability[seatId]) {
       console.log(`Selected seat: ${seatId} for passenger: ${this.currentPassenger?.name}`);
-      this.seatSelected.emit({ flightType, seatId });
+      this.seatSelected.emit({ flightType: this.currentFlightType, seatId });
     }
   }
-
+  
   onNextPassenger(): void {
     const passenger = this.flightSeatsService.nextPassenger();
     if (passenger) {
@@ -147,7 +147,7 @@ export class SectionSeatsContentComponent implements OnInit, OnDestroy {
       console.log('No hay más pasajeros');
     }
   }
-
+  
   onPreviousPassenger(): void {
     const passenger = this.flightSeatsService.previousPassenger();
     if (passenger) {

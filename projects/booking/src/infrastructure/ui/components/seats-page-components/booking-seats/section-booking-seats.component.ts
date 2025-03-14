@@ -25,32 +25,41 @@ export class SectionBookingSeatsComponent {
 
   // Métodos para obtener datos de los asientos
   getSeatClass(row: number, column: string): string {
-    const seatId = `${row}${column}`;
+    const seatId = `${row}-${column}`;
     const seat = this.flight[this.currentFlightType]?.seats[seatId];
+    // console.log('Seat:', seat); // Depuración
+    // console.log('Current Flight:', this.flight[this.currentFlightType]); // Depuración
     return seat ? `main__seat--${seat.type.toLowerCase().replace(' ', '-')}` : '';
-    console.log(seat);
   }
   
 
   isSeatAvailable(row: number, column: string): boolean {
-    const seatId = `${row}${column}`;
+    const seatId = `${row}-${column}`; // Cambia el formato para que coincida con el servidor
     const seat = this.flight[this.currentFlightType]?.seats[seatId];
-    return seat ? seat.isAvailable : false;
+    // console.log(seatId, seat); // Depuración: Verifica el seatId y el seat
+  
+    if (!seat) {
+      console.debug(`Seat ${seatId} does not exist`);
+      return false;
+    }
+  
+    return seat.isAvailable;
   }
+  
 
   getSeatPrice(row: number, column: string): number {
-    const seatId = `${row}${column}`;
+    const seatId = `${row}-${column}`;
     const seat = this.flight[this.currentFlightType]?.seats[seatId];
     return seat ? seat.price || 0 : 0;
   }
 
   isSeatSelected(row: number, column: string): boolean {
-    const seatId = `${row}${column}`;
+    const seatId = `${row}-${column}`;
     return this.selectedSeats[seatId] || false;
   }
 
   onSeatClick(row: number, column: string): void {
-    const seatId = `${row}${column}`;
+    const seatId = `${row}-${column}`;
     this.seatClicked.emit({ seatId });
   }
 
