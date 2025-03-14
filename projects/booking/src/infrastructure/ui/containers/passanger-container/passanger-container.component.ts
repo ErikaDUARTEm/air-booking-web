@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { PassengerFormComponent } from '../../forms/passenger-form/passenger-form.component';
-import { GetFlyUsecase } from '../../../../application/booking/get-fly-passenger.usecase';
-import { Observable, Subject } from 'rxjs';
-import { IPassenger, IPassengerData } from '../../../../domain/model/passenger.model';
+import { Observable } from 'rxjs';
+import { IPassenger} from '../../../../domain/model/passenger.model';
 import { AsyncPipe } from '@angular/common';
 import { SavePassengersUseCase } from '../../../../application/booking/save-passengers.usecase';
 import { Router } from '@angular/router';
+import { FormUseCase, IFormFlight } from 'availability';
 
 @Component({
   selector: 'lib-passanger-container',
@@ -13,14 +13,14 @@ import { Router } from '@angular/router';
   templateUrl: './passanger-container.component.html',
 })
 export class PassangerContainerComponent implements OnInit{
-  private readonly getFlyUsecase = inject(GetFlyUsecase);
+  private readonly getFlyUsecase = inject(FormUseCase);
   private readonly savePassengersUseCase = inject(SavePassengersUseCase);
   private readonly router = inject(Router);
-  public passengersData$!: Observable<IPassengerData>;
+  public passengersData$!: Observable<IFormFlight>;
 
 
   ngOnInit() {
-    this.passengersData$ = this.getFlyUsecase.flyData$();
+    this.passengersData$ = this.getFlyUsecase.form$();
   }
 
   handleSubmit(passengers: IPassenger[]): void {

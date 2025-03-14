@@ -42,3 +42,22 @@ export interface IFlightData {
   destination: ILocation;
   passengers: IPassengerData;
 }
+
+export interface IFlightMock {
+  aircraftModel: string;
+  arrivalTime: string;
+  departureTime: string;
+  destination: string;
+  duration: string;
+  flightId: string;
+  flightNumber: string;
+  operatingAirline: string;
+  origin: string;
+  prices: number;
+  tax: number;
+}
+
+export interface IFlightSelection {
+  departureFlight: IFlightMock;
+  returnFlight: IFlightMock;
+}

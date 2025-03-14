@@ -1,1 +1,5 @@
-<lib-fly-details [flyDetails]="flightData$ | async"></lib-fly-details>
+<lib-fly-details   
+    [flyOrigin]="flightOriginData$ | async" 
+    [flyDestination]="flightDestinationData$ | async"
+    [flyPassengers]="passangerFlightData$ | async">
+</lib-fly-details>

@@ -1,7 +1,9 @@
 import { inject, Injectable } from "@angular/core";
 import { StateFactory } from "shared";
 import { BehaviorSubject } from "rxjs";
-import { IFlightData, IPassenger } from "../model/passenger.model";
+import { IPassenger } from "../model/passenger.model";
+import { IFormFlight } from "availability";
+
 
 @Injectable({
   providedIn: 'root',
@@ -11,28 +13,7 @@ export class PassengerState {
 
   //#region Subjects
 
-  private readonly flightData$ = new BehaviorSubject<IFlightData>({
-    dates: {
-      departure: "2025-03-11T05:00:00.000Z",
-      return: "2025-03-14T05:00:00.000Z"
-    },
-    origin: {
-      abbreviation: "AXM",
-      airport: "El Edén International Airport",
-      name: "Armenia"
-    },
-    destination: {
-      abbreviation: "BOG",
-      airport: "El Dorado International Airport",
-      name: "Bogotá"
-    },
-    passengers: {
-      adult: 1,
-      children: 1,
-      infants: 0,
-    },
-  });
-
+  private readonly flightData$ = new BehaviorSubject<IFormFlight>(null);
   private readonly allPassengers$ = new BehaviorSubject<IPassenger[]>([]);
   private readonly passenger$ = new BehaviorSubject<IPassenger | null>(null);
 
