@@ -16,6 +16,7 @@ export class FlightState {
   private readonly flightOriginSelected$ = new BehaviorSubject<IFlightSelected>(null);
   private readonly flightDestinationSelected$ = new BehaviorSubject<IFlightSelected>(null);
   private readonly form$ = new BehaviorSubject<IFormFlight>(null)
+  private readonly loadingSubject$ = new BehaviorSubject<boolean>(false);
   //#endregion
 
   store() {
@@ -24,7 +25,8 @@ export class FlightState {
       flightsDestination: this._factory.state(this.flightsDestination$),
       flightOriginSelected: this._factory.state(this.flightOriginSelected$),
       flightDestinationSelected: this._factory.state(this.flightDestinationSelected$),
-      form: this._factory.state(this.form$)
+      form: this._factory.state(this.form$),
+      loadingSubject: this._factory.state(this.loadingSubject$)
     }
   }
 }
