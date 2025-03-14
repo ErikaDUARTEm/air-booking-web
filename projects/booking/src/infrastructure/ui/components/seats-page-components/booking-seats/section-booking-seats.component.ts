@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { IFlight } from './../../../../../domain/model/seats.model';
+import { IFlight } from '../../../../../domain/model/seats.model';
 import { IPassenger } from '../../../../../domain/model/passenger.model';
 
 
@@ -21,10 +21,8 @@ export class SectionBookingSeatsComponent {
   @Input() regularRows: number[] = [];
   @Input() leftTwoCols: string[] = [];
   @Input() rightTwoCols: string[] = [];
-
   @Input() leftCols: string[] = [];
   @Input() rightCols: string[] = [];
-
   @Input() seatClasses: {[key: string]: string} = {};
   @Input() seatAvailability: {[key: string]: boolean} = {};
   @Input() seatPrices: {[key: string]: number} = {};

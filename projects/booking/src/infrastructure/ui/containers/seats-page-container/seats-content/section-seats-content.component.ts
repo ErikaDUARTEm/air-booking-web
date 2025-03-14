@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output, OnDestroy, Input } from '@angular/core';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, tap } from 'rxjs/operators';
 
 import { SectionBookingSeatsComponent } from './../../../components/seats-page-components/booking-seats/section-booking-seats.component';
 import { FlightSeatsService } from '../../../../services/services/seats.service';
@@ -24,12 +24,12 @@ export class SectionSeatsContentComponent implements OnInit, OnDestroy {
   @Input() currentFlightType: 'outbound' | 'return' = 'outbound';
 
   flight: { outbound: IFlight, return: IFlight } = {
-    outbound: {} as IFlight, 
-    return: {} as IFlight   
+    outbound: {} as IFlight,
+    return: {} as IFlight,
   };
+
   passengers: IPassenger[] = [];
   currentPassenger!: IPassenger;
-  
   bussinessRows: number[] = [1, 2, 3, 4];
   premiumRows: number[] = [5, 6, 7, 8, 9, 10, 11];
   emergencyRows: number[] = [17];
@@ -39,7 +39,6 @@ export class SectionSeatsContentComponent implements OnInit, OnDestroy {
   rightTwoCols: string[] = ['D', 'E'];
   leftCols: string[] = ['A', 'B', 'C'];
   rightCols: string[] = ['D', 'E', 'F'];
-  
   seatClasses: { [key: string]: string } = {};
   seatAvailability: { [key: string]: boolean } = {};
   seatPrices: { [key: string]: number } = {};
@@ -65,21 +64,32 @@ export class SectionSeatsContentComponent implements OnInit, OnDestroy {
       });
     
       this.flightSeatsService.getPassengers()
-      .pipe(takeUntil(this.destroy$))
+      .pipe(
+        takeUntil(this.destroy$),
+        tap(passengers => {
+          console.log('Received passengers:', passengers);
+        })
+      )
       .subscribe(passengers => {
-        this.passengers = passengers;
-        console.log(this.passengers)
+        if (passengers && passengers.length > 0) {
+          this.passengers = passengers;
+          this.updateSelectedSeats();
+        } else {
+          console.warn('No passengers data received');
+        }
+      });
+  
+    this.flightSeatsService.getCurrentPassenger()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(passenger => {
+        if (!passenger) {
+          console.error('No hay un pasajero actual definido.');
+          return;
+        }
+        this.currentPassenger = passenger;
         this.updateSelectedSeats(); 
       });
-
-    this.flightSeatsService.getCurrentPassenger()
-    .pipe(takeUntil(this.destroy$))
-    .subscribe(passenger => {
-      this.currentPassenger = passenger;
-      this.updateSelectedSeats(); 
-    });
   }
-
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
@@ -115,8 +125,6 @@ export class SectionSeatsContentComponent implements OnInit, OnDestroy {
   
   private updateSelectedSeats(): void {
     this.selectedSeats = {};
-  
-    // Actualizar asientos seleccionados para el pasajero actual
     if (this.currentPassenger) {
       if (this.currentPassenger.departureSeat) {
         this.selectedSeats[this.currentPassenger.departureSeat] = true;
@@ -126,7 +134,6 @@ export class SectionSeatsContentComponent implements OnInit, OnDestroy {
       }
     }
   
-    // Actualizar asientos seleccionados para otros pasajeros
     this.passengers.forEach(passenger => {
       if (passenger.id !== this.currentPassenger?.id) {
         if (passenger.departureSeat) {
@@ -151,16 +158,20 @@ export class SectionSeatsContentComponent implements OnInit, OnDestroy {
   onNextPassenger(): void {
     const passenger = this.flightSeatsService.nextPassenger();
     if (passenger) {
-      console.log(`Cambiado a pasajero: ${passenger.name}`);
+      this.currentPassenger = passenger;
+      this.updateSelectedSeats(); // Actualizar los asientos seleccionados
+      console.log('Cambiado a pasajero:', passenger.name);
     } else {
-      console.log('No hay mas pasajeros');
+      console.log('No hay más pasajeros');
     }
   }
-
+  
   onPreviousPassenger(): void {
     const passenger = this.flightSeatsService.previousPassenger();
     if (passenger) {
-      console.log(`Cambiado a pasajero: ${passenger.name}`);
+      this.currentPassenger = passenger;
+      this.updateSelectedSeats(); // Actualizar los asientos seleccionados
+      console.log('Cambiado a pasajero:', passenger.name);
     } else {
       console.log('Este es el primer pasajero');
     }
@@ -169,11 +180,13 @@ export class SectionSeatsContentComponent implements OnInit, OnDestroy {
   onNextFlight(): void {
     if (this.currentFlightType === 'outbound') {
       this.currentFlightType = 'return';
+      
       console.log(this.flight);
     } else {
       this.currentFlightType = 'outbound';
       console.log(this.flight);
     }
+    console.log(this.passengers);
   
     this.updateSeatData(); 
     this.flightChange.emit(this.currentFlightType);

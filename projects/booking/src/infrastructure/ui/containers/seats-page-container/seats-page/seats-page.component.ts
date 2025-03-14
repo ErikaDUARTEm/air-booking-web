@@ -36,13 +36,12 @@ export class SeatsPageComponent implements OnInit {
       this.flight.return = flight;
     });
 
-    this.flightSeatsService.loadFlightData('FL123');
+    this.flightSeatsService.initializeSeats();
 
     if (!this.flight.return) {
       this.isRoundTrip = false;
     }
   }
-
   
   openModal(seat: { flightType: 'outbound' | 'return'; seatId: string; }): void {
     const { flightType, seatId } = seat;
@@ -58,7 +57,8 @@ export class SeatsPageComponent implements OnInit {
   confirmSeatSelection(): void {
     const success = this.flightSeatsService.selectSeat(this.currentFlightType, this.selectedSeat);
     if (success) {
-      console.log(`Asiento ${this.selectedSeat} confirmado para el vuelo ${this.currentFlightType}`);
+      console.log(`Asiento ${this.selectedSeat} confirmado`);
+      console.log()
     } else {
       console.error(`No se pudo asignar el asiento ${this.selectedSeat}`);
     }
@@ -96,12 +96,11 @@ export class SeatsPageComponent implements OnInit {
         console.log(this.flight)
       } else {
         // this.router.navigate(['/booking/payment']);
-        console.log(this.flightSeatsService.getPassengers())
+        console.log(this.flightSeatsService.getCurrentPassenger)
         console.log(this.flight)
       }
     } else {
       // this.router.navigate(['/booking/payment']);
-      console.log(this.flightSeatsService.getPassengers())
       console.log(this.flight)
     }
   }

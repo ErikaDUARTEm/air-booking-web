@@ -1,28 +1,22 @@
-// import { IFlight, IPassenger } from '../../../domain/model/seats.model';
-import { IFlight } from '../../../domain/model/seats.model';
-import { PassengerState } from '../../../domain/state/passenger.state';
+import { inject, Injectable } from '@angular/core';
 import { FlightState } from '../../../domain/state/seats.state';
+import { IFlight } from '../../../domain/model/seats.model';
+import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
 import { IPassenger } from '../../../domain/model/passenger.model';
-
-import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { PassengerState } from '../../../domain/state/passenger.state';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FlightSeatsService {
+  private readonly _state = inject(FlightState);
+  private readonly _passengerState = inject(PassengerState);
   private currentPassengerIndex = 0;
 
-  constructor(
-    private flightState: FlightState,
-    private passengerState: PassengerState
-  ) {
-    this.initializeSeats();
-  }
 
-  private initializeSeats(): void {
-    const outboundFlight = this.flightState.outboundFlightState.snapshot();
-    const returnFlight = this.flightState.returnFlightState.snapshot();
+  initializeSeats(): void {
+    const outboundFlight = this._state.store().outboundFlight.snapshot();
+    const returnFlight = this._state.store().returnFlight.snapshot();
     this.initializeFlightSeats(outboundFlight);
     this.initializeFlightSeats(returnFlight);
   }
@@ -117,49 +111,53 @@ export class FlightSeatsService {
     });
 
     if (flight.type === 'outbound') {
-      this.flightState.outboundFlightState.set(flight);
+      this._state.store().outboundFlight.set(flight);
     } else {
-      this.flightState.returnFlightState.set(flight);
+      this._state.store().returnFlight.set(flight);
     }
   }
 
   getOutboundFlight(): Observable<IFlight> {
-    return this.flightState.outboundFlightState.$();
+    return this._state.store().outboundFlight.$();
   }
 
   getReturnFlight(): Observable<IFlight> {
-    return this.flightState.returnFlightState.$();
+    return this._state.store().returnFlight.$();
   }
 
   getPassengers(): Observable<IPassenger[]> {
-    return this.passengerState.store().allPassengers.$(); // ESTADO DEL PASAJERO
+    return this._passengerState.store().allPassengers.$();
   }
 
   getCurrentPassenger(): Observable<IPassenger> {
-    return this.passengerState
-      .store()
-      .allPassengers.$()
-      .pipe(
-        map(
-          (passengers: IPassenger[]) => passengers[this.currentPassengerIndex]
-        )
-      );
+    return this._passengerState.store().allPassengers.$().pipe(
+      map((passengers: IPassenger[]) => {
+        if (passengers.length === 0) {
+          throw new Error('No hay pasajeros disponibles.');
+        }
+        return passengers[this.currentPassengerIndex];
+      })
+    );
   }
 
   selectSeat(flightType: 'outbound' | 'return', seatId: string): boolean {
-    const flight =
-      flightType === 'outbound'
-        ? this.flightState.outboundFlightState.snapshot()
-        : this.flightState.returnFlightState.snapshot();
+    const flight = flightType === 'outbound'
+      ? this._state.store().outboundFlight.snapshot()
+      : this._state.store().returnFlight.snapshot();
 
     const seat = flight.seats[seatId];
     if (!seat || !seat.isAvailable) {
       return false;
     }
 
-    const passengers = this.passengerState.store().allPassengers.snapshot();
+    const passengers = this._passengerState.store().allPassengers.snapshot();
     const currentPassenger = passengers[this.currentPassengerIndex];
 
+    if (!currentPassenger) {
+      console.error('No hay un pasajero actual definido.');
+      return false;
+    }
+    
     if (flightType === 'outbound' && currentPassenger.departureSeat) {
       const oldSeat = flight.seats[currentPassenger.departureSeat];
       if (oldSeat) {
@@ -179,74 +177,80 @@ export class FlightSeatsService {
     } else {
       currentPassenger.returnSeat = seatId;
     }
-
     seat.passenger = currentPassenger.id;
     seat.isAvailable = false;
 
-    this.passengerState.store().allPassengers.set([...passengers]);
+  
+    const updatedPassengers = [...passengers];
+    updatedPassengers[this.currentPassengerIndex] = currentPassenger;
+    this._passengerState.store().allPassengers.set(updatedPassengers);
 
     if (flightType === 'outbound') {
-      this.flightState.outboundFlightState.set({ ...flight });
+      this._state.store().outboundFlight.set({ ...flight });
     } else {
-      this.flightState.returnFlightState.set({ ...flight });
+      this._state.store().returnFlight.set({ ...flight });
     }
 
     return true;
   }
 
+
+
+
+  private releaseSeat(flight: IFlight, seatId: string): void {
+    const oldSeat = flight.seats[seatId];
+    if (oldSeat) {
+      oldSeat.passenger = undefined;
+      oldSeat.isAvailable = true;
+    }
+  }
+
+  private assignSeat(
+    flight: IFlight, 
+    seatId: string, 
+    passenger: IPassenger, 
+    flightType: 'outbound' | 'return'
+  ): void {
+    const seat = flight.seats[seatId];
+    if (flightType === 'outbound') {
+      passenger.departureSeat = seatId;
+    } else {
+      passenger.returnSeat = seatId;
+    }
+    seat.passenger = passenger.id;
+    seat.isAvailable = false;
+
+    // Actualizar el estado de pasajeros
+    const passengers = this._passengerState.store().allPassengers.snapshot();
+    const updatedPassengers = passengers.map(p => 
+      p.id === passenger.id ? passenger : p
+    );
+    this._passengerState.store().allPassengers.set(updatedPassengers);
+  }
+
+  getCurrentIndex(): number {
+    return this.currentPassengerIndex;
+  }
+
+
   nextPassenger(): IPassenger | null {
-    if (
-      this.currentPassengerIndex <
-      this.passengerState.store().allPassengers.snapshot().length - 1
-    ) {
+    const passengers = this._passengerState.store().allPassengers.snapshot();
+    if (this.currentPassengerIndex < passengers.length - 1) {
       this.currentPassengerIndex++;
-      const passengers = this.passengerState.store().allPassengers.snapshot();
-      this.passengerState.store().allPassengers.set([...passengers]);
+      console.log(`Cambiando al pasajero ${this.currentPassengerIndex + 1} de ${passengers.length}`);
       return passengers[this.currentPassengerIndex];
     }
     return null;
   }
 
   previousPassenger(): IPassenger | null {
+    const passengers = this._passengerState.store().allPassengers.snapshot();
     if (this.currentPassengerIndex > 0) {
       this.currentPassengerIndex--;
-      const passengers = this.flightState.passengersState.snapshot();
-      this.flightState.passengersState.set([...passengers]);
+      console.log(`Cambiando al pasajero ${this.currentPassengerIndex + 1} de ${passengers.length}`);
       return passengers[this.currentPassengerIndex];
     }
     return null;
   }
 
-  releaseSeat(seatId: string): boolean {
-    const flight = this.flightState.returnFlightState.snapshot();
-    const seat = flight.seats[seatId];
-    if (!seat) {
-      return false;
-    }
-
-    const passengers = this.flightState.passengersState.snapshot();
-    const passenger = passengers.find(
-      (p) => p.departureSeat === seatId || p.returnSeat === seatId
-    );
-
-    if (passenger) {
-      if (passenger.departureSeat === seatId) {
-        passenger.departureSeat = undefined;
-      } else if (passenger.returnSeat === seatId) {
-        passenger.returnSeat = undefined;
-      }
-    }
-
-    seat.passenger = undefined;
-    seat.isAvailable = true;
-
-    this.flightState.passengersState.set(passengers);
-    this.flightState.returnFlightState.set(flight);
-
-    return true;
-  }
-
-  loadFlightData(flightId: string): void {
-    console.log(`Cargando datos para el vuelo ${flightId}`);
-  }
 }

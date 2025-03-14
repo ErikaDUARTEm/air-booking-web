@@ -14,10 +14,3 @@ export interface ISeat {
   passenger?: string;
 }
 
-export interface IPassenger {
-  id: string;
-  name: string;
-  lastName: string;
-  documentId: string;
-  selectedSeat?: string;
-}
