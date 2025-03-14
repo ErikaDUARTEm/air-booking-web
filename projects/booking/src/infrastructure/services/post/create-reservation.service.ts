@@ -10,7 +10,7 @@ import { IReservationRequest } from "../../../domain/model/reservation-request.m
 })
 export class CreateReservationService {
   private http = inject(HttpClient);
-  private apiUrl = environment.apiUrl + '/reservation';
+  private apiUrl = "http://localhost:8081/api/booking/create-reservation";
 
   execute(payment:IReservationRequest): Observable<IReservationRequest> {
     return this.http.post<IReservationRequest>(this.apiUrl, payment);

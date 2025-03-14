@@ -8,18 +8,12 @@ import { Observable, Subscription } from "rxjs";
 })
 export class SavePassengersUseCase {
   private readonly _state = inject(State);
-private subscriptions: Subscription;
 
-
-  //#region Public Methods
-  initSubscriptions(): void {
-    this.subscriptions = new Subscription();
-  }
-
-  destroySubscriptions(): void {
-    this.subscriptions.unsubscribe();
-  }
   savePassengers$(): Observable<IPassenger[]> {
     return this._state.passenger.allPassengers.$();
+  }
+
+  setPassengers(passengers: IPassenger[]): void {
+    this._state.passenger.allPassengers.set(passengers);
   }
 }
