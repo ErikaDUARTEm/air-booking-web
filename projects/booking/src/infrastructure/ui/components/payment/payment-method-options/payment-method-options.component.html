@@ -83,7 +83,7 @@
     </lib-billing-form>
   </div>
 
-  <div class="payment-method__button">
+  <div class="payment-method__button" *ngIf="selectedMethod !== null">
     <button class="payment-method__confirm-button"
       [disabled]="!isConfirmButtonEnabled()"
       (click)="confirmPayment()">
