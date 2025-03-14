@@ -10,9 +10,7 @@
       Selecciona otro método de pago
     </button>
   </div>
-  <div *ngIf="successMessage$" class="payment-method__success-message">
-    <p>{{message()}}</p>
-  </div>
+
   <div class="payment-method__container">
     <div class="payment-method__option">
       <div class="payment-method__header">
@@ -84,7 +82,9 @@
       (onFormValidityChange)="handleFormValidity('BILLING', $event.isValid, $event.formData)">
     </lib-billing-form>
   </div>
-
+  <div *ngIf="successMessage$" class="payment-method__success-message">
+    <p>{{message()}}</p>
+  </div>
   <div class="payment-method__button" *ngIf="selectedMethod !== null">
     <button class="payment-method__confirm-button"
       [disabled]="!isConfirmButtonEnabled()"

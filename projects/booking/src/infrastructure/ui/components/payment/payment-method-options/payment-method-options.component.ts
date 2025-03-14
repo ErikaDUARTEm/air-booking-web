@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BillingFormComponent } from '../../../forms/forms-method-payment/billing-form/billing-form.component';
 import { PaymentState } from '../../../../../domain/state/payment.state';
 import { IBillingAddress, ICard, IPaymentData, IPse } from '../../../../../domain/model/payment.model';
+import { Router } from '@angular/router';
 
 
 
@@ -21,6 +22,7 @@ export class PaymentMethodOptionsComponent {
   @ViewChild(PseFormComponentComponent, { static: false }) pseFormComponent!: PseFormComponentComponent;
   @ViewChild(BillingFormComponent, { static: false }) billingFormComponent!: BillingFormComponent;
   private readonly paymentState = inject(PaymentState);
+  public router = inject(Router);
   public onMethodSelected = output<'CARD' | 'PSE' | null>();
   public onConfirmPayment = output<any>();
   public successMessage$ = input<string  | null>();
@@ -80,5 +82,8 @@ export class PaymentMethodOptionsComponent {
     };
 
     this.onConfirmPayment.emit(paymentData);
+    setTimeout(() => {
+      this.router.navigate(['/']);
+    }, 3000);
   }
 }
