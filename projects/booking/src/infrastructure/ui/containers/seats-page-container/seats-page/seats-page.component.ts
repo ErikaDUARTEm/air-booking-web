@@ -1,3 +1,4 @@
+import { SelectSeatUseCase } from './../../../../../application/booking/select-seat.usecase';
 import { IFlight } from './../../../../../domain/model/seats.model';
 import { FlightSeatsService } from '../../../../services/services/seats.service';
 import { Router } from '@angular/router'; // Importa el Router para la redirección
@@ -19,15 +20,47 @@ import { SeatsModalContentComponent } from "../seats-modal-content/seats-modal-c
 })
 export class SeatsPageComponent implements OnInit {
  
+  // modalOpen = false;
+  // selectedSeat = '';
+  // currentFlightType: 'outbound' | 'return' = 'outbound';
+  // flight: { outbound: IFlight | null, return: IFlight | null } = { outbound: null, return: null };
+  // isRoundTrip = true; 
+
   modalOpen = false;
   selectedSeat = '';
   currentFlightType: 'outbound' | 'return' = 'outbound';
   flight: { outbound: IFlight | null, return: IFlight | null } = { outbound: null, return: null };
-  isRoundTrip = true; 
+  isRoundTrip = true;
   
-  constructor(private flightSeatsService: FlightSeatsService, private router: Router) {}
+  // constructor(private flightSeatsService: FlightSeatsService, private router: Router) {}
+
+  constructor(
+    private flightSeatsService: FlightSeatsService,
+    private selectSeatUseCase: SelectSeatUseCase,
+    private router: Router
+  ) {}
   
+  // ngOnInit(): void {
+  //   this.flightSeatsService.getOutboundFlight().subscribe(flight => {
+  //     this.flight.outbound = flight;
+  //   });
+
+  //   this.flightSeatsService.getReturnFlight().subscribe(flight => {
+  //     this.flight.return = flight;
+  //   });
+
+  //   this.flightSeatsService.initializeSeats();
+
+  //   if (!this.flight.return) {
+  //     this.isRoundTrip = false;
+  //   }
+  // }
+
   ngOnInit(): void {
+    const aggregateId = '680166f2-495f-466c-8bbd-58c35d35df07'; // Reemplaza con el ID real del vuelo
+    this.selectSeatUseCase.initializeSeats(aggregateId, 'outbound');
+    this.selectSeatUseCase.initializeSeats(aggregateId, 'return');
+
     this.flightSeatsService.getOutboundFlight().subscribe(flight => {
       this.flight.outbound = flight;
     });
@@ -36,7 +69,7 @@ export class SeatsPageComponent implements OnInit {
       this.flight.return = flight;
     });
 
-    this.flightSeatsService.initializeSeats();
+    console.log(this.flight);
 
     if (!this.flight.return) {
       this.isRoundTrip = false;

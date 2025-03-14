@@ -8,7 +8,10 @@ export interface IFlight {
 
 export interface ISeat {
   id: string;
-  type: 'bussiness' | 'economy' | 'emergency' | 'favorable' | 'regular' | 'unavailable';
+  seatNumber: string;
+	row: number;
+	column: string,
+  type: 'Business Class' | 'Economy Extra' | 'Exit' | 'Favorable' | 'Regular' | 'unavailable';
   price?: number;
   isAvailable: boolean;
   passenger?: string;
