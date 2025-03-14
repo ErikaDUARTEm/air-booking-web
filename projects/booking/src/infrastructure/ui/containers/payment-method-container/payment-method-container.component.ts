@@ -1,13 +1,15 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, inject, OnDestroy, OnInit } from '@angular/core';
 import { PaymentAndSummaryComponentComponent } from '../../components/payment/payment-and-summary-component/payment-and-summary-component.component';
 import { PaymentState } from '../../../../domain/state/payment.state';
 import { PaymentUseCase } from '../../../../application/booking/payment.usecase';
 import { IPaymentData } from '../../../../domain/model/payment.model';
 import { Observable } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
+
 
 @Component({
   selector: 'lib-payment-method-container',
-  imports: [PaymentAndSummaryComponentComponent],
+  imports: [PaymentAndSummaryComponentComponent, AsyncPipe],
   templateUrl: './payment-method-container.component.html',
 })
 export class PaymentMethodContainerComponent implements OnInit {
@@ -15,6 +17,7 @@ export class PaymentMethodContainerComponent implements OnInit {
   private readonly _paymentUseCase = inject(PaymentUseCase);
   public paymentData$!: Observable<IPaymentData>;
   public successMessage$!: Observable<string>;
+
 
   ngOnInit() {
     this.paymentData$ = this._paymentUseCase.paymentData$();
@@ -41,5 +44,6 @@ export class PaymentMethodContainerComponent implements OnInit {
   }
   submitPayment(paymentData: any): void {
     this._paymentUseCase.execute(paymentData);
+
   }
 }

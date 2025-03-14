@@ -10,7 +10,9 @@
       Selecciona otro método de pago
     </button>
   </div>
-
+  <div *ngIf="successMessage$" class="payment-method__success-message">
+    <p>{{message()}}</p>
+  </div>
   <div class="payment-method__container">
     <div class="payment-method__option">
       <div class="payment-method__header">

@@ -19,6 +19,13 @@
       text-decoration: underline;
     }
   }
+  &__success-message{
+    color: variables.$green;
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    text-align: center;
+  }
   &__container {
     max-width: 600px;
     margin: 20px auto;
