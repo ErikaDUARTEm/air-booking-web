@@ -132,12 +132,12 @@ export class SeatsPageComponent implements OnInit {
         console.log(`Flight type changed to ${this.currentFlightType}`);
         console.log(this.flight)
       } else {
-        // this.router.navigate(['/booking/payment']);
+        this.router.navigate(['/booking/payment']);
         console.log(this.flightSeatsService.getCurrentPassenger)
         console.log(this.flight)
       }
     } else {
-      // this.router.navigate(['/booking/payment']);
+      this.router.navigate(['/booking/payment']);
       console.log(this.flight)
     }
   }
