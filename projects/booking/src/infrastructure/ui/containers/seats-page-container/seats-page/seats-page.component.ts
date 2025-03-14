@@ -1,6 +1,8 @@
+
+import { SelectSeatUseCase } from './../../../../../application/booking/select-seat.usecase';
 import { IFlight } from './../../../../../domain/model/seats.model';
 import { FlightSeatsService } from '../../../../services/services/seats.service';
-import { Router } from '@angular/router'; // Importa el Router para la redirección
+import { Router } from '@angular/router'; 
 
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -10,6 +12,7 @@ import { SectionSeatsContentComponent } from './../seats-content/section-seats-c
 import { SeatsFooterContentComponent } from "../seats-footer-content/seats-footer-content.component";
 import { SeatsDetailsContentComponent } from "../seats-details-content/seats-details-content.component";
 import { SeatsModalContentComponent } from "../seats-modal-content/seats-modal-content.component";
+import { GetFlightsUsecase } from 'availability';
 
 @Component({
   selector: 'lib-seats-page',
@@ -19,30 +22,47 @@ import { SeatsModalContentComponent } from "../seats-modal-content/seats-modal-c
 })
 export class SeatsPageComponent implements OnInit {
  
+  // modalOpen = false;
+  // selectedSeat = '';
+  // currentFlightType: 'outbound' | 'return' = 'outbound';
+  // flight: { outbound: IFlight | null, return: IFlight | null } = { outbound: null, return: null };
+  // isRoundTrip = true; 
+
   modalOpen = false;
   selectedSeat = '';
   currentFlightType: 'outbound' | 'return' = 'outbound';
   flight: { outbound: IFlight | null, return: IFlight | null } = { outbound: null, return: null };
-  isRoundTrip = true; 
+  isRoundTrip = true;
   
-  constructor(private flightSeatsService: FlightSeatsService, private router: Router) {} // Inyecta el Router
+  constructor(
+    private flightSeatsService: FlightSeatsService,
+    private getFlightsUseCase: GetFlightsUsecase,
+    private selectSeatUseCase: SelectSeatUseCase,
+    private router: Router
+  ) {}
   
+
   ngOnInit(): void {
+    this.getFlightsUseCase.getFlightOriginSelectedId().subscribe(aggregateId => {
+      this.selectSeatUseCase.initializeSeats(aggregateId, 'outbound');
+    });
+  
+    this.getFlightsUseCase.getFlightDestinationSelectedId().subscribe(aggregateId => {
+      this.selectSeatUseCase.initializeSeats(aggregateId, 'return');
+    });
+  
     this.flightSeatsService.getOutboundFlight().subscribe(flight => {
       this.flight.outbound = flight;
     });
-
+  
     this.flightSeatsService.getReturnFlight().subscribe(flight => {
       this.flight.return = flight;
     });
-
-    this.flightSeatsService.loadFlightData('FL123');
-
+  
     if (!this.flight.return) {
       this.isRoundTrip = false;
     }
   }
-
   
   openModal(seat: { flightType: 'outbound' | 'return'; seatId: string; }): void {
     const { flightType, seatId } = seat;
@@ -88,19 +108,35 @@ export class SeatsPageComponent implements OnInit {
     }
   }
 
+
+  markSelectedSeatsAndProceed(): void {
+    this.selectSeatUseCase.markAllSelectedSeatsAsOccupied().subscribe({
+      next: (results) => {
+        console.log('Todos los asientos han sido marcados como ocupados:', results);
+
+        this.router.navigate(['/booking/payment']);
+      },
+      error: (error) => {
+        console.error('Error al marcar los asientos como ocupados:', error);
+        this.router.navigate(['/booking/payment']);
+      }
+    });
+  }
+
   handleNextFlightRequest(): void {
     if (this.isRoundTrip) {
       if (this.currentFlightType === 'outbound') {
         this.currentFlightType = 'return';
         console.log(`Flight type changed to ${this.currentFlightType}`);
-        console.log(this.flight)
       } else {
-        this.router.navigate(['/booking/payment']);
-        console.log(this.flight)
+        this.markSelectedSeatsAndProceed();
       }
     } else {
-      this.router.navigate(['/booking/payment']);
-      console.log(this.flight)
+
+      this.markSelectedSeatsAndProceed();
     }
   }
+
+
+
 }

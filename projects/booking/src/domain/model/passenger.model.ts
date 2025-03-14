@@ -6,6 +6,7 @@ export interface IPassengerData {
 }
 
 export interface IPassenger {
+  id?: string | null;
   name: string;
   lastName: string;
   birthDate: Date;
@@ -13,6 +14,8 @@ export interface IPassenger {
   email?: string;
   confirmEmail?: string;
   phone?: string;
+  departureSeat?: string;
+  returnSeat?: string;
 }
 
 

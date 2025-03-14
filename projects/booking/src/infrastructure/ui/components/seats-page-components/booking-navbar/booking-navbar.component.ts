@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
   templateUrl: './booking-navbar.component.html',
   styleUrl: './booking-navbar.component.scss'
 })
-export class BookingNevbarComponent {
+export class BookingNavbarComponent {
 
 }

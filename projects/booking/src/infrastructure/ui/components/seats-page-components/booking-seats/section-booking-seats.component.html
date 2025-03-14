@@ -4,13 +4,16 @@
       <!-- Información del pasajero actual -->
       <div class="main__passenger-info">
         <h3>Seleccionando asiento para:</h3>
-        <p>{{currentPassenger?.name}} {{currentPassenger?.lastName}}</p>
-        <p *ngIf="currentPassenger?.selectedSeat">Asiento seleccionado: <span class="main__selected-seat">{{currentPassenger?.selectedSeat}}</span></p>
+        <p>{{ currentPassenger?.name }} {{ currentPassenger?.lastName }}</p>
+        <p *ngIf="currentPassenger?.departureSeat">
+          Asiento de ida: <span class="main__selected-seat">{{ currentPassenger?.departureSeat }}</span>
+        </p>
+        <p *ngIf="currentPassenger?.returnSeat">
+          Asiento de regreso: <span class="main__selected-seat">{{ currentPassenger?.returnSeat }}</span>
+        </p>
       </div>
 
       <!-- Header con seat column labels -->
-     
-      
       <div class="main__seat-service-area">
         <div class="main__service-item">
           <img src="./booking/bathroom.svg" alt="Baños">
@@ -21,9 +24,8 @@
           <p>Servicio</p>
         </div>
       </div>
-      
-      <!-- Columnas de asientos -->
 
+      <!-- Columnas de asientos -->
       <div class="main__seat-columns">
         <div class="main__col-left">
           <div class="main__seat-label">A</div>
@@ -35,196 +37,233 @@
           <div class="main__seat-label">F</div>
         </div>
       </div>
-    
 
-        <ng-container *ngFor="let row of bussinessRows">
-            <div class="main__seat-row">
-              <div class="main__col-left">
-                <div class="main__seat" [ngClass]="seatClasses[row + col]" *ngFor="let col of leftTwoCols">
-                  <button 
-                    [disabled]="!seatAvailability[row + col]"
-                    [class.selected]="selectedSeats[row + col]"
-                    (click)="onSeatClick(row, col)">
-                    <img *ngIf="seatPrices[row + col] > 0" src="./booking/dollar-sign.svg" alt="Premium">
-                  </button>
-                </div>
-              </div>
-              <div class="main__col-number">{{row < 5 ? '0' + row : row}}</div>
-              <div class="main__col-right">
-                <div class="main__seat" [ngClass]="seatClasses[row + col]" *ngFor="let col of rightTwoCols">
-                  <button 
-                    [disabled]="!seatAvailability[row + col]"
-                    [class.selected]="selectedSeats[row + col]"
-                    (click)="onSeatClick(row, col)">
-                    <img *ngIf="seatPrices[row + col] > 0" src="./booking/dollar-sign.svg" alt="Premium">
-                  </button>
-                </div>
-              </div>
-            </div>
-          </ng-container>
-
-               <!-- Separador de clases -->
-      <div class="main__class-separator">
-        <div class="main__separator-label main__separator-label--left">Clase Económica</div>
-        <div class="main__separator-label main__separator-label--right">Clase Ejecutiva</div>
-      </div>
-
-          <div class="main__seat-columns">
-            <div class="main__col-left">
-              <div class="main__seat-label">A</div>
-              <div class="main__seat-label">B</div>
-              <div class="main__seat-label">C</div>
-            </div>
-            <div class="main__col-number"></div>
-            <div class="main__col-right">
-              <div class="main__seat-label">D</div>
-              <div class="main__seat-label">E</div>
-              <div class="main__seat-label">F</div>
-            </div>
-          </div>
-      
-      <!-- Clase Ejecutiva (Premium) -->
-      <div class="main__executive-class">
-        <!-- Filas Premium -->
-        <ng-container *ngFor="let row of premiumRows">
+      <!-- Asientos dinámicos -->
+      <ng-container *ngIf="flight">
+        <!-- Clase Ejecutiva (Business Class) -->
+        <ng-container *ngFor="let row of [1, 2, 3, 4]">
           <div class="main__seat-row">
             <div class="main__col-left">
-              <div class="main__seat" [ngClass]="seatClasses[row + col]" *ngFor="let col of leftCols">
-                <button 
-                  [disabled]="!seatAvailability[row + col]"
-                  [class.selected]="selectedSeats[row + col]"
-                  (click)="onSeatClick(row, col)">
-                  <img *ngIf="seatPrices[row + col] > 0" src="./booking/dollar-sign.svg" alt="Economy">
-                </button>
-              </div>
+              <ng-container *ngFor="let col of ['A', 'B']">
+                <div class="main__seat main__seat--businessclass" [ngClass]="getSeatClass(row, col)">
+                  <button 
+                    [disabled]="!isSeatAvailable(row, col)"
+                    [class.selected]="isSeatSelected(row, col)"
+                    (click)="onSeatClick(row, col)">
+                    <img *ngIf="getSeatPrice(row, col) > 0" src="./booking/dollar-sign.svg" alt="Premium">
+                  </button>
+                </div>
+              </ng-container>
             </div>
-            <div class="main__col-number">{{row < 10 ? '0' + row : row}}</div>
+            <div class="main__col-number">{{ row }}</div>
             <div class="main__col-right">
-              <div class="main__seat" [ngClass]="seatClasses[row + col]" *ngFor="let col of rightCols">
-                <button 
-                  [disabled]="!seatAvailability[row + col]"
-                  [class.selected]="selectedSeats[row + col]"
-                  (click)="onSeatClick(row, col)">
-                  <img *ngIf="seatPrices[row + col] > 0" src="./booking/dollar-sign.svg" alt="Economy">
-                </button>
-              </div>
+              <ng-container *ngFor="let col of ['E', 'F']">
+                <div class="main__seat main__seat--businessclass" [ngClass]="getSeatClass(row, col)">
+                  <button 
+                    [disabled]="!isSeatAvailable(row, col)"
+                    [class.selected]="isSeatSelected(row, col)"
+                    (click)="onSeatClick(row, col)">
+                    <img *ngIf="getSeatPrice(row, col) > 0" src="./booking/dollar-sign.svg" alt="Premium">
+                  </button>
+                </div>
+              </ng-container>
             </div>
           </div>
         </ng-container>
-      </div>
-      
- 
-      
-      <!-- Asientos de Emergencia -->
-      <ng-container *ngFor="let row of emergencyRows">
-        <div class="main__seat-row">
-          <div class="main__col-left">
-            <div class="main__seat" [ngClass]="seatClasses[row + col]" *ngFor="let col of leftCols">
-              <button 
-                [disabled]="!seatAvailability[row + col]"
-                [class.selected]="selectedSeats[row + col]"
-                (click)="onSeatClick(row, col)">
-                <img *ngIf="seatPrices[row + col] > 0" src="./booking/dollar-sign.svg" alt="Emergency">
-              </button>
-            </div>
-          </div>
-          <div class="main__col-number">{{row}}</div>
-          <div class="main__col-right">
-            <div class="main__seat" [ngClass]="seatClasses[row + col]" *ngFor="let col of rightCols">
-              <button 
-                [disabled]="!seatAvailability[row + col]"
-                [class.selected]="selectedSeats[row + col]"
-                (click)="onSeatClick(row, col)">
-                <img *ngIf="seatPrices[row + col] > 0" src="./booking/dollar-sign.svg" alt="Emergency">
-              </button>
-            </div>
-          </div>
-        </div>
-      </ng-container>
-      
-      <!-- Asientos Favorables -->
-      <ng-container *ngFor="let row of favorableRows">
-        <div class="main__seat-row">
-          <div class="main__col-left">
-            <div class="main__seat" [ngClass]="seatClasses[row + col]" *ngFor="let col of leftCols">
-              <button 
-                [disabled]="!seatAvailability[row + col]"
-                [class.selected]="selectedSeats[row + col]"
-                (click)="onSeatClick(row, col)">
-                <img *ngIf="seatPrices[row + col] > 0" src="./booking/dollar-sign.svg" alt="Favorable">
-              </button>
-            </div>
-          </div>
-          <div class="main__col-number">{{row}}</div>
-          <div class="main__col-right">
-            <div class="main__seat" [ngClass]="seatClasses[row + col]" *ngFor="let col of rightCols">
-              <button 
-                [disabled]="!seatAvailability[row + col]"
-                [class.selected]="selectedSeats[row + col]"
-                (click)="onSeatClick(row, col)">
-                <img *ngIf="seatPrices[row + col] > 0" src="./booking/dollar-sign.svg" alt="Favorable">
-              </button>
-            </div>
-          </div>
-        </div>
-      </ng-container>
-      
-      <!-- Filas 21-29 (Asientos regulares) -->
-      <ng-container *ngFor="let row of regularRows">
-        <div class="main__seat-row">
-          <div class="main__col-left">
-            <div class="main__seat" [ngClass]="seatClasses[row + col]" *ngFor="let col of leftCols">
-              <button 
-                [disabled]="!seatAvailability[row + col]"
-                [class.selected]="selectedSeats[row + col]"
-                (click)="onSeatClick(row, col)">
-              </button>
-            </div>
-          </div>
-          <div class="main__col-number">{{row}}</div>
-          <div class="main__col-right">
-            <div class="main__seat" [ngClass]="seatClasses[row + col]" *ngFor="let col of rightCols">
-              <button 
-              [disabled]="!seatAvailability[row + col]"
-              [class.selected]="selectedSeats[row + col]"
-              (click)="onSeatClick(row, col)">
-              </button>
-            </div>
-          </div>
-        </div>
-      </ng-container>
-      
-      <!-- Servicios inferiores -->
-      <div class="main__bottom-services">
-        <div class="service-row">
-          <div class="main__service-item">
-            <img src="./booking/bathroom.svg" alt="Baños">
-            <p>Baños</p>
-          </div>
-          <div class="main__service-item">
-            <img src="./booking/bathroom.svg" alt="Baños">
-            <p>Baños</p>
-          </div>
-        </div>
-        <div class="service-center">
-          <div class="main__service-item">
-            <img src="./booking/coffe.svg" alt="Servicio">
-            <p>Servicio</p>
-          </div>
-        </div>
-      </div>
 
-      <div class="main__passanger-navigation">
-        <button class="btn-prev" (click)="onPreviousPassenger()"><</button>
-        <div class="main__passenger-indicators">
-          <span *ngFor="let passenger of passengers; let i = index" 
-                [class.active]="passenger.id === currentPassenger?.id"
-                [class.completed]="passenger.selectedSeat">
-            <span>{{i + 1}}</span>
-          </span>
+        <!-- Separador de clases -->
+        <div class="main__class-separator">
+          <div class="main__separator-label main__separator-label--left">Clase Económica</div>
+          <div class="main__separator-label main__separator-label--right">Clase Ejecutiva</div>
         </div>
-        <button class="btn-next" (click)="onNextPassenger()">></button>
+
+        <!-- Clase Económica (Economy) -->
+        <ng-container *ngFor="let row of [5, 6, 7, 8]">
+          <div class="main__seat-row">
+            <div class="main__col-left">
+              <ng-container *ngFor="let col of ['A', 'B', 'C']">
+                <div class="main__seat main__seat--economy" [ngClass]="getSeatClass(row, col)">
+                  <button 
+                    [disabled]="!isSeatAvailable(row, col)"
+                    [class.selected]="isSeatSelected(row, col)"
+                    (click)="onSeatClick(row, col)">
+                    <img *ngIf="getSeatPrice(row, col) > 0" src="./booking/dollar-sign.svg" alt="Economy">
+                  </button>
+                </div>
+              </ng-container>
+            </div>
+            <div class="main__col-number">{{ row }}</div>
+            <div class="main__col-right">
+              <ng-container *ngFor="let col of ['D', 'E', 'F']">
+                <div class="main__seat main__seat--economy" [ngClass]="getSeatClass(row, col)">
+                  <button 
+                    [disabled]="!isSeatAvailable(row, col)"
+                    [class.selected]="isSeatSelected(row, col)"
+                    (click)="onSeatClick(row, col)">
+                    <img *ngIf="getSeatPrice(row, col) > 0" src="./booking/dollar-sign.svg" alt="Economy">
+                  </button>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </ng-container>
+
+
+        <ng-container *ngFor="let row of [9, 10, 11]">
+          <div class="main__seat-row">
+            <div class="main__col-left">
+              <ng-container *ngFor="let col of ['A', 'B', 'C']">
+                <div class="main__seat main__seat--favorable" [ngClass]="getSeatClass(row, col)">
+                  <button 
+                    [disabled]="!isSeatAvailable(row, col)"
+                    [class.selected]="isSeatSelected(row, col)"
+                    (click)="onSeatClick(row, col)">
+                    <img *ngIf="getSeatPrice(row, col) > 0" src="./booking/dollar-sign.svg" alt="Favorable">
+                  </button>
+                </div>
+              </ng-container>
+            </div>
+            <div class="main__col-number">{{ row }}</div>
+            <div class="main__col-right">
+              <ng-container *ngFor="let col of ['D', 'E', 'F']">
+                <div class="main__seat  main__seat--favorable" [ngClass]="getSeatClass(row, col)">
+                  <button 
+                    [disabled]="!isSeatAvailable(row, col)"
+                    [class.selected]="isSeatSelected(row, col)"
+                    (click)="onSeatClick(row, col)">
+                    <img *ngIf="getSeatPrice(row, col) > 0" src="./booking/dollar-sign.svg" alt="Favorable">
+                  </button>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </ng-container>
+
+        <!-- Asientos de emergencia -->
+        <ng-container *ngFor="let row of [17, 18]">
+          <div class="main__seat-row">
+            <div class="main__col-left">
+              <ng-container *ngFor="let col of ['A', 'B', 'C']">
+                <div class="main__seat main__seat--emergency" [ngClass]="getSeatClass(row, col)">
+                  <button 
+                    [disabled]="!isSeatAvailable(row, col)"
+                    [class.selected]="isSeatSelected(row, col)"
+                    (click)="onSeatClick(row, col)">
+                    <img *ngIf="getSeatPrice(row, col) > 0" src="./booking/dollar-sign.svg" alt="Emergency">
+                  </button>
+                </div>
+              </ng-container>
+            </div>
+            <div class="main__col-number">{{ row }}</div>
+            <div class="main__col-right">
+              <ng-container *ngFor="let col of ['D', 'E', 'F']">
+                <div class="main__seat main__seat--emergency" [ngClass]="getSeatClass(row, col)">
+                  <button 
+                    [disabled]="!isSeatAvailable(row, col)"
+                    [class.selected]="isSeatSelected(row, col)"
+                    (click)="onSeatClick(row, col)">
+                    <img *ngIf="getSeatPrice(row, col) > 0" src="./booking/dollar-sign.svg" alt="Emergency">
+                  </button>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </ng-container>
+
+        <!-- Asientos favorables -->
+        <ng-container *ngFor="let row of [19, 20]">
+          <div class="main__seat-row">
+            <div class="main__col-left">
+              <ng-container *ngFor="let col of ['A', 'B', 'C']">
+                <div class="main__seat main__seat--favorable" [ngClass]="getSeatClass(row, col)">
+                  <button 
+                    [disabled]="!isSeatAvailable(row, col)"
+                    [class.selected]="isSeatSelected(row, col)"
+                    (click)="onSeatClick(row, col)">
+                    <img *ngIf="getSeatPrice(row, col) > 0" src="./booking/dollar-sign.svg" alt="Favorable">
+                  </button>
+                </div>
+              </ng-container>
+            </div>
+            <div class="main__col-number">{{ row }}</div>
+            <div class="main__col-right">
+              <ng-container *ngFor="let col of ['D', 'E', 'F']">
+                <div class="main__seat  main__seat--favorable" [ngClass]="getSeatClass(row, col)">
+                  <button 
+                    [disabled]="!isSeatAvailable(row, col)"
+                    [class.selected]="isSeatSelected(row, col)"
+                    (click)="onSeatClick(row, col)">
+                    <img *ngIf="getSeatPrice(row, col) > 0" src="./booking/dollar-sign.svg" alt="Favorable">
+                  </button>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </ng-container>
+
+        <!-- Asientos regulares -->
+        <ng-container *ngFor="let row of [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33]">
+          <div class="main__seat-row">
+            <div class="main__col-left">
+              <ng-container *ngFor="let col of ['A', 'B', 'C']">
+                <div class="main__seat main__seat--regular">
+                  <button 
+                    [disabled]="!isSeatAvailable(row, col)"
+                    [class.selected]="isSeatSelected(row, col)"
+                    (click)="onSeatClick(row, col)">
+                  </button>
+                </div>
+              </ng-container>
+            </div>
+            <div class="main__col-number">{{ row }}</div>
+            <div class="main__col-right">
+              <ng-container *ngFor="let col of ['D', 'E', 'F']">
+                <div class="main__seat main__seat--regular" [ngClass]="getSeatClass(row, col)">
+                  <button 
+                    [disabled]="!isSeatAvailable(row, col)"
+                    [class.selected]="isSeatSelected(row, col)"
+                    (click)="onSeatClick(row, col)">
+                  </button>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </ng-container>
+
+        <!-- Servicios inferiores -->
+        <div class="main__bottom-services">
+          <div class="service-row">
+            <div class="main__service-item">
+              <img src="./booking/bathroom.svg" alt="Baños">
+              <p>Baños</p>
+            </div>
+            <div class="main__service-item">
+              <img src="./booking/bathroom.svg" alt="Baños">
+              <p>Baños</p>
+            </div>
+          </div>
+          <div class="service-center">
+            <div class="main__service-item">
+              <img src="./booking/coffe.svg" alt="Servicio">
+              <p>Servicio</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navegación entre pasajeros -->
+        <div class="main__passanger-navigation">
+          <button class="btn-prev" (click)="onPreviousPassenger()"><</button>
+          <div class="main__passenger-indicators">
+            <span *ngFor="let passenger of passengers; let i = index" 
+                  [class.active]="passenger.id === currentPassenger?.id"
+                  [class.completed]="passenger.departureSeat && passenger.returnSeat">
+              <span>{{ i + 1 }}</span>
+            </span>
+          </div>
+          <button class="btn-next" (click)="onNextPassenger()">></button>
+        </div>
+      </ng-container>
       </div>
     </div>
-  </div>
+  
 </section>

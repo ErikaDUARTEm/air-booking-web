@@ -224,6 +224,17 @@
           background-color: #f0f8ff;
         }
       }
+
+      &--businessclass button {
+        border: 1px solid #001E60;
+        img{
+          color: #001E60;
+        }
+        
+        &:hover {
+          background-color: #f0f8ff;
+        }
+      }
       
       &--unavailable button {
         background-image: linear-gradient(to bottom right, transparent calc(50% - 1px), #ccc, transparent calc(50% + 1px));
