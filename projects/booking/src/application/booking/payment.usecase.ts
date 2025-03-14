@@ -36,7 +36,6 @@ export class PaymentUseCase{
         return;
       }
     }
-    console.log(paymentData)
       this._state.payment.paymentData.set(paymentData);
       this._state.payment.billingData.set(billingData);
       this._state.payment.selectedMethod.set(selectedMethod);
