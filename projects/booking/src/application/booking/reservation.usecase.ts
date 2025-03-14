@@ -1,98 +1,108 @@
-import { inject, Injectable } from "@angular/core";
-import { State } from "../../domain/state";
-import { CreateReservationService } from "../../infrastructure/services/post/create-reservation.service";
-import { GetFlightDetailsUseCase } from "./get-fly-details.usecase";
-import { SavePassengersUseCase } from "./save-passengers.usecase";
-import { PaymentUseCase } from "./payment.usecase";
-import { Observable, Subscription, combineLatest } from "rxjs";
-import { IReservationRequest } from "../../domain/model/reservation-request.model";
+// import { inject, Injectable } from "@angular/core";
+// import { State } from "../../domain/state";
+// import { CreateReservationService } from "../../infrastructure/services/post/create-reservation.service";
+// import { Subscription, } from "rxjs";
+// import { IReservationRequest } from "../../domain/model/reservation-request.model";
+// import { PaymentUseCase } from "./payment.usecase";
+// import { GetFlightsUsecase } from "availability";
+// import { SavePassengersUseCase } from "./save-passengers.usecase";
+// import { ICard, IPse } from "../../domain/model/payment.model";
 
-@Injectable({
-  providedIn: 'root',
-})
-export class ReservationUseCase {
-  private readonly _state = inject(State);
-  private readonly _createReservationService = inject(CreateReservationService);
-  private readonly _getFlyDetailsUseCase = inject(GetFlightDetailsUseCase);
-  private readonly _savePassengerUseCase = inject(SavePassengersUseCase);
-  private readonly _paymentUseCase = inject(PaymentUseCase);
-  private subscriptions: Subscription;
+// @Injectable({
+//   providedIn: 'root',
+// })
+// export class ReservationUseCase {
+//   private readonly _state = inject(State);
+//   private readonly _createReservationService = inject(CreateReservationService);
+//   private subscriptions: Subscription;
+//   private readonly _reservationUseCase = inject(ReservationUseCase);
+//   private readonly _paymentUseCase = inject(PaymentUseCase);
+//   private readonly _getFlightUseCase = inject(GetFlightsUsecase);
+//   private readonly _savePassangerUseCase = inject(SavePassengersUseCase);
+//   //#region Public Methods
+//   initSubscriptions(): void {
+//     this.subscriptions = new Subscription();
+//   }
+//   getReservationData(): IReservationRequest | void {
+//     //const selectedFlights = this._state.flight.flightSelection.snapshot();
+//     const passengers = this._state.passenger.allPassengers.snapshot();
+//     const paymentData = this._state.payment.paymentData.snapshot();
+//     const paymentDetails = paymentData.paymentDetails;
 
-  //#region Public Methods
-  initSubscriptions(): void {
-    this.subscriptions = new Subscription();
-  }
-  getReservationData(): IReservationRequest | void {
+//     return {
+//       // departureDate: selectedFlights.departureFlight.departureTime,
+//       // arrivalDate: selectedFlights.return?.date || "",
+//       // origin: selectedFlights.departure.origin,
+//       // destination: selectedFlights.departure.destination,
+//       // reservationCode: this.generateReservationCode(),
+//       // creationDate: new Date().toISOString(),
 
-      const selectedFlights = this._state.flight.outboundFlightState.snapshot()
-      const passengers = this._state.passenger.flightData.snapshot()
-      const paymentData = this._state.payment.paymentData.snapshot()
+//       // originFlight: {
+//       //   relationalId: selectedFlights.departure.id,
+//       //   price: selectedFlights.departure.price,
+//       //   category: selectedFlights.departure.category,
+//       //   startTime: selectedFlights.departure.startTime,
+//       //   endTime: selectedFlights.departure.endTime
+//       // },
 
-      if (!selectedFlights || !passengers || !paymentData) {
-        console.error("No se pueden obtener todos los datos necesarios para la reserva.");
-        return null;
-      }
-      return {
-        departureDate: selectedFlights.departure.date,
-        arrivalDate: selectedFlights.return?.date || "",
-        origin: selectedFlights.departure.origin,
-        destination: selectedFlights.departure.destination,
-        reservationCode: this.generateReservationCode(),
-        creationDate: new Date().toISOString(),
+//       // destinationFlight: selectedFlights.return
+//       //   ? {
+//       //       relationalId: selectedFlights.return.id,
+//       //       price: selectedFlights.return.price,
+//       //       category: selectedFlights.return.category,
+//       //       startTime: selectedFlights.return.startTime,
+//       //       endTime: selectedFlights.return.endTime
+//       //     }
+//       //   : null,
 
-        originFlight: {
-          relationalId: selectedFlights.departure.id,
-          price: selectedFlights.departure.price,
-          category: selectedFlights.departure.category,
-          startTime: selectedFlights.departure.startTime,
-          endTime: selectedFlights.departure.endTime
-        },
+//       passengers: passengers.map(p => ({
+//         type: "ADULT",
+//         firstName: p.name,
+//         lastName: p.lastName,
+//         documentType: "",
+//         documentNumber: "",
+//         gender: p.gender,
+//         birthdayDate: p.birthDate.toString(),
+//         email: p.email,
+//         phoneNumber: p.phone,
+//         originSeat: "",
+//         destinationSeat: ""
+//       })),
 
-        destinationFlight: selectedFlights.return
-          ? {
-              relationalId: selectedFlights.return.id,
-              price: selectedFlights.return.price,
-              category: selectedFlights.return.category,
-              startTime: selectedFlights.return.startTime,
-              endTime: selectedFlights.return.endTime
-            }
-          : null,
+//       payment: {
+//         paymentMethod : paymentData.paymentMethod,
+//         subtotal: paymentData.subtotal,
+//         total: paymentData.total,
+//         discount: 0.0,
+//         ...(paymentData.paymentMethod === 'CARD' ? { card: paymentData.paymentDetails as ICard } : {
+//           number: "",
+//           holderName: "",
+//           expirationDate: "",
+//           cvv: 0,
+//           countryIssue: "",
+//         }),
+//         ...(paymentData.paymentMethod  === 'PSE' ? { pse: paymentData.paymentDetails as IPse } : {
+//           holderName: "",
+//           email: ""
+//         }),
+//         billingAddress: {
+//           addressOne: paymentData.billingAddress.addressOne,
+//           addressTwo: paymentData.billingAddress.addressTwo,
+//           country: paymentData.billingAddress.country,
+//           city:paymentData.billingAddress.city,
+//           state: paymentData.billingAddress.state,
+//           postalCode: paymentData.billingAddress.postalCode,
+//           phoneNumber: paymentData.billingAddress.phoneNumber,
+//           email: paymentData.billingAddress.email
+//         }
 
-        passengers: passengers.map(p => ({
-          type: p.type,
-          firstName: p.firstName,
-          lastName: p.lastName,
-          documentType: p.documentType,
-          documentNumber: p.documentNumber,
-          gender: p.gender,
-          birthdayDate: p.birthdayDate,
-          email: p.email,
-          phoneNumber: p.phoneNumber,
-          originSeat: p.originSeat,
-          destinationSeat: p.destinationSeat
-        })),
+//       }
+//     };
+//   }
 
-        paymentData: paymentData
-      };
-  }
+//   }
+// //#endregion
 
-  execute(){
-
-
-
-    this.subscriptions.add(
-      this._createReservationService
-      .execute().pipe().subscribe()
-    )
-
-  }
-  destroySubscriptions(): void {
-    this.subscriptions.unsubscribe();
-  }
-}
-
-
-//#endregion
-
-//#region Private Methods
-//#endregion
+// //#region Private Methods
+// //#endregion
+// }

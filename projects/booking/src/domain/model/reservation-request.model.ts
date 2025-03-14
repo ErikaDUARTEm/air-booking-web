@@ -1,4 +1,4 @@
-import { IPaymentData } from "./payment.model";
+import { IBillingAddress, ICard, IPaymentData, IPse } from './payment.model';
 
 export interface IReservationRequest {
   departureDate: string;
@@ -37,6 +37,14 @@ export interface IReservationRequest {
     originSeat: string;
     destinationSeat: string;
   }[];
+   payment: {
+    paymentMethod: 'CARD' | 'PSE';
+    subtotal: number;
+    total: number;
+    discount: number;
+    billingAddress: IBillingAddress;
+    card?: ICard;
+    pse?: IPse;
+  }
 
-  paymentData: IPaymentData;
 }

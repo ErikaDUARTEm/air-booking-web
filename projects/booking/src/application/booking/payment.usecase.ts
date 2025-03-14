@@ -9,7 +9,17 @@ import { ICard, IPaymentData, IPse } from "../../domain/model/payment.model";
 })
 export class PaymentUseCase{
   private readonly _state = inject(State);
+  private subscriptions: Subscription;
 
+
+  //#region Public Methods
+  initSubscriptions(): void {
+    this.subscriptions = new Subscription();
+  }
+
+  destroySubscriptions(): void {
+    this.subscriptions.unsubscribe();
+  }
     paymentData$(): Observable<IPaymentData> {
         return this._state.payment.paymentData.$();
       }
