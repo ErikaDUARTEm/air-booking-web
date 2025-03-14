@@ -20,15 +20,12 @@ export class CreateUserUseCase {
         this.subscriptions.unsubscribe();
     }
 
-    execute(user: IUser): void {
-        this.subscriptions.add(
-            this._service.execute(user).
-            pipe(
-                tap(newUser => {
-                    const updatedUsers = this._state.users.users.snapshot();
-                    this._state.users.users.set([...updatedUsers, newUser]);
-                })
-            ).subscribe()
+    execute(user: IUser): Observable<IUser> {
+        return this._service.execute(user).pipe(
+          tap(newUser => {
+            const updatedUsers = this._state.users.users.snapshot();
+            this._state.users.users.set([...updatedUsers, newUser]);
+          })
         );
-    }
+      }
 }

@@ -3,6 +3,7 @@
     display: flex;
     flex-direction: row;
     &__leftSide{
+      width: 60%;
       padding-left: 20px;
     }
     &__body {
