@@ -9,6 +9,6 @@ import { Component, input, output } from '@angular/core';
 })
 export class ButtonModalComponent {
   text = input<string>();
-  variant = input<"primary" | "secondary">("primary");
+  variant = input<"primary" | "secondary" | "tertiary" |"noText">("primary");
   onClick = output<void>()
 }

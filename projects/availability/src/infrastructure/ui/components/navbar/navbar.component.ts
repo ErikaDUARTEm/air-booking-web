@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { LogoComponent } from 'shared';
 import { Router, RouterLink } from '@angular/router';
 import { INavRouter } from 'shared';
+import { LoginLogoutButtonComponent } from "shared";
 
 @Component({
   selector: 'lib-navbar',
-  imports: [LogoComponent, RouterLink],
+  imports: [LogoComponent, RouterLink, LoginLogoutButtonComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })

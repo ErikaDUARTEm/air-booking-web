@@ -36,7 +36,7 @@ export class ReservationUseCase {
     const uuid = crypto.randomUUID();
 
     return {
-      departureDate: selectedOriginFlights.departureTime.toDateString(),
+      departureDate: "",
       arrivalDate: selectedDestinationFlights.arrivalTime.toDateString(),
       origin: selectedOriginFlights.origin.name,
       destination: selectedDestinationFlights.destination.name,

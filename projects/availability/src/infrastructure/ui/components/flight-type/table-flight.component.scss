@@ -1,0 +1,117 @@
+@use "../../../ui/styles/mixins.scss" as mix;
+@use "../../../ui/styles/variables.scss" as vars;
+@use "../../../../../../shared/src/infrastructure/ui/styles/variables.scss" as shared-vars;
+.card {
+  background-color: shared-vars.$background-color;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  margin: 0 auto 30px;
+  padding: 20px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  max-height: 600px;
+  overflow: hidden;
+  overflow-y: auto;
+ font-family: Jost, sans-serif;;
+  &__title {
+    text-align: center;
+    margin: 0;
+    color: shared-vars.$black;
+    width: 100%;
+  }
+
+  &__table {
+    width: 100%;
+    margin-top: 20px;
+  }
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__button-add {
+    background-color: shared-vars.$blue;
+    color: shared-vars.$white;
+    border: none;
+    padding: 10px 20px;
+    width: 150px;
+    border-radius: 5px;
+    margin-right: 5%;
+    cursor: pointer;
+  }
+}
+
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  &__header {
+    // background-color: shared-vars.$blue;
+    border-bottom: 1px solid shared-vars.$blue;
+    color:shared-vars.$black;
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    padding: 12px 15px;
+    text-align: center;
+  }
+
+  &__row {
+   
+    &:nth-child(even) {
+      background-color: shared-vars.$white;
+    }
+
+    &:hover {
+      background-color: rgba(76, 175, 80, 0.1);
+
+      .actions__items {
+        visibility: visible;
+      }
+    }
+  }
+
+  &__cell {
+    padding: 12px 15px;
+    text-align: center;
+    color: shared-vars.$black;
+    font-size: 1.5rem;
+
+    &:first-child {
+      font-weight: bold;
+    }
+  }
+}
+
+.actions {
+    display: flex;
+    width: 40px;
+    padding: 12px 0;;
+  &__items {
+    visibility: hidden;
+    display: flex;
+    gap: 10px;
+    position: relative;
+  }
+
+  &__button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.error {
+  &__title {
+    font-size: 1.5rem;
+    color: red;
+    margin: 0;
+  }
+
+  &__message {
+    font-size: 1rem;
+    color: shared-vars.$black;
+  }
+}

@@ -1,0 +1,57 @@
+@use "../../styles/variables.scss" as variables;
+@use "../../styles/mixins.scss" as mixins;
+
+.login-logout {
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  color: variables.$white;
+  font-size: variables.$font-size-label;
+  padding: variables.$spacing-xs;
+  border-radius: 50px;
+  width: 150px;
+  border: 1px solid variables.$white;
+  text-decoration: none;
+
+  &:hover {
+    cursor: pointer;
+    background-color: variables.$white;
+    color: variables.$blue;
+    border-radius: 10px 10px 0 0;
+  }
+
+  &:hover .dropdown {
+    display: block;
+  }
+
+  &:active {
+    outline: 1px solid variables.$white;
+    outline-offset: 2px;
+  }
+
+  svg {
+    width: variables.$icon-size-large;
+  }
+}
+
+.dropdown {
+  display: none;
+  background-color: #0032a0;
+  padding: 5px;
+  position: absolute;
+  top: 59px;
+  width: 150px;
+  font-size: 15px;
+  text-align: center;
+  color: #fff;
+  list-style: none;
+  border: 1px solid #fff;
+  margin-top: 2px;
+
+  a:hover {
+    background-color: #ffffff33;
+  }
+}

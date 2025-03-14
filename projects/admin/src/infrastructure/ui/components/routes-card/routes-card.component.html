@@ -1,0 +1,23 @@
+@for (route of routes; track route.routeId) {
+<div class="card">
+  <div class="card__info">
+    <p class="card__origin">Origen: {{ route.origin }}</p>
+    <p class="card__destination">Destino: {{ route.destination }}</p>
+    <p class="card__duration">Duración: {{ route.duration }} horas</p>
+  </div>
+  <div class="card__actions">
+    <button
+      class="card__button card__button--edit"
+      (click)="editRouteHandler(route)"
+    >
+      Editar
+    </button>
+    <button
+      class="card__button card__button--delete"
+      (click)="deleteRouteHandler(route)"
+    >
+      Eliminar
+    </button>
+  </div>
+</div>
+}

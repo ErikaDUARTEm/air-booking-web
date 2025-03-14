@@ -1,6 +1,6 @@
 import { Routes } from "@angular/router";
 import { UsersContainerComponent } from "../../containers/user-container/user-container.component";
-import { SidebarComponent } from "shared";
+import { hasRoleGuard, SidebarComponent } from "shared";
 import { LoginContainerComponent } from "../../containers/login-container/login-container.component";
 import { UserRegisterComponent } from "../../forms/user-register/user-register.component";
 import { RegisterContainerComponent } from "../../containers/register-container/register-container.component";
@@ -11,6 +11,7 @@ export const authRoutes: Routes = [
         children: [
             {
                 path: '',
+                canActivate: [hasRoleGuard(["ADMIN"])],
                 component: UsersContainerComponent,
             },
             {

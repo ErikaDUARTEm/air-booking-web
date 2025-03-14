@@ -1,0 +1,63 @@
+@use '../../../../../../shared/src/infrastructure/ui/styles/variables.scss' as variables;
+
+.flight-form {
+  display: flex;
+  flex-direction: column;
+
+  max-width: 400px;
+  background: #fff;
+  border-radius: 8px;
+  margin: 1rem auto;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+  &__group {
+    margin: 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__label {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+  }
+
+  &__input {
+    padding: 1.2rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1.4rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+
+    &:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+      outline: none;
+    }
+
+    &.is-invalid {
+      border-color: #dc3545;
+      background-color: #f8d7da;
+    }
+  }
+
+  &__button {
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 19px;
+    transition: opacity 0.2s;
+    cursor: pointer;
+    width: 250px;
+    margin: 1rem auto;
+    
+    background-color: variables.$blue-dark;
+    font-weight: variables.$font-weight-regular;
+    color: variables.$white;
+    &:hover {
+      background-color: variables.$blue;
+    }
+  }
+}

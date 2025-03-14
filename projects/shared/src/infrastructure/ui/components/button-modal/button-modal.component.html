@@ -1,5 +1,11 @@
 <button class="button"
-    [ngClass]="{'button--primary': variant() === 'primary', 'button--secondary': variant() === 'secondary'}"
+    [ngClass]="{
+        'button--primary': variant() === 'primary', 
+        'button--secondary': variant() === 'secondary',
+        'button--tertiary': variant() === 'tertiary',
+        'button--noText': variant() === 'noText'
+        }"
     (click)="onClick.emit()">
-    {{ text() }}
+    <ng-content></ng-content>
+    <span *ngIf="text()">{{ text() }}</span>
 </button>

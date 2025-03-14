@@ -49,8 +49,8 @@ export class LocationSelectorComponent {
   }
 
   swapLocations() {
-    const origin = this.formGroup.get('origin')?.value;
-    const destination = this.formGroup.get('destination')?.value;
+    const origin = this.formGroup.value.origin.name;
+    const destination = this.formGroup.value.destination.name;
 
     this.formGroup.patchValue({
       origin: destination,

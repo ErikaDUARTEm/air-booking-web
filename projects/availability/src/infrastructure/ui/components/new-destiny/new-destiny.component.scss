@@ -7,7 +7,9 @@
   position: relative;
   overflow: hidden;
   height: 80vh;
+  width: 80dvw;
   border-radius: 20px;
+  margin: 0 auto;
   font-family: variables.$primary-font;
 
   &__image {
@@ -70,7 +72,7 @@
     max-width: 50%;
 
     &-title {
-      font-size: 8rem;
+      font-size: 60px;
     }
 
     &-description {
@@ -97,5 +99,11 @@
         transition: fill 0.3s;
       }
     }
+  }
+}
+
+@media (760px <= width <= 1400px) {
+  .new-destiny {
+    width: 90dvw;
   }
 }

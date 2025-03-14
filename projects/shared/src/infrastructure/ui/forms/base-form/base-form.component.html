@@ -1,0 +1,16 @@
+<div [formGroup]="formGroup" class="form">
+    @for (field of fields; track $index) {
+    <div class="form__field">
+        @if (field.label) {
+        <label for="{{ field.name }}" class="form__label">{{ field.label }}</label>
+        }
+        <input [id]="field.name" [type]="field.type" [formControlName]="field.name" class="form__input"
+            [ngClass]="{ 'is-invalid': formGroup.get(field.name)?.invalid && formGroup.get(field.name)?.touched }" />
+        <div class="invalid-feedback form__error">
+            @if (formGroup.get(field.name)?.invalid && formGroup.get(field.name)?.touched) {
+            <span class="form__error-message">Campo inválido</span>
+            }
+        </div>
+    </div>
+    }
+</div>

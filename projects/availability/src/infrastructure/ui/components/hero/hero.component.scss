@@ -1,7 +1,5 @@
-@use "../../../../../../shared/src/infrastructure/ui/styles/variables.scss" as
-  variables;
-@use "../../../../../../shared/src/infrastructure/ui/styles/mixins.scss" as
-  mixins;
+@use "../../../../../../shared/src/infrastructure/ui/styles/variables.scss" as variables;
+@use "../../../../../../shared/src/infrastructure/ui/styles/mixins.scss" as mixins;
 
 .flight-search {
   @include mixins.typography-base;

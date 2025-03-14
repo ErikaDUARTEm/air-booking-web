@@ -1,0 +1,6 @@
+<lib-routes-layout
+  [routes]="routes$ | async"
+  (editRoute)="onEditRoute($event)"
+  (deleteRoute)="onDeleteRoute($event)"
+  (createRoute)="onCreateRoute($event)"
+></lib-routes-layout>

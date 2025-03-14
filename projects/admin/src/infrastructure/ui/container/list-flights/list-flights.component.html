@@ -1,0 +1,13 @@
+
+<lib-table-flight 
+    [dataFlight]="flights$ | async"
+    (removedFlight)="removeFlight($event)"
+    (createdFlight)="createFlights($event)"
+    (updatedFlight)="updateFlight($event)"
+    [currentFlight]="currentFlight$ | async"
+    (onSelectOrder)="selectFlight($event)"
+    [dataRoute] = "routes$ | async"
+
+    >
+    
+</lib-table-flight>

@@ -1,0 +1,46 @@
+@use "./../../styles/mixins" as mixins;
+@use "./../../styles/variables" as variables;
+@use "./../../../../../../shared/src/infrastructure/ui/styles/variables.scss" as
+  variablesGlobales;
+
+.button-container {
+  display: flex;
+  justify-content: center; // Centra horizontalmente
+  margin-bottom: 50px; // Espacio debajo del botón
+  margin-top: 50px;
+}
+
+.create-route-button {
+  // Estilos base
+  background-color: variablesGlobales.$green; // Fondo azul
+  color: variablesGlobales.$white; // Texto blanco
+  font-weight: 500; // Peso de la fuente
+  font-size: 16px; // Tamaño de la fuente
+  padding: 12px 24px; // Relleno interno
+  border: none; // Sin borde
+  border-radius: 8px; // Bordes redondeados
+  cursor: pointer; // Cursor tipo puntero
+  transition: background-color 0.3s ease; // Transición suave
+
+  // Efecto hover
+  &:hover {
+    background-color: darken(
+      variablesGlobales.$green,
+      10%
+    ); // Oscurecer el azul al pasar el mouse
+  }
+
+  // Efecto activo (al hacer clic)
+  &:active {
+    background-color: darken(
+      variablesGlobales.$green,
+      20%
+    ); // Oscurecer aún más el azul
+  }
+
+  // Efecto focus (para accesibilidad)
+  &:focus {
+    outline: none; // Quitar el contorno por defecto
+    box-shadow: 0 0 0 3px rgba(variablesGlobales.$green, 0.3); // Sombra para indicar foco
+  }
+}

@@ -36,4 +36,35 @@
         background-color: #e01d1d;
       }
     }
+
+    &--tertiary{
+      background-color: variables.$blue-dark;
+      color: variables.$white;
+      padding: 10px 10px;
+      width: 150px;
+      font-size: 1.5rem;
+      border-radius: 5px;
+      border: none;
+      margin-right: 5%;
+      border: none;
+      cursor: pointer;
+      &:hover {
+        background-color: variables.$blue;
+      }
+    }
+
+    &--noText{
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      border: none;
+      left: 100%;
+      background-color: transparent;
+      cursor: pointer;
+    }
+    
+
+    
   }

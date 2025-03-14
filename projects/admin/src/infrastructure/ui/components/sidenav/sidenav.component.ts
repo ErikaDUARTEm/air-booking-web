@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 interface Menu {
-  title: string,
-  path: string,
+  title: string;
+  path: string;
 }
 
 @Component({
@@ -11,18 +11,26 @@ interface Menu {
   standalone: true,
   imports: [RouterLink],
   templateUrl: './sidenav.component.html',
-  styleUrl: './sidenav.component.scss'
+  styleUrl: './sidenav.component.scss',
 })
 export class SidenavComponent {
-
   public listMenu: Menu[] = [
     {
       title: 'Inicio',
-      path: '/admin/view'
+      path: '/admin/view',
     },
     {
       title: 'Reservas',
-      path: '/admin/booking'
+      path: '/admin/booking',
+    },
+    {
+      title: 'Rutas',
+      path: '/admin/routes',
+    },
+    {
+      title: 'Vuelos',
+      path: '/admin/flights'
+      
     }
-  ]
+  ];
 }

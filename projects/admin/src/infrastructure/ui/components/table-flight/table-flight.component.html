@@ -1,0 +1,75 @@
+<lib-admin-header title="Gestión de Vuelos" />
+<div class="card">
+    <div class="card__header">
+        <h2 class="card__title">Vuelos</h2>
+sdf
+        <lib-modal class="card__button-add" [title]="'Formulario para crear Vuelo'" [actionText]="'Agregar Vuelo'"
+            (onConfirm)="confirma()" (onCancel)="cancel()" [variant]="'tertiary'">
+            <lib-create-flight #createFlight (createFlight)="createFlights($event)"
+                [routes]="dataRoute()"></lib-create-flight>
+        </lib-modal>
+    </div>
+    <table class="card__table styled-table">
+        <thead>
+            <tr>
+                @for (item of columnKeys; track $index) {
+                <th class="styled-table__header">{{columns[$index]}}</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @for (item of flightRequests; track $index) {
+            <tr class="styled-table__row">
+                @for (key of columnKeys; track $index) {
+                <td class="styled-table__cell">
+                    @if (key === 'price' || key === 'BF' || key === 'BB' || key === 'EF' || key === 'EB' || key ===
+                    'EC') {
+
+                    {{ item[key] | currency }}
+                    }
+                    @else {
+                    @if (key === 'departureTime' || key=== 'arrivalTime') {
+                    {{ item[key] |fixDate| date: 'medium' }}
+                    }
+                    @else{
+                    @if (key === 'routeId') {
+                    {{ item[key] | routeIdFormat }}
+                    }@else{
+                    {{item[key]}}
+                    }
+                    }
+                    }
+                </td>
+                }
+                <td class="styled-table__cell actions">
+                    <div class="actions__items">
+                        <lib-modal class="actions__button--remove"
+                            [title]="'¿Estas seguro que quieres eliminar el vuelo?'" [actionText]="''"
+                            (onConfirm)="removeFlight(item.flightNumber)" (onCancel)="cancel()" [variant]="'noText'">
+                            <svg buttonTable width="30px" height="30px" class="icon"
+                                preserveAspectRatio="xMidYMid meet">
+                                <use [attr.xlink:href]="images[0]"></use>
+                            </svg>
+                        </lib-modal>
+                        <div (click)="sendData(item.flightNumber)">
+                            <lib-modal class="actions__button--remove" [title]="'Actualizar Vuelo'" [actionText]="''"
+                                (onConfirm)="cancel()" (onCancel)="confirmUpdate()" [variant]="'noText'"  >
+                                <svg buttonTable width="30px" height="30px" class="icon"
+                                    preserveAspectRatio="xMidYMid meet">
+                                    <use [attr.xlink:href]="images[1]"></use>
+                                </svg>
+                                <lib-update-flight #updateFlight form-body [flightFound]="currentFlight()"
+                                    (updateFlight)="onUpdateFlight($event)"
+                                    [routes]="dataRoute()"
+                                    >
+                                </lib-update-flight>
+                            </lib-modal>
+                        </div>
+
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

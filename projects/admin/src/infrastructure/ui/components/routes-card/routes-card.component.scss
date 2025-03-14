@@ -1,0 +1,121 @@
+@use "./../../styles/mixins" as mixins;
+@use "./../../styles/variables" as variables;
+@use "./../../../../../../shared/src/infrastructure/ui/styles/variables.scss" as
+  variablesGlobales;
+
+/* Block: Card */
+.card {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  background-color: variablesGlobales.$white; /* Fondo de la card */
+  border-radius: 5px; /* Bordes redondeados */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
+  padding: 16px; /* Espaciado interno */
+  display: flex;
+  flex-direction: column; /* Organiza el contenido en columna */
+  justify-content: space-between; /* Distribuye el espacio verticalmente */
+}
+
+/* Contenedor de la información (origen, destino, duración) */
+.card__info {
+  display: flex;
+  justify-content: space-around; /* Distribuye el espacio horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  width: 100%; /* Ocupa todo el ancho de la card */
+  margin-bottom: 25px; /* Espacio inferior para separar de los botones */
+}
+
+/* Estilos para los textos (origen, destino, duración) */
+.card__origin,
+.card__destination,
+.card__duration {
+  font-family: "Jost", sans-serif; /* Fuente primaria */
+  font-size: 16px; /* Tamaño de texto de párrafo */
+  color: variablesGlobales.$black; /* Color de texto principal */
+  margin: 0; /* Elimina el margen por defecto */
+}
+
+/* Contenedor de acciones (botones) */
+.card__actions {
+  display: flex;
+  justify-content: space-evenly; /* Centra los botones horizontalmente */
+  gap: 24px; /* Espacio entre los botones */
+}
+
+/* Botones */
+.card__button {
+  font-family: "Jost", sans-serif; /* Fuente primaria */
+  font-size: 18px; /* Tamaño de texto */
+  font-weight: bold; /* Peso de la fuente */
+  padding: 8px 16px; /* Espaciado interno */
+  border: none; /* Sin borde */
+  border-radius: 5px; /* Bordes redondeados */
+  cursor: pointer; /* Cursor tipo pointer */
+  transition: background-color 0.3s ease; /* Transición suave */
+  width: 100px; /* Ancho fijo */
+
+  &--edit {
+    background-color: variablesGlobales.$blue; /* Color primario */
+    color: variablesGlobales.$white; /* Texto blanco */
+
+    &:hover {
+      background-color: darken(variablesGlobales.$blue, 10%); /* Efecto hover */
+    }
+  }
+
+  &--delete {
+    background-color: variablesGlobales.$red; /* Color de eliminación */
+    color: variablesGlobales.$white; /* Texto blanco */
+
+    &:hover {
+      background-color: darken(variablesGlobales.$red, 10%); /* Efecto hover */
+    }
+  }
+}
+
+/* Estilos para el modal */
+.modal {
+  display: none; /* Oculta el modal por defecto */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Asegura que el modal esté por encima de otros elementos */
+}
+
+.modal--visible {
+  display: flex; /* Muestra el modal cuando está visible */
+}
+
+.modal__content {
+  background-color: variablesGlobales.$white; /* Fondo del contenido del modal */
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px; /* Ancho del modal */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
+}
+
+.modal__header {
+  font-family: "Jost", sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  color: variablesGlobales.$black;
+  margin-bottom: 16px;
+}
+
+.modal__body {
+  font-family: "Jost", sans-serif;
+  font-size: 16px;
+  color: variablesGlobales.$black;
+  margin-bottom: 20px;
+}
+
+.modal__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px; /* Espacio entre los botones */
+}

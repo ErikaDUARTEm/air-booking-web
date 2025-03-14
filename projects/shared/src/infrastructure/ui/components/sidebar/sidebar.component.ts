@@ -1,4 +1,5 @@
 import { Component, input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 interface MenuSidebar {
   title: string;
@@ -7,7 +8,7 @@ interface MenuSidebar {
 
 @Component({
   selector: 'lib-sidebar',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })

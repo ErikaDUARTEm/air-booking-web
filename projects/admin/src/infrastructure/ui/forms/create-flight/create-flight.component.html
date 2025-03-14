@@ -1,0 +1,14 @@
+<form [formGroup]="formGroup" (ngSubmit)="submit()" class="route-form">
+    @if(flightRequest){
+    <lib-base-form [model]="flightRequest" [labelsMap]="customLabels" [formGroup]="formGroup"></lib-base-form>
+    }
+    <lib-control-route [routes]="routes" [formGroup]="formGroup"></lib-control-route>
+    <div class="route-form__group">
+        <label for="departureTime" class="route-form__label">Hora de Salida:</label>
+        <input id="departureTime" type="datetime-local" formControlName="departureTime" class="route-form__input" />
+    </div>
+    <div class="route-form__group">
+        <label for="arrivalTime" class="route-form__label">Hora de Llegada:</label>
+        <input id="arrivalTime" type="datetime-local" formControlName="arrivalTime" class="route-form__input" />
+    </div>
+</form>

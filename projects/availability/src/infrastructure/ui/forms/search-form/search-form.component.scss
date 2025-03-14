@@ -10,6 +10,7 @@
     border-radius: variables.$border-radius;
     box-shadow: 0 15px 20px variables.$shadow-color;
     width: 70dvw;
+    margin: 0 auto;
     @include mixins.typography-base;
   }
 
@@ -19,5 +20,11 @@
     font-weight: 500;
     position: absolute;
     margin-top: 5px;
+  }
+}
+
+@media (760px <= width <= 1400px) {
+  .flight-search__form {
+    width: 90dvw;
   }
 }

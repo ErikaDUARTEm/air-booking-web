@@ -20,6 +20,7 @@
     "@angular/router": "^19.1.0",
     "@canvasjs/angular-charts": "^1.2.0",
     "@canvasjs/charts": "^3.12.5",
+    "booking-final": "file:",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"

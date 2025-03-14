@@ -1,0 +1,35 @@
+<form [formGroup]="formGroup" (ngSubmit)="submit()" class="flight-form">
+    <div class="flight-form__group">
+        <label for="aggregateId" class="flight-form__label">ID</label>
+        <input id="aggregateId" formControlName="aggregateId" class="flight-form__input" />
+    </div>
+
+    <div class="flight-form__group">
+        <label for="flightNumber" class="flight-form__label">Número de Vuelo</label>
+        <input id="flightNumber" formControlName="flightNumber" class="flight-form__input" />
+    </div>
+
+    <div class="flight-form__group">
+        <label for="flightModel" class="flight-form__label">Modelo de Avión</label>
+        <input id="flightModel" formControlName="flightModel" class="flight-form__input" />
+    </div>
+
+    <lib-control-route [formGroup]="formGroup" [routes]="routes"></lib-control-route>
+
+    <div class="flight-form__group">
+        <label for="price" class="flight-form__label">Precio</label>
+        <input id="price" type="number" formControlName="price" class="flight-form__input" />
+    </div>
+
+    <div class="flight-form__group">
+        <label for="departureTime" class="flight-form__label">Hora de Salida</label>
+        <input id="departureTime" type="datetime-local" formControlName="departureTime" class="flight-form__input" />
+    </div>
+
+    <div class="flight-form__group">
+        <label for="arrivalTime" class="flight-form__label">Hora de Llegada</label>
+        <input id="arrivalTime" type="datetime-local" formControlName="arrivalTime" class="flight-form__input" />
+    </div>
+
+    <button type="submit" class="flight-form__button">Actualizar</button>
+</form>
