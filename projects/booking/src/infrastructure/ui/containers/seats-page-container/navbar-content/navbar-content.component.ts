@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { BookingNevbarComponent } from '../../../components/seats-page-components/booking-navbar/booking-navbar.component';
+import { BookingNavbarComponent } from '../../../components/seats-page-components/booking-navbar/booking-navbar.component';
 
 @Component({
   selector: 'lib-navbar-content',
-  imports: [BookingNevbarComponent],
+  imports: [BookingNavbarComponent],
   templateUrl: './navbar-content.component.html',
   styleUrl: './navbar-content.component.scss'
 })

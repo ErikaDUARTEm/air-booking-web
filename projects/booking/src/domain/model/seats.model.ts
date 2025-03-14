@@ -8,16 +8,12 @@ export interface IFlight {
 
 export interface ISeat {
   id: string;
-  type: 'bussiness' | 'economy' | 'emergency' | 'favorable' | 'regular' | 'unavailable';
+  seatNumber: string;
+	row: number;
+	column: string,
+  type: 'businessclass' | 'economyextra' | 'exit' | 'favorable' | 'regular' | 'unavailable';
   price?: number;
   isAvailable: boolean;
   passenger?: string;
 }
 
-export interface IPassenger {
-  id: string;
-  name: string;
-  lastName: string;
-  documentId: string;
-  selectedSeat?: string;
-}

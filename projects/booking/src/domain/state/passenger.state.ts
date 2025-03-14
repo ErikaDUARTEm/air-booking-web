@@ -14,7 +14,6 @@ export class PassengerState {
   //#region Subjects
 
   private readonly flightData$ = new BehaviorSubject<IFormFlight>(null);
-
   private readonly allPassengers$ = new BehaviorSubject<IPassenger[]>([]);
   private readonly passenger$ = new BehaviorSubject<IPassenger | null>(null);
 
