@@ -8,4 +8,5 @@ export interface IUser {
     methodAuthentication?: string;
     role?: string;
     frequenct?: string;
+    state?: string;
 }
