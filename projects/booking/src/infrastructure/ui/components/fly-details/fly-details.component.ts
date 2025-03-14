@@ -1,6 +1,6 @@
 import { Component, input } from '@angular/core';
-import { IFlightData, IFlightSelection } from '../../../../domain/model/passenger.model';
 import { CurrencyPipe, DatePipe } from '@angular/common';
+import { IFlightSelected, IFormFlight } from 'availability';
 
 @Component({
   selector: 'lib-fly-details',
@@ -9,6 +9,7 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
   styleUrl: './fly-details.component.scss'
 })
 export class FlyDetailsComponent {
- public flyDetails = input<IFlightSelection>();
-
+ public flyOrigin = input<IFlightSelected>();
+ public flyDestination = input<IFlightSelected>();
+ public flyPassengers = input<IFormFlight>();
 }
