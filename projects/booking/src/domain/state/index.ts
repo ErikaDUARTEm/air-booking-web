@@ -2,6 +2,7 @@ import { inject, Injectable } from "@angular/core";
 import { PaymentState } from "./payment.state";
 import { PassengerState } from "./passenger.state";
 import { FlightState } from "./seats.state";
+import { FlightStateMock } from "./fligthmock.state";
 
 @Injectable({
   providedIn: 'root',
@@ -9,8 +10,7 @@ import { FlightState } from "./seats.state";
 export class State {
   private readonly _paymentState = inject(PaymentState);
   private readonly _passengerState = inject(PassengerState);
-  private readonly _flightState = inject(FlightState);
-
+  private readonly _flightState = inject(FlightStateMock);
 
   get payment() {
     return this._paymentState.store();
@@ -19,7 +19,8 @@ export class State {
   get passenger() {
     return this._passengerState.store();
   }
-  get flight(){
+
+  get flight() {
     return this._flightState.store();
   }
 }
