@@ -1,21 +1,26 @@
 <section class="flight">
   <div class="flight__detail">
     <header class="flight__detail-header">
-      <span>{{flightNumber}}</span>
+      <span>{{flightInfo?.flightNumber}}</span>
     </header>
 
     <main class="flight__detail-main">
       <div class="flight__detail-main-hours">
-        <span>{{departureTime | date:'hh:mm a'}}</span>
+        <span>{{flightInfo?.departureTime | date:'hh:mm a'}}</span>
         <div class="flight__detail-main-hours-line"></div>
-        <span class="flight__detail-main-hours-time">{{duration}}</span>
+        <span class="flight__detail-main-hours-time">{{flightInfo?.duration | durationFormat}}</span>
         <div class="flight__detail-main-hours-line"></div>
-        <span>{{arrivalTime | date:'hh:mm a'}}</span>
+        <span>{{flightInfo?.arrivalTime | date:'hh:mm a'}}</span>
       </div>
 
       <div class="flight__detail-main-cities">
-        <span>{{form?.origin?.name}}({{form?.origin?.abbreviation}})</span>
-        <span>{{form?.destination?.name}}({{form?.destination?.abbreviation}})</span>
+        @if (form?.type === 'ida') {
+          <span>{{form?.origin?.name}}({{form?.origin?.abbreviation}})</span>
+          <span>{{form?.destination?.name}}({{form?.destination?.abbreviation}})</span>
+        } @else {
+          <span>{{form?.destination?.name}}({{form?.destination?.abbreviation}})</span>
+          <span>{{form?.origin?.name}}({{form?.origin?.abbreviation}})</span>
+        }
       </div>
     </main>
 
@@ -32,7 +37,7 @@
       <div class="flight__class-line"></div>
       <div class="flight__class-info">
         <h2 class="flight__class-title">Desde</h2>
-        <span class="flight__class-price">{{standardTotalPrice | currency:'COP':'code':'1.0-0'}}</span>
+        <span class="flight__class-price">{{flightInfo?.totalPricesInfo?.standardPriceTotal | currency:'COP':'code':'1.0-0'}}</span>
         <h2 class="flight__class-title">Ida · Por adulto</h2>
       </div>
     </button>
@@ -43,7 +48,7 @@
       <div class="flight__class-line flight__class-line--dark"></div>
       <div class="flight__class-info">
         <h2 class="flight__class-title">Desde</h2>
-        <span class="flight__class-price">{{executiveTotalPrice | currency:'COP':'code':'1.0-0'}}</span>
+        <span class="flight__class-price">{{flightInfo?.totalPricesInfo?.executiveTotalPrice | currency:'COP':'code':'1.0-0'}}</span>
         <h2 class="flight__class-title">Ida · Por adulto</h2>
       </div>
     </button>

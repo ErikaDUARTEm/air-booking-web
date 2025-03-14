@@ -2,19 +2,21 @@ import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FlightTypeComponent } from '../../components/flight-type/flight-type.component';
 import { FlightsComponent } from '../../components/flights/flights.component';
 import { FormUseCase } from '../../../../application/form.usecase';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import {
   IFlight,
   IFlightSelected,
   IFormFlight,
+  IOriginDestination,
 } from '../../../../domain/model/flight.model';
 import { AsyncPipe, NgIf } from '@angular/common';
 import { GetFlightsUsecase } from '../../../../application/flight/get-flights.usecase';
 import { Router } from '@angular/router';
+import { LoadingComponent } from '../../components/loading/loading.component';
 
 @Component({
   selector: 'lib-flight-selection',
-  imports: [FlightTypeComponent, FlightsComponent, AsyncPipe, NgIf],
+  imports: [FlightTypeComponent, FlightsComponent, LoadingComponent, AsyncPipe, NgIf],
   templateUrl: './flight-selection.component.html',
 })
 export class FlightSelectionComponent implements OnInit, OnDestroy {
@@ -23,13 +25,18 @@ export class FlightSelectionComponent implements OnInit, OnDestroy {
   private readonly router = inject(Router);
 
   public form$: Observable<IFormFlight>;
-  public flightsOrigin$: Observable<IFlight[]>;
-  public flightsDestination$: Observable<IFlight[]>;
   public flights$: Observable<IFlight[]>;
+  public origindestinacion$: Observable<IOriginDestination[]>;
+  public loadingSubject$: Observable<boolean>;
 
   ngOnInit() {
     this._formUsecase.initSubscriptions();
     this._getFlightsUsecase.initSubscriptions();
+
+    this._formUsecase.execute({
+      ...this._formUsecase.spanshot(),
+      type: 'ida',
+    });
 
     this._getFlightsUsecase.executeFirst({
       passengers: {
@@ -54,11 +61,10 @@ export class FlightSelectionComponent implements OnInit, OnDestroy {
     });
 
     this.flights$ = this._getFlightsUsecase.flightsOrigin$();
+    this.loadingSubject$ = this._getFlightsUsecase.loadingSubject$();
 
     this._formUsecase.viewForm();
     this.form$ = this._formUsecase.form$();
-    this.flightsOrigin$ = this._getFlightsUsecase.flightsOrigin$();
-    this.flightsDestination$ = this._getFlightsUsecase.flightsDestination$();
 
     this._getFlightsUsecase.viewFlightsOrigin();
     this._getFlightsUsecase.viewFlightsDestination();
@@ -118,11 +124,19 @@ export class FlightSelectionComponent implements OnInit, OnDestroy {
         this._getFlightsUsecase.viewFlightOriginSelected();
         this.flightPhase = 'regreso';
         this.flights$ = this._getFlightsUsecase.flightsDestination$();
+
+        this._formUsecase.execute({
+          ...this._formUsecase.spanshot(),
+          type: 'regreso',
+        });
       } else {
-        this.flightReturnSelected = flightSelected;
-        this._getFlightsUsecase.saveFlightDestinationSelected(
-          this.flightReturnSelected
-        );
+        this.flightReturnSelected =  {
+          ...flightSelected,
+          origin: this.flightOriginSelected.destination, 
+          destination: this.flightOriginSelected.origin, 
+        };
+
+        this._getFlightsUsecase.saveFlightDestinationSelected(this.flightReturnSelected);
         this._getFlightsUsecase.viewFlightDestinationSelected();
 
         this.router.navigate(['/']);

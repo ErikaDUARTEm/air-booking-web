@@ -2,13 +2,13 @@ export interface IFlight {
   flightId: string;
   flightNumber: string;
   aircraftModel: string;
-  duration: number;
+  duration: string;
   operatingAirline: string;
   origin: string;
   destination: string;
   departureTime: Date;
   arrivalTime: Date;
-  tax: ITaxes; 
+  tax: ITaxes;
   prices: IPrices;
   totalPricesInfo: ITotalPricesInfo;
 }
@@ -17,13 +17,13 @@ export interface IFlightSelected {
   flightId: string;
   flightNumber: string;
   aircraftModel: string;
-  duration: number;
+  duration: string;
   operatingAirline: string;
   origin: { name: string; abbreviation: string; airport: string };
   destination: { name: string; abbreviation: string; airport: string };
   departureTime: Date;
   arrivalTime: Date;
-  tax: number; 
+  tax: number;
   prices: number;
   totalPricesInfo: number;
 }
@@ -58,9 +58,15 @@ export interface IFormFlight {
     adults: number;
     children: number;
     infants: number;
-  }
+  },
+  type?: string;
 }
 
+export interface IOriginDestination {
+  name: string;
+  abbreviation: string;
+  airport: string;
+}
 
 export interface ITaxes {
   standardTax: number;

@@ -84,6 +84,53 @@ $secondary-font: 'Montserrat', sans-serif;
   border-radius: 4px;
 }
 
+.table__actions--toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 5px;
+  transition: color 0.2s ease-in-out;
+
+  svg {
+    width: 16px;
+    height: 16px;
+    transition: fill 0.2s ease-in-out;
+  }
+
+  &.active {
+    color: $red;
+    svg {
+      fill: $red;
+    }
+
+    &:hover {
+      color: darken($red, 10%);
+      svg {
+        fill: darken($red, 10%);
+      }
+    }
+  }
+
+  &.inactive {
+    color: $black;
+    svg {
+      fill: $black;
+    }
+
+    &:hover {
+      color: darken($black, 10%);
+      svg {
+        fill: darken($black, 10%);
+      }
+    }
+  }
+}
+
+
 .table__actions--edit {
   color: $blue;
   display: flex;
