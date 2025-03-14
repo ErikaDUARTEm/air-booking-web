@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { FlightState } from '../../../domain/state/seats.state';
 import { IFlight } from '../../../domain/model/seats.model';
-import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
+import { BehaviorSubject, catchError, combineLatest, forkJoin, map, Observable, of, tap } from 'rxjs';
 import { IPassenger } from '../../../domain/model/passenger.model';
 import { PassengerState } from '../../../domain/state/passenger.state';
 import { HttpClient } from '@angular/common/http';
@@ -10,9 +10,6 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class FlightSeatsService {
-  // private readonly _state = inject(FlightState);
-  // private readonly _passengerState = inject(PassengerState);
-  // private currentPassengerIndex = 0;
 
   private readonly _state = inject(FlightState);
   private readonly _passengerState = inject(PassengerState);
@@ -27,14 +24,75 @@ export class FlightSeatsService {
     const url = `http://localhost:8080/api/seat/${aggregateId}`;
     return this._http.get<any>(url);
   }
+
+  markSeatAsOccupied(aggregateId: string, seatId: string): Observable<any> {
+    const url = 'http://localhost:8080/api/flight-seat';
+    const body = {
+      aggregateId,
+      seatId
+    };
+    
+    return this._http.put<any>(url, body);
+  }
+
+  
   
   
   initializeSeats(): void {
-    // const outboundFlight = this._state.store().outboundFlight.snapshot();
-    // const returnFlight = this._state.store().returnFlight.snapshot();
-    // this.initializeFlightSeats(outboundFlight);
-    // this.initializeFlightSeats(returnFlight);
+
     
+  }
+
+
+
+  markAllSelectedSeatsAsOccupied(): Observable<any[]> {
+    const passengers = this._passengerState.store().allPassengers.snapshot();
+    const outboundFlight = this._state.store().outboundFlight.snapshot();
+    const returnFlight = this._state.store().returnFlight.snapshot();
+    
+    const seatRequests: Observable<any>[] = [];
+    
+    // Procesar asientos de ida
+    passengers.forEach(passenger => {
+      if (passenger.departureSeat) {
+        seatRequests.push(
+          this.markSeatAsOccupied(outboundFlight.id, passenger.departureSeat)
+            .pipe(
+              tap(response => {
+                console.log(`Asiento de ida ${passenger.departureSeat} marcado como ocupado para ${passenger.name}`);
+              }),
+              catchError(error => {
+                console.error(`Error al marcar asiento de ida ${passenger.departureSeat}:`, error);
+                return of(null);
+              })
+            )
+        );
+      }
+      
+      // Procesar asientos de vuelta
+      if (passenger.returnSeat) {
+        seatRequests.push(
+          this.markSeatAsOccupied(returnFlight.id, passenger.returnSeat)
+            .pipe(
+              tap(response => {
+                console.log(`Asiento de vuelta ${passenger.returnSeat} marcado como ocupado para ${passenger.name}`);
+              }),
+              catchError(error => {
+                console.error(`Error al marcar asiento de vuelta ${passenger.returnSeat}:`, error);
+                return of(null);
+              })
+            )
+        );
+      }
+    });
+    
+    // Si no hay asientos para marcar, devolver un observable vacío
+    if (seatRequests.length === 0) {
+      return of([]);
+    }
+    
+    // Ejecutar todas las solicitudes en paralelo
+    return forkJoin(seatRequests);
   }
 
   initializeSeatsWithRealData(aggregateId: string, flightType: 'outbound' | 'return'): void {

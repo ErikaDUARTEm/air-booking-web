@@ -75,4 +75,8 @@ export class SelectSeatUseCase {
   previousPassenger(): IPassenger | null {
     return this._service.previousPassenger();
   }
+
+  markAllSelectedSeatsAsOccupied(): Observable<any[]> {
+    return this._service.markAllSelectedSeatsAsOccupied();
+  }
 }

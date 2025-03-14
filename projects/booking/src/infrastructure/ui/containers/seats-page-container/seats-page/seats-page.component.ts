@@ -34,8 +34,6 @@ export class SeatsPageComponent implements OnInit {
   flight: { outbound: IFlight | null, return: IFlight | null } = { outbound: null, return: null };
   isRoundTrip = true;
   
-  // constructor(private flightSeatsService: FlightSeatsService, private router: Router) {}
-
   constructor(
     private flightSeatsService: FlightSeatsService,
     private getFlightsUseCase: GetFlightsUsecase,
@@ -43,21 +41,6 @@ export class SeatsPageComponent implements OnInit {
     private router: Router
   ) {}
   
-  // ngOnInit(): void {
-  //   this.flightSeatsService.getOutboundFlight().subscribe(flight => {
-  //     this.flight.outbound = flight;
-  //   });
-
-  //   this.flightSeatsService.getReturnFlight().subscribe(flight => {
-  //     this.flight.return = flight;
-  //   });
-
-  //   this.flightSeatsService.initializeSeats();
-
-  //   if (!this.flight.return) {
-  //     this.isRoundTrip = false;
-  //   }
-  // }
 
   ngOnInit(): void {
     this.getFlightsUseCase.getFlightOriginSelectedId().subscribe(aggregateId => {
@@ -125,20 +108,35 @@ export class SeatsPageComponent implements OnInit {
     }
   }
 
+
+  markSelectedSeatsAndProceed(): void {
+    this.selectSeatUseCase.markAllSelectedSeatsAsOccupied().subscribe({
+      next: (results) => {
+        console.log('Todos los asientos han sido marcados como ocupados:', results);
+
+        this.router.navigate(['/booking/payment']);
+      },
+      error: (error) => {
+        console.error('Error al marcar los asientos como ocupados:', error);
+        this.router.navigate(['/booking/payment']);
+      }
+    });
+  }
+
   handleNextFlightRequest(): void {
     if (this.isRoundTrip) {
       if (this.currentFlightType === 'outbound') {
         this.currentFlightType = 'return';
         console.log(`Flight type changed to ${this.currentFlightType}`);
-        console.log(this.flight)
       } else {
-        this.router.navigate(['/booking/payment']);
-        console.log(this.flightSeatsService.getCurrentPassenger)
-        console.log(this.flight)
+        this.markSelectedSeatsAndProceed();
       }
     } else {
-      this.router.navigate(['/booking/payment']);
-      console.log(this.flight)
+
+      this.markSelectedSeatsAndProceed();
     }
   }
+
+
+
 }
