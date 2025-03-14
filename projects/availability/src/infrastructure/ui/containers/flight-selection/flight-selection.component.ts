@@ -139,7 +139,7 @@ export class FlightSelectionComponent implements OnInit, OnDestroy {
         this._getFlightsUsecase.saveFlightDestinationSelected(this.flightReturnSelected);
         this._getFlightsUsecase.viewFlightDestinationSelected();
 
-        this.router.navigate(['/']);
+        this.router.navigate(['/booking/passanger']);
       }
 
       this.reloadFlights();

@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, inject } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, inject, input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, AbstractControl } from '@angular/forms';
-import { IPassengerData, IPassenger } from '../../../../domain/model/passenger.model';
+import { IPassenger } from '../../../../domain/model/passenger.model';
 import { ageValidator } from '../../utils/validators';
+import { IFormFlight } from 'availability';
+
 
 @Component({
   selector: 'lib-passenger-form',
@@ -14,12 +16,7 @@ import { ageValidator } from '../../utils/validators';
 export class PassengerFormComponent implements OnChanges {
   private _fb = inject(FormBuilder);
   @Output() onSubmit = new EventEmitter<IPassenger[]>();
-
-  @Input() passengerData: IPassengerData = {
-    adult: 0,
-    children: 0,
-    infants: 0,
-  };
+  public passengerData = input<IFormFlight>();
 
   passengerForms: FormGroup[] = [];
   savedPassengers: IPassenger[] = []; 
@@ -48,42 +45,42 @@ export class PassengerFormComponent implements OnChanges {
   ];
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['passengerData']) {
-      this.passengerData = this.passengerData ?? { adult: 0, children: 0, infants: 0 };
+    if (changes['passengerData'] && this.passengerData) {
       this.generateForms();
     }
   }
 
   generateForms(): void {
     this.passengerForms = [];
-    this.savedPassengers = []; 
-    for (let i = 0; i < (this.passengerData.adult || 0); i++) {
+    this.savedPassengers = [];
+
+    const passengers = this.passengerData()?.passengers
+    for (let i = 0; i < (passengers.adults || 0); i++) {
       this.addAdultForm();
     }
-    for (let i = 0; i < (this.passengerData.children || 0); i++) {
+    for (let i = 0; i < (passengers.children || 0); i++) {
       this.addChildForm();
     }
-    for (let i = 0; i < (this.passengerData.infants || 0); i++) {
+    for (let i = 0; i < (passengers.infants || 0); i++) {
       this.addInfantForm();
     }
   }
   
   addAdultForm(): void {
-    const form = this.createPassengerForm(true, 'adult');
-    this.passengerForms.push(form);
-  }
-  
-  addChildForm(): void {
-    const form = this.createPassengerForm(true, 'child');
-    this.passengerForms.push(form);
-  }
-  
-  addInfantForm(): void {
-    const form = this.createPassengerForm(false, 'infant');
-    this.passengerForms.push(form);
+    this.passengerForms.push(this.createPassengerForm('adult'));
   }
 
-  createPassengerForm(includeContactInfo = true, passengerType: 'adult' | 'child' | 'infant' = 'adult'): FormGroup {
+  addChildForm(): void {
+    this.passengerForms.push(this.createPassengerForm('child'));
+  }
+
+  addInfantForm(): void {
+    this.passengerForms.push(this.createPassengerForm('infant'));
+  }
+
+  createPassengerForm(
+    passengerType: 'adult' | 'child' | 'infant' = 'adult'
+  ): FormGroup {
     const form = this._fb.group({
       name: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -91,31 +88,29 @@ export class PassengerFormComponent implements OnChanges {
       birthDateMonth: [null, Validators.required],
       birthDateYear: [null, [Validators.required, Validators.min(1900), Validators.max(new Date().getFullYear())]],
       gender: ['', Validators.required],
-      ...(includeContactInfo && {
-        email: ['', [Validators.required, Validators.email]],
-        confirmEmail: ['', [Validators.required, Validators.email]],
-        countryCode: ['', Validators.required],
+      ...(passengerType === 'adult' && {
+        countryCode: ['+1', Validators.required],
         phoneNumber: ['', [Validators.required, Validators.pattern(/^[0-9]+$/)]],
       }),
       promotions: [false],
     });
-  
-    
     if (passengerType === 'adult') {
       form.setValidators(ageValidator(12, 120));
     } else if (passengerType === 'child') {
       form.setValidators(ageValidator(2, 11));
     } else if (passengerType === 'infant') {
-      form.setValidators(ageValidator(0, 1)); 
+      form.setValidators(ageValidator(0, 1));
     }
-  
     return form;
   }
 
+
   getPassengerType(index: number): string {
-    if (index < (this.passengerData.adult || 0)) {
+    const passengers = this.passengerData()?.passengers
+
+    if (index < passengers.adults) {
       return 'Adulto (12 años en adelante)';
-    } else if (index < (this.passengerData.adult || 0) + (this.passengerData.children || 0)) {
+    } else if (index < passengers.adults + passengers.children) {
       return 'Niño (2 a 11 años)';
     } else {
       return 'Infante (menos de 2 años)';
@@ -126,21 +121,23 @@ export class PassengerFormComponent implements OnChanges {
     return index === this.passengerForms.length - 1;
   }
   
-  areAllFormsValid(): boolean {
-    return this.passengerForms.every(form => form.valid);
+  areFormsValid(): boolean {
+    return this.passengerForms.every((form) => form.valid);
   }
 
-  
-
   submit(): void {
-    if (this.areAllFormsValid()) {
-      const passengers = this.passengerForms.map(form => {
+    if (this.areFormsValid()) {
+      const passengers = this.passengerForms.map((form) => {
         const { birthDateDay, birthDateMonth, birthDateYear, countryCode, phoneNumber, ...rest } = form.value;
-        const birthDate = `${birthDateYear}-${String(birthDateMonth).padStart(2, '0')}-${String(birthDateDay).padStart(2, '0')}`; 
-        const phone = `${countryCode} ${phoneNumber}`;
-        return { ...rest, birthDate, phone };
+        const birthDate = `${birthDateYear}-${String(birthDateMonth).padStart(2, '0')}-${String(birthDateDay).padStart(2, '0')}`;
+
+        return {
+          ...rest,
+          birthDate,
+          phone: countryCode ? `${countryCode} ${phoneNumber}` : '',
+        } as IPassenger;
       });
-  
+
       this.onSubmit.emit(passengers);
     } else {
       console.log('Por favor, completa todos los campos requeridos y corrige los errores.');
