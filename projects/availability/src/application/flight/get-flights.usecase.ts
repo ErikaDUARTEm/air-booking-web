@@ -43,6 +43,9 @@ export class GetFlightsUsecase {
     );
   }
 
+  loadingSubject$(): Observable<boolean> {
+    return this._state.flights.loadingSubject.$() as Observable<boolean>;
+  }
   //#endregion
 
   //#region Public Methods
@@ -55,20 +58,28 @@ export class GetFlightsUsecase {
   }
 
   executeFirst(requiredFlight: IRequiredFlight): void {
+    this._state.flights.loadingSubject.set(true);
     this.subscriptions.add(
       this._service.execute(requiredFlight)
         .pipe(
-          tap(result => this._state.flights.flightsOrigin.set(result)),
+          tap(result => {
+            this._state.flights.flightsOrigin.set(result);
+            this._state.flights.loadingSubject.set(false);
+          }),
         )
         .subscribe()
     );
   }
 
   executeSecond(requiredFlight: IRequiredFlight): void {
+    this._state.flights.loadingSubject.set(true);
     this.subscriptions.add(
       this._service.execute(requiredFlight)
         .pipe(
-          tap(result => this._state.flights.flightsDestination.set(result)),
+          tap(result => {
+            this._state.flights.flightsDestination.set(result);
+            this._state.flights.loadingSubject.set(false);
+          }),
         )
         .subscribe()
     );

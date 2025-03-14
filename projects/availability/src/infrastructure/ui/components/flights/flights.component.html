@@ -29,13 +29,7 @@
   @for (flight of flights; track $index) {
     <lib-flight-info 
       [form]="form"
-      [flightNumber]="flight.flightNumber"
-      [departureTime]="flight.departureTime"
-      [arrivalTime]="flight.arrivalTime"
-      [duration]="flight.duration"
-      [standardTotalPrice]="flight.totalPricesInfo.standardPriceTotal"
-      [executiveTotalPrice]="flight.totalPricesInfo.executiveTotalPrice"
-      [totalPricesInfo]="flight.totalPricesInfo"
+      [flightInfo]="flight"
       (onFlightSelected)="onFlightSelected($event)"
     ></lib-flight-info>
   }

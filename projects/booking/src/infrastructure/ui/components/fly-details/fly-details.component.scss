@@ -10,6 +10,7 @@
   height: 600px;
   margin-top: 10rem;
   position: fixed;
+  font-family: variables.$secondary-font;
 
   &__header-container {
     display: flex;
@@ -51,10 +52,15 @@
     @include mixins.text-paragraph;
     font-size: 0.9rem;
 
+
   }
 
   &__route{
-      font-size: 1.5rem;
+    font-size: 1.5rem;
+
+    .fly-details__date{
+      font-size: rem;
+    }
   }
 
   &__pricing {

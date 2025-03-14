@@ -2,23 +2,22 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } fro
 import { ClassCardComponent } from "../class-card/class-card.component";
 import { ClassCardData } from '../../../../domain/model/card.model';
 import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
-import { IFormFlight, ITotalPricesInfo } from '../../../../domain/model/flight.model';
+import { IFlight, IFormFlight, ITotalPricesInfo } from '../../../../domain/model/flight.model';
+import { DurationFormatPipe } from '../../pipes/DurationFormatPipe';
 
 @Component({
   selector: 'lib-flight-info',
-  imports: [ClassCardComponent, CommonModule, DatePipe, CurrencyPipe],
+  imports: [ClassCardComponent, CommonModule, DatePipe, CurrencyPipe, DurationFormatPipe],
   templateUrl: './flight-info.component.html',
   styleUrl: './flight-info.component.scss',
 })
 export class FlightInfoComponent implements OnInit {
   @Input() public form!: IFormFlight;
-  @Input() public flightNumber!: string;
-  @Input() public departureTime!: Date;
-  @Input() public arrivalTime!: Date;
-  @Input() public duration!: number;
-  @Input() public standardTotalPrice!: number;
-  @Input() public executiveTotalPrice!: number;
-  @Input() public totalPricesInfo!: ITotalPricesInfo;
+  @Input() public flightInfo!: IFlight;
+
+  logDuration() {
+    console.log('Duración:', this.flightInfo?.duration);
+  }
 
   @Output() public onFlightSelected = new EventEmitter<{price: number, flightNumber: string}>();
 
@@ -41,7 +40,7 @@ export class FlightInfoComponent implements OnInit {
   onCardSelected(selectedCard: {price: number}) {
     const selectedFlight = {
       price: selectedCard.price,
-      flightNumber: this.flightNumber
+      flightNumber: this.flightInfo?.flightNumber
     };
 
     this.onFlightSelected.emit(selectedFlight);
@@ -52,7 +51,7 @@ export class FlightInfoComponent implements OnInit {
       {
         type: 'Económica Basic',
         description: 'Tarifa más restrictiva. Viaje Ligero',
-        price: this.totalPricesInfo?.standardPriceTotal,
+        price: this.flightInfo?.totalPricesInfo?.standardPriceTotal,
         conditions: [
           { icon: 'dolar.svg', text: 'Equipaje en bodega con cargo', alt: 'Dolar' },
           { icon: 'dolar.svg', text: 'Preselección de asientos con cargo', alt: 'Dolar' },
@@ -68,7 +67,7 @@ export class FlightInfoComponent implements OnInit {
       {
         type: 'Económica Classic',
         description: 'Los beneficios que esperas',
-        price: this.totalPricesInfo?.economicPriceTotal,
+        price: this.flightInfo?.totalPricesInfo?.economicPriceTotal,
         conditions: [
           { icon: 'check.svg', text: '1 equipaje en bodega (23kg)', alt: 'Check' },
           { icon: 'check.svg', text: 'Preselección de asientos regulares', alt: 'Check' },
@@ -84,7 +83,7 @@ export class FlightInfoComponent implements OnInit {
       {
         type: 'Económica Full',
         description: 'Mejor flexibilidad para tu viaje',
-        price: this.totalPricesInfo?.favorablePriceTotal,
+        price: this.flightInfo?.totalPricesInfo?.favorablePriceTotal,
         conditions: [
           { icon: 'check.svg', text: '2 equipajes en bodega (23kg)', alt: 'Check' },
           { icon: 'check.svg', text: 'Preselección de asientos Premium', alt: 'Check' },
@@ -104,7 +103,7 @@ export class FlightInfoComponent implements OnInit {
       {
         type: 'Ejecutuva Promo',
         description: 'Máxima comodidad a mejor precio',
-        price: this.totalPricesInfo?.executiveTotalPrice,
+        price: this.flightInfo?.totalPricesInfo?.executiveTotalPrice,
         conditions: [
           { icon: 'check.svg', text: '1 equipajes en bodega (32 kg)', alt: 'Check' },
           { icon: 'check.svg', text: 'Preselección de todos los asientos', alt: 'Check' },
@@ -119,7 +118,7 @@ export class FlightInfoComponent implements OnInit {
       {
         type: 'Ejecutiva Full',
         description: 'Máxima flexibilidad y Comodidad',
-        price: this.totalPricesInfo?.executiveFullTotalPrice,
+        price: this.flightInfo?.totalPricesInfo?.executiveFullTotalPrice,
         conditions: [
           { icon: 'check.svg', text: '2 equipajes en bodega (32kg)', alt: 'Check' },
           { icon: 'check.svg', text: 'Preselección de todos los asientos', alt: 'Check' },

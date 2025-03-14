@@ -3,7 +3,13 @@
     <img src="favicon.png" alt="AirSofka - Volver al inicio" />
 
     <menu class="header__nav-menu" role="menu" aria-label="Main menu navigation">
-      <h2 class="header__nav-menu-item header__nav-menu-item--origin">{{form?.origin?.abbreviation || ''}} ➜ {{form?.destination?.abbreviation || ''}}</h2>
+      @if (form?.type === 'ida') {
+        <h2 class="header__nav-menu-item header__nav-menu-item--origin">{{form?.origin?.abbreviation || ''}} ➜ {{form?.destination?.abbreviation || ''}}</h2>
+      }
+      @if (form?.type === 'regreso') {
+        <h2 class="header__nav-menu-item header__nav-menu-item--origin">{{form?.destination?.abbreviation || ''}} ➜ {{form?.origin?.abbreviation || ''}}</h2>
+      }
+
       <span>|</span>
 
       <h2 class="header__nav-menu-item">{{form?.dates?.departure || '' | date:'MMM d' }} - {{form?.dates?.return || '' | date:'MMM d'}}- Ida y vuelta</h2>
