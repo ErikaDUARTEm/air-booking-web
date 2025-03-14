@@ -11,6 +11,7 @@
   margin-top: 10rem;
   position: fixed;
   font-family: variables.$secondary-font;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 
   &__header-container {
     display: flex;
@@ -51,16 +52,22 @@
     margin-top: variables.$spacing-lg;
     @include mixins.text-paragraph;
     font-size: 0.9rem;
+    display: block;
 
+    .fly-details__date{
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
 
   }
 
   &__route{
     font-size: 1.5rem;
+  }
 
-    .fly-details__date{
-      font-size: rem;
-    }
+  .fly-details__date{
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
   }
 
   &__pricing {

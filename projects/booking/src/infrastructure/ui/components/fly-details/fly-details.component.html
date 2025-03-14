@@ -15,25 +15,29 @@
   </div>
 
   <div class="fly-details__info">
-    <p class="fly-details__route">
-      {{ flyOrigin()?.origin.abbreviation }} · 
-      {{ flyOrigin()?.departureTime | date: 'h:mm a' }} → 
-      {{ flyOrigin()?.destination.abbreviation }} · 
-      {{ flyOrigin()?.arrivalTime | date: 'h:mm a' }}
-    </p>
-    <p class="fly-details__date">
-      {{ flyOrigin()?.departureTime | date: 'EEE, MMM dd, yyyy' }}
-    </p>
+    <div>
+      <p class="fly-details__route">
+        {{ flyOrigin()?.origin.abbreviation }} · 
+        {{ flyOrigin()?.departureTime | date: 'h:mm a' }} → 
+        {{ flyOrigin()?.destination.abbreviation }} · 
+        {{ flyOrigin()?.arrivalTime | date: 'h:mm a' }}
+      </p>
+      <p class="fly-details__date">
+        {{ flyOrigin()?.departureTime | date: 'EEE, MMM dd, yyyy' }}
+      </p>
+    </div>
 
-    <p class="fly-details__route">
-      {{ flyDestination()?.destination.abbreviation }} · 
-      {{ flyDestination()?.departureTime | date: 'h:mm a' }} → 
-      {{ flyDestination()?.origin.abbreviation }} · 
-      {{ flyDestination()?.arrivalTime | date: 'h:mm a' }}
-    </p>
-    <p class="fly-details__date">
-      {{ flyDestination()?.departureTime | date: 'EEE, MMM dd, yyyy' }}
-    </p>
+    <div >
+      <p class="fly-details__route">
+        {{ flyDestination()?.destination.abbreviation }} · 
+        {{ flyDestination()?.departureTime | date: 'h:mm a' }} → 
+        {{ flyDestination()?.origin.abbreviation }} · 
+        {{ flyDestination()?.arrivalTime | date: 'h:mm a' }}
+      </p>
+      <p class="fly-details__date">
+        {{ flyDestination()?.departureTime | date: 'EEE, MMM dd, yyyy' }}
+      </p>
+    </div>
   </div>
 
   <section class="fly-details__pricing">
