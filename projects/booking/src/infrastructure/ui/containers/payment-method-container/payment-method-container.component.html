@@ -1,3 +1,4 @@
 <lib-payment-and-summary-component
+  [successMessage$]="successMessage$ | async"
   (onConfirmPayment)="submitPayment($event)">
 </lib-payment-and-summary-component>

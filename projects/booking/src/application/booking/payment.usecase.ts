@@ -1,48 +1,58 @@
 import { inject, Injectable } from "@angular/core";
 import { CreateReservationService } from "../../infrastructure/services/post/create-reservation.service";
 import { State } from "../../domain/state";
-import { Subscription, tap } from "rxjs";
-import { IPaymentData } from "../../domain/model/payment.model";
+import { Observable, Subscription, tap } from "rxjs";
+import { ICard, IPaymentData, IPse } from "../../domain/model/payment.model";
 
 @Injectable({
   providedIn: 'root',
 })
 export class PaymentUseCase{
-  private readonly _service = inject(CreateReservationService);
   private readonly _state = inject(State);
-  private subscriptions!: Subscription;
+  private subscriptions: Subscription;
 
-    //#region Public Methods
-    initSubscriptions(): void {
-      this.subscriptions = new Subscription();
-    }
 
+  //#region Public Methods
+  initSubscriptions(): void {
+    this.subscriptions = new Subscription();
+  }
+
+  destroySubscriptions(): void {
+    this.subscriptions.unsubscribe();
+  }
+    paymentData$(): Observable<IPaymentData> {
+        return this._state.payment.paymentData.$();
+      }
     execute(paymentData: IPaymentData): void {
       const billingData = this._state.payment.billingData.snapshot();
       const selectedMethod = this._state.payment.selectedMethod.snapshot();
+      const successMessage = this._state.payment.successMessage.snapshot();
 
-      if (!paymentData || !billingData || !selectedMethod) {
-        this._state.payment.successMessage.set('No se puede procesar el pago: Datos incompletos.')
+    if (!paymentData.paymentMethod || !paymentData.paymentDetails || !paymentData.billingAddress) {
+      this._state.payment.successMessage.set('No se puede procesar el pago: Datos incompletos.');
+      return;
+    }
+
+    if (paymentData.paymentMethod === 'CARD') {
+      const cardDetails = paymentData.paymentDetails as ICard;
+      if (!cardDetails.number || !cardDetails.holderName || !cardDetails.expirationDate || !cardDetails.cvv) {
+        this._state.payment.successMessage.set('No se puede procesar el pago: Datos de tarjeta de crédito incompletos.');
         return;
       }
-      this.subscriptions.add(
-        this._service
-          .execute(paymentData)
-          .pipe(
-            tap(() => {
-              console.log(paymentData)
-              this._state.payment.successMessage.set('Pago procesado con éxito.')
-            })
-          )
-          .subscribe()
-      );
-      console.log(paymentData.paymentDetails)
+    } else if (paymentData.paymentMethod === 'PSE') {
+      const pseDetails = paymentData.paymentDetails as IPse;
+      if (!pseDetails.holderName || !pseDetails.email) {
+        this._state.payment.successMessage.set('No se puede procesar el pago: Datos de PSE incompletos.');
+        return;
+      }
     }
-    destroySubscriptions(): void {
-      this.subscriptions.unsubscribe();
-    }
+      this._state.payment.paymentData.set(paymentData);
+      this._state.payment.billingData.set(billingData);
+      this._state.payment.selectedMethod.set(selectedMethod);
+      this._state.payment.successMessage.set('Pago confirmado, Reserva realizada con exito.');
 
 
+    }
     //#endregion
 
 }

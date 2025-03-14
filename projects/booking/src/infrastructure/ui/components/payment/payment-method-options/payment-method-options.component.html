@@ -82,7 +82,9 @@
       (onFormValidityChange)="handleFormValidity('BILLING', $event.isValid, $event.formData)">
     </lib-billing-form>
   </div>
-
+  <div *ngIf="successMessage$" class="payment-method__success-message">
+    <p>{{message()}}</p>
+  </div>
   <div class="payment-method__button" *ngIf="selectedMethod !== null">
     <button class="payment-method__confirm-button"
       [disabled]="!isConfirmButtonEnabled()"

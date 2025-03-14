@@ -1,18 +1,21 @@
-import { Component, output } from '@angular/core';
+import { Component,  inject,  input,  output } from '@angular/core';
 import { PaymentMethodOptionsComponent } from '../payment-method-options/payment-method-options.component';
-import { HeaderPaymentComponent } from '../header-payment/header-payment.component';
+import { AsyncPipe, CommonModule } from '@angular/common';
+
 @Component({
   selector: 'lib-payment-and-summary-component',
-  imports: [PaymentMethodOptionsComponent, HeaderPaymentComponent],
+  imports: [PaymentMethodOptionsComponent, CommonModule],
   templateUrl: './payment-and-summary-component.component.html',
   styleUrl: './payment-and-summary-component.component.scss'
 })
 export class PaymentAndSummaryComponentComponent {
 
   public onConfirmPayment = output<any>();
+  public successMessage$ = input<string>();
 
-  handleConfirmPayment(paymentData: any): void {
+  handleConfirmPaymentAndRedirectToHome(paymentData: any): void {
     this.onConfirmPayment.emit(paymentData);
-    console.log('Datos confirmados emitidos al contenedor:', paymentData);
+
+
   }
 }

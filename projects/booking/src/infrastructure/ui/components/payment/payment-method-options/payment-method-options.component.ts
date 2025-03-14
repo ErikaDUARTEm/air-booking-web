@@ -1,9 +1,12 @@
-import { Component, output, ViewChild} from '@angular/core';
+import { Component, inject, input, output, ViewChild} from '@angular/core';
 import { CreditCardFormComponentComponent } from '../../../forms/forms-method-payment/credit-card-form-component/credit-card-form-component.component';
 import { PseFormComponentComponent } from "../../../forms/forms-method-payment/pse-form-component/pse-form-component.component";
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BillingFormComponent } from '../../../forms/forms-method-payment/billing-form/billing-form.component';
+import { PaymentState } from '../../../../../domain/state/payment.state';
+import { IBillingAddress, ICard, IPaymentData, IPse } from '../../../../../domain/model/payment.model';
+import { Router } from '@angular/router';
 
 
 
@@ -18,9 +21,11 @@ export class PaymentMethodOptionsComponent {
   @ViewChild(CreditCardFormComponentComponent, { static: false }) creditCardFormComponent!: CreditCardFormComponentComponent;
   @ViewChild(PseFormComponentComponent, { static: false }) pseFormComponent!: PseFormComponentComponent;
   @ViewChild(BillingFormComponent, { static: false }) billingFormComponent!: BillingFormComponent;
-
+  private readonly paymentState = inject(PaymentState);
+  public router = inject(Router);
   public onMethodSelected = output<'CARD' | 'PSE' | null>();
   public onConfirmPayment = output<any>();
+  public successMessage$ = input<string  | null>();
 
   selectedMethod: 'CARD' | 'PSE' | null = null;
 
@@ -29,7 +34,9 @@ export class PaymentMethodOptionsComponent {
     PSE: { isValid: false, formData: null },
     BILLING: { isValid: false, formData: null },
   };
-
+  message(): string {
+    return this.paymentState.store().successMessage.snapshot();
+  }
   handleSelectMethod(method: 'CARD' | 'PSE' | null): void {
     this.selectedMethod = method;
     const componentsToReset = {
@@ -47,7 +54,6 @@ export class PaymentMethodOptionsComponent {
         console.warn(`Componente no inicializado en posición ${index}`);
       }
     });
-    console.log("Método de pago seleccionado:", method);
     this.onMethodSelected.emit(method);
   }
 
@@ -66,15 +72,18 @@ export class PaymentMethodOptionsComponent {
   }
 
   confirmPayment(): void {
-
-    const paymentData = {
-      method: this.selectedMethod,
-      cardData: this.formStates.CARD.formData,
-      pseData: this.formStates.PSE.formData,
-      billingData: this.formStates.BILLING.formData,
+    const paymentData= {
+      paymentMethod: this.selectedMethod as 'CARD' | 'PSE',
+      paymentDetails:
+        this.selectedMethod === 'CARD'
+          ? (this.formStates.CARD.formData as ICard)
+          : (this.formStates.PSE.formData as IPse),
+      billingAddress: this.formStates.BILLING.formData as IBillingAddress,
     };
-    alert("Pago confirmado con exito")
-    this.onConfirmPayment.emit(paymentData);
-  }
 
+    this.onConfirmPayment.emit(paymentData);
+    setTimeout(() => {
+      this.router.navigate(['/']);
+    }, 3000);
+  }
 }
