@@ -8,6 +8,7 @@
   gap: variables.$spacing-base;
   background-color: variables.$white;
   margin-left: 10rem;
+  font-family: variables.$primary-font;
 
   &__title {
     @include mixins.title-main;
