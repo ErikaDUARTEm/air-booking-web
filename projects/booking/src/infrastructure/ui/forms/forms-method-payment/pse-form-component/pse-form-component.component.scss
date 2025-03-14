@@ -40,6 +40,7 @@
       display: flex;
       align-items: center;
       gap: 5px;
+      font-family: variables.$secondary-font;
 
       input[type="radio"] {
         width: 15px;
@@ -58,6 +59,7 @@
       font-size: 1.4rem;
       margin-bottom: 0.5rem;
       font-weight: 400;
+      font-family: variables.$secondary-font;
     }
 
     input {
